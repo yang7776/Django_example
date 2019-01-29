@@ -2,6 +2,6 @@
 This is an example of django
 
 Contains methods：
-  log
-  cache
+  log ;
+  cache ;
   Use of ImageField
