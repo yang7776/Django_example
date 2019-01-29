@@ -1,0 +1,9 @@
+1. 在中端里登录mysql, 根据settings中的数据库，创建对应数据库
+
+2. 修改setting文件其中的连接mysql数据库的代码
+
+3. 执行python manage.py makemigration, 执行python manage.py migrate
+
+4. 创建django内置数据库管理员, python manage.py createsuperuser
+
+5. 运行, python manage.py runserver
