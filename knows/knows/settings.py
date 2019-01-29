@@ -13,21 +13,43 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 
 from .logs import *
+from django.utils.module_loading import import_string
 
 # 缓存
 CACHES = {
-    "default":{
-        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',  # 引擎
+    "default": {
+        # 注意：使用Memcached缓存之前，必须先下载Memcached服务
+        # 'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': '127.0.0.1:11211',
         'TIMEOUT': 300,  # 缓存超时时间（默认300，None表示永不过期，0表示立即过期）
-        'OPTIONS': {
-            'MAX_ENTRIES': 2,  # 最大缓存个数（默认300）
-            'CULL_FREQUENCY': 1,  # 缓存到达最大个数之后，剔除缓存个数的比例，即：1/CULL_FREQUENCY（默认3）
-        },
-        'KEY_PREFIX': '',  # 缓存key的前缀（默认空）
-        'VERSION': 1,  # 缓存key的版本（默认1）
-        'KEY_FUNCTION':""
     }
 }
+
+
+def default_key_func(key, key_prefix, version):
+    """
+    Default function to generate keys.
+
+    Constructs the key used by all other methods. By default it prepends
+    the `key_prefix'. KEY_FUNCTION can be used to specify an alternate
+    function with custom key making behavior.
+    """
+    return '%s:%s:%s' % (key_prefix, version, key)
+
+
+def get_key_func(key_func):
+    """
+    Function to decide which key function to use.
+
+    Defaults to ``default_key_func``.
+    """
+    if key_func is not None:
+        if callable(key_func):
+            return key_func
+        else:
+            return import_string(key_func)
+    return default_key_func
 
 
 
@@ -61,6 +83,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    # 'django.middleware.cache.UpdateCacheMiddleware',      # 全站缓存——顶部
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -68,6 +91,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'django.middleware.cache.FetchFromCacheMiddleware',   # 全站缓存——尾部
 ]
 
 ROOT_URLCONF = 'knows.urls'
