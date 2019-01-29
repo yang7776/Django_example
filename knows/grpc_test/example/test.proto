@@ -1,0 +1,24 @@
+// grpc版本
+syntax = "proto3";
+package example;
+
+// 定义接口,一个请求接口，一个响应接口
+service TestData {
+    rpc GetInfo(TestRequest) returns (TestResponse){}
+}
+
+// 定义请求接口下发送请求的数据格式
+message TestRequest {
+    string username = 1;
+    string password = 2;
+}
+
+// 定义响应接口下返回请求的数据格式
+message TestResponse {
+    int32 code = 1;
+    string message = 2;
+}
+
+message TestResponse1{
+    string message
+}
