@@ -12,8 +12,8 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 
-from .logs import *
-from django.utils.module_loading import import_string
+from .logs import *     # 导入log文件
+
 
 # 缓存
 CACHES = {
@@ -25,32 +25,6 @@ CACHES = {
         'TIMEOUT': 300,  # 缓存超时时间（默认300，None表示永不过期，0表示立即过期）
     }
 }
-
-
-def default_key_func(key, key_prefix, version):
-    """
-    Default function to generate keys.
-
-    Constructs the key used by all other methods. By default it prepends
-    the `key_prefix'. KEY_FUNCTION can be used to specify an alternate
-    function with custom key making behavior.
-    """
-    return '%s:%s:%s' % (key_prefix, version, key)
-
-
-def get_key_func(key_func):
-    """
-    Function to decide which key function to use.
-
-    Defaults to ``default_key_func``.
-    """
-    if key_func is not None:
-        if callable(key_func):
-            return key_func
-        else:
-            return import_string(key_func)
-    return default_key_func
-
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
