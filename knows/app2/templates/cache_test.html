@@ -39,7 +39,7 @@
         </tr>
     {% for item in teas %}
         <tr>
-            <td>{{ item.name }}</td>
+            <td>{{ item.get_type_display }}</td>
         </tr>
      {% endfor %}
     </table>
