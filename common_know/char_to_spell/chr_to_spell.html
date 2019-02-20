@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <title>汉字转拼音代码</title>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script src="char_to_initial.js"></script>
+    <style type="text/css">
+        .initial1 span{
+            color: #5b5b5b;
+            cursor: pointer;
+        }
+        .initial1 span:hover{
+            color: black;
+        }
+        .initial2 span{
+            color: #5b5b5b;
+            cursor: pointer;
+        }
+        .initial2 span:hover{
+            color: black;
+        }
+        .choose_city{
+            overflow: hidden;
+        }
+        .city{
+            font-size: 13px;
+        }
+        .city input{
+            vertical-align:-2px;
+            margin: 0 2px 0 0;
+        }
+        .city span{
+            margin-right: 15px;
+        }
+        .cinema{
+            font-size: 13px;
+        }
+        .cinema input{
+            vertical-align:-2px;
+            margin: 0 2px 0 0;
+        }
+        .cinema span{
+            margin-right: 15px;
+        }
+        .custom_input{
+            font-size: 13px;
+        }
+        .custom_input input{
+            vertical-align:-2px;
+            margin: 0 2px 0 0;
+        }
+        .custom_input span{
+            margin-right: 15px;
+        }
+        .custom_input div{
+            margin-bottom: 7px;
+        }
+        #put_info{
+            width: 700px;
+            margin: 50px auto;
+        }
+    </style>
+</head>
+<body>
+<input type="text">
+<button>获取</button>
+<div style="margin-top: 10px"><span style="font-size: 20px" id='initial1'></span></div>
+<div><span style="font-size: 20px" id='initial2'></span></div>
+<div><span style="font-size: 20px" id='initial3'></span></div>
+
+<div id="put_info">
+    <div class="choose_city">
+        <div style="float: left;margin-right: 70px;font-size:13px;color:#5b5b5b">选择城市:</div>
+        <div style="float: left;width: 500px;">
+            <div style="margin-bottom: 10px" class="initial1">
+            <span>A</span>
+            <span>B</span>
+            <span>C</span>
+            <span>D</span>
+            <span>E</span>
+            <span>F</span>
+            <span>G</span>
+            <span>H</span>
+            <span>I</span>
+            <span>J</span>
+            <span>K</span>
+            <span>L</span>
+            <span>M</span>
+            <span>N</span>
+            <span>O</span>
+            <span>P</span>
+            <span>Q</span>
+            <span>R</span>
+            <span>S</span>
+            <span>T</span>
+            <span>U</span>
+            <span>V</span>
+            <span>W</span>
+            <span>X</span>
+            <span>Y</span>
+            <span>Z</span>
+            <span class="take_in">收起</span>
+        </div>
+            <div class="city">
+                <span><input type="checkbox" value="全国">全国</span>
+                <span><input type="checkbox" value="北京">北京</span>
+                <span><input type="checkbox" value="上海">上海</span>
+                <span><input type="checkbox" value="上海">长沙</span>
+                <span><input type="checkbox" value="上海">重庆</span>
+            </div>
+        </div>
+    </div>
+    <div class="choose_cinema" style="overflow: hidden;margin:50px 0">
+        <div style="float: left;margin-right: 70px;font-size:13px;color:#5b5b5b">选择影城:</div>
+        <div style="float: left;width: 500px;">
+            <div style="margin-bottom: 10px" class="initial2">
+                <span>A</span>
+                <span>B</span>
+                <span>C</span>
+                <span>D</span>
+                <span>E</span>
+                <span>F</span>
+                <span>G</span>
+                <span>H</span>
+                <span>I</span>
+                <span>J</span>
+                <span>K</span>
+                <span>L</span>
+                <span>M</span>
+                <span>N</span>
+                <span>O</span>
+                <span>P</span>
+                <span>Q</span>
+                <span>R</span>
+                <span>S</span>
+                <span>T</span>
+                <span>U</span>
+                <span>V</span>
+                <span>W</span>
+                <span>X</span>
+                <span>Y</span>
+                <span>Z</span>
+                <span class="take_in2">收起</span>
+            </div>
+            <div class="cinema">
+                <span><input type="checkbox" value="北京万达影城">北京万达影城</span>
+                <span><input type="checkbox" value="上海万达影城">上海万达影城</span>
+                <span><input type="checkbox" value="广州万达影城">广州万达影城</span>
+            </div>
+        </div>
+    </div>
+    <div class="custom_label" style="margin-bottom: 50px;overflow: hidden">
+        <div style="float: left;margin-right: 57px;font-size:13px;color:#5b5b5b">自定义标签:</div>
+        <div style="float:left;width: 500px;" class="custom_input">
+            <span><input type="checkbox" value="华北横屏">华北横屏</span>
+            <span><input type="checkbox" value="西北横屏">西北横屏</span>
+        </div>
+    </div>
+    <div class="seled_label" style="overflow: hidden">
+        <div style="float: left;margin-right: 57px;font-size:13px;color:#5b5b5b">已选择标签:</div>
+        <div style="float:left;width: 500px;" class="custom_input">
+            <div class="chs_city"></div>
+            <div class="chs_cinema"></div>
+            <div class="chs_label"></div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    $('button').click(function () {
+        var char = $('input').val();
+        s = pinyin.convertPYs(char);
+        $('#initial1').html("第一个首字母："+s[1].substring(1,0).toUpperCase());
+        $('#initial2').html("全首字母："+s[1]);
+        $('#initial3').html("全拼："+s[0]);
+    })
+</script>
+<script type="application/javascript">
+    // 多字母省略
+    var num = $('.initial1 span');
+    var num2 = $('.initial2 span');
+    if(num.length>2){
+        for (var i = 3; i < num.length; i++) {
+            num.eq(i).hide()
+        }
+        $('.initial1').append('<span class="omit" onclick="omit()">……</span>')
+    }
+    $('.take_in').click(function () {
+        for (var i = 3; i < num.length; i++) {
+            num.eq(i).hide()
+        }
+        $('.initial1').append('<span class="omit" onclick="omit()">……</span>')
+    });
+    omit = function () {
+        for (var i = 3; i < num.length; i++) {
+            num.eq(i).show()
+        }
+        $('.omit').remove()
+    }
+    if(num2.length>2){
+        for (var i = 3; i < num2.length; i++) {
+            num2.eq(i).hide()
+        }
+        $('.initial2').append('<span class="omit1" onclick="omit1()">……</span>')
+    }
+    $('.take_in2').click(function () {
+        for (var i = 3; i < num2.length; i++) {
+            num2.eq(i).hide()
+        }
+        $('.initial2').append('<span class="omit1" onclick="omit1()">……</span>')
+    });
+    omit1 = function () {
+        for (var i = 3; i < num2.length; i++) {
+            num2.eq(i).show()
+        }
+        $('.omit1').remove()
+    }
+
+    // 根据首字母筛选城市
+    $('.initial1 span').click(function (d) {
+        $('.error_msg').remove();
+        $('.city span').hide();
+        var alph1 = $(this).html();
+        if (alph1 == "收起") {
+            $('.city span').show();
+        } else {
+            var city = $('.city span');
+            var suc_num = 0;
+            for (var i = 0; i < city.length; i++) {
+                var city_this = $('.city span').eq(i);
+                var city_name = $('.city span').eq(i).text();
+                var city_name_chr = pinyin.convertPYs(city_name)[1].substring(1, 0).toUpperCase();
+                if (alph1 == city_name_chr) {
+                    city_this.show();
+                    suc_num = suc_num + 1
+                }
+            }
+            if (!suc_num) {
+                $('.city').append('<span class="error_msg">抱歉，暂无相关城市</span>');
+            }
+        }
+    });
+    $('.initial2 span').click(function (d) {
+        $('.error_msg2').remove();
+        $('.cinema span').hide();
+        var alph1 = $(this).html();
+        if (alph1 == "收起") {
+            $('.cinema span').show();
+        } else {
+            var cinema = $('.cinema span');
+            var suc_num = 0;
+            for (var i = 0; i < cinema.length; i++) {
+                var cinema_this = $('.cinema span').eq(i);
+                var cinema_name = $('.cinema span').eq(i).text();
+                var cinema_name_chr = pinyin.convertPYs(cinema_name)[1].substring(1, 0).toUpperCase();
+                if (alph1 == cinema_name_chr) {
+                    cinema_this.show();
+                    suc_num = suc_num + 1
+                }
+            }
+            if (!suc_num) {
+                $('.cinema').append('<span class="error_msg2">抱歉，暂无相关影城</span>');
+            }
+        }
+    });
+
+    $('.city span input').click(function () {
+        var city_item = $(this).val();
+        if($(this).is(":checked")){
+            $('.chs_city').append('<span><input type="checkbox" value="'+city_item+'" checked>'+city_item+'</span>')
+        }else {
+            $('.chs_city input[value="city_item"]'.replace("city_item",city_item)).parent().remove()
+        }
+    });
+    $('.cinema span input').click(function () {
+        var cinema_item = $(this).val();
+        if($(this).is(":checked")){
+            $('.chs_cinema').append('<span><input type="checkbox" value="'+cinema_item+'" checked>'+cinema_item+'</span>')
+        }else {
+            $('.chs_cinema input[value="cinema_item"]'.replace("cinema_item",cinema_item)).parent().remove()
+        }
+    });
+    $('.custom_input span input').click(function () {
+        var label_item = $(this).val();
+        if($(this).is(":checked")){
+            $('.chs_label').append('<span><input type="checkbox" value="'+label_item+'" checked>'+label_item+'</span>')
+        }else {
+            $('.chs_label input[value="label_item"]'.replace("label_item",label_item)).parent().remove()
+        }
+    });
+
+
+</script>
+</html>
