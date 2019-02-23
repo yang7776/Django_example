@@ -19,6 +19,10 @@ import logging
 # Create your views here.
 def select(request):
     return render(request,"select.html")
+    
+def test_item(request):
+    tests = Test_item.objects.all()
+    return render(request,"test_teacher_item.html",locals())
 
 @cache_page(7) # 设置该视图缓存7秒
 def cache_test(request):
@@ -40,4 +44,30 @@ def sel(request):
     else:
         request.session['id'] = id
     return HttpResponse("ID申请成功")
+
+@csrf_exempt
+def teacher_test(request):
+    id = request.POST.get('id')   # 前端传值为7
+    name = request.POST.get('name')
+    data = {
+        "test_id":id,
+        "test_name":name
+    }
+    Test_item.objects.create(**data)
+    return HttpResponse(json.dumps({"msg":"创建成功"}))\
+    
+@csrf_exempt
+def teacher_test_update(request):
+    id = request.POST.get('id')   # 前端传值为7
+    name = request.POST.get('name')
+    obj = Test_item.objects.filter(test_id=id).exists()  # 判断对应数据实例是否存在
+    if not obj:
+        return HttpResponse(json.dumps({"msg": "无对象"}))
+    else:
+        test_id_compare = Test_item.objects.judge_id(id)  # 调用此表格中的Manager函数，即调用此表格的一个方法
+        print(test_id_compare)  # 输出对应方法的返回值,并在下方返回到前端
+        objs = Test_item.objects.get(test_id=id)
+        objs.test_name = name
+        objs.save()
+        return HttpResponse(json.dumps({"msg":"更改成功","test_id_compare":test_id_compare}))
 
