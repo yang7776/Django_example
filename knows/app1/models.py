@@ -12,3 +12,9 @@ class Person(models.Model):
     selfid = models.CharField(max_length=77,primary_key=True)
     name = models.CharField(max_length=77)
     photo = models.ImageField(blank=True,upload_to=user_directory_path)
+    
+class SeaTest(models.Model):
+    id = models.IntegerField(primary_key=True)
+    sex = models.CharField(max_length=30)
+    age = models.IntegerField()
+    name = models.CharField(max_length=50)

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+	<script src="//cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<body>
+<div style="margin: 20px">
+    name:<input type="text" name="name"><br>
+    id: <input type="text" name="id"><br>
+    age:<input type="text" name="age"><br>
+    sex:<input type="text" name="sex"><br>
+    <button>搜索</button>
+</div>
+<table id="test" class="display" cellspacing="0" width="100%">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>sex</th>
+            <th>age</th>
+            <th>name</th>
+        </tr>
+        </thead>
+    <tbody>
+    </tbody>
+</table>
+</body>
+<script type="text/javascript">
+    $('#test').dataTable({
+        "bProcessing": true,
+        "sAjaxSource": '/app1/sea',
+        {#"bServerSide": true,#}
+        "sAjaxDataProp": "data_list",
+        "sPaginationType": "full_numbers",
+        "bScrollCollapse" : true,
+        "aLengthMenu" : [3, 5, 7],
+        "bAutoWidth": false,
+        "bSort" : true,
+        "bInfo" : true,
+        "bFilter": true,
+        "bDestroy": true,
+        "aaSorting" : [[0, "asc"]],
+        "oLanguage": {
+            "sProcessing": "正在加载中,请稍后...",
+            "sLengthMenu": "显示 _MENU_条",
+            "sZeroRecords": "没有找到符合条件的数据",
+            "sEmptyTable": "表中无数据存在！",
+            "sInfo": "当前第_START_-_END_条/共计_TOTAL_条",
+            "sInfoEmpty": "没有记录",
+            "sInfoFiltered": "(从 _MAX_ 条记录中过滤)",
+            "sSearch": "搜索：",
+            "sUrl" : "",
+            "oPaginate": {
+                "sFirst": "首页",
+                "sPrevious": "前一页",
+                "sNext": "后一页",
+                "sLast": "尾页"
+            }
+        },
+        "buttons": [
+            {
+                extend: 'excelHtml5', //csvHtml5 pdfHtml5
+                title: '生产报表',
+                filename: '生产报表',
+                extension: '.xlsx',
+                text: function (dt) { //buttontext
+                    return "Excel格式导出";
+                }
+            }
+        ],
+        "dom": 'lBfrtip',
+        "fnRowCallback": function (nRow, aData, iDisplayIndex) {
+            console.log(nRow);   // 指：当前显示每行的tr对象
+            console.log(aData);   // 指：当前显示“每行的各列”数据，以数组形式
+            console.log(iDisplayIndex);    // 指：当前显示每行的索引，每次从0开始
+        },
+        "aoColumnDefs": [
+            {"aaSorting" : ["desc"], "aTargets": ["_all"]}
+        ]
+        // https://www.cnblogs.com/amoniyibeizi/p/4548111.html
+    })
+</script>
+</html>
