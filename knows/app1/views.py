@@ -45,6 +45,8 @@ def sea(request):
             item.id,
             item.sex,
             item.age,
+            item.name,
+            item.id,
             item.name
         ]
         data_info.append(per)

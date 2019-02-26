@@ -5,8 +5,8 @@
     <title>Title</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
-	<script src="//cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-    <script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -24,6 +24,7 @@
             <th>sex</th>
             <th>age</th>
             <th>name</th>
+            <th>详情</th>
         </tr>
         </thead>
     <tbody>
@@ -38,7 +39,7 @@
         "sAjaxDataProp": "data_list",
         "sPaginationType": "full_numbers",
         "bScrollCollapse" : true,
-        "aLengthMenu" : [3, 5, 7],
+        "aLengthMenu" : [5, 3, 7],
         "bAutoWidth": false,
         "bSort" : true,
         "bInfo" : true,
@@ -74,15 +75,19 @@
             }
         ],
         "dom": 'lBfrtip',
-        "fnRowCallback": function (nRow, aData, iDisplayIndex) {
-            console.log(nRow);   // 指：当前显示每行的tr对象
-            console.log(aData);   // 指：当前显示“每行的各列”数据，以数组形式
-            console.log(iDisplayIndex);    // 指：当前显示每行的索引，每次从0开始
+        "fnRowCallback": function (nRow, aData, iDisplayIndex) {  // 此方法是对接收数据后，进行进一步处理
+            $('td:eq(4)',nRow).html("<button onclick='btn(this)' value='"+aData[4]+"/"+aData[5]+"'>详情</button>");   //如此代码设置第5列为一个按钮，用来输出每行多余的数据
+            //console.log(nRow);   // 指：当前显示每行的tr对象
+            //console.log(aData);   // 指：当前显示“每行的各列”数据，以数组形式
+            //console.log(iDisplayIndex);    // 指：当前显示每行的索引，每次从0开始
         },
-        "aoColumnDefs": [
-            {"aaSorting" : ["desc"], "aTargets": ["_all"]}
+        "aoColumnDefs": [  // 对指定列，或所有列（_all）进行操作
+            //{"bVisible": false, "aTargets":[0] , "bSearchable": false}   如：这句代码指将第0列隐藏，中括号里为列索引
         ]
         // https://www.cnblogs.com/amoniyibeizi/p/4548111.html
     })
+    function btn(a) {
+        console.log($(a).val())
+    }
 </script>
 </html>
