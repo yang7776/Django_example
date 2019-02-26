@@ -76,7 +76,8 @@
         ],
         "dom": 'lBfrtip',
         "fnRowCallback": function (nRow, aData, iDisplayIndex) {  // 此方法是对接收数据后，进行进一步处理
-            $('td:eq(4)',nRow).html("<button onclick='btn(this)' value='"+aData[4]+"/"+aData[5]+"'>详情</button>");   //如此代码设置第5列为一个按钮，用来输出每行多余的数据
+            $('td:eq(4)',nRow).html("<button onclick='btn(this)' value=''>详情</button>");   //如此代码设置第5列为一个按钮，用来输出每行多余的数据
+            $('td:eq(4)',nRow).children().attr("value",aData[5]+"/"+aData[4])
             //console.log(nRow);   // 指：当前显示每行的tr对象
             //console.log(aData);   // 指：当前显示“每行的各列”数据，以数组形式
             //console.log(iDisplayIndex);    // 指：当前显示每行的索引，每次从0开始
