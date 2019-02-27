@@ -47,7 +47,7 @@ def sea(request):
             item.age,
             item.name,
             item.id,
-            item.name
+            item.sex + "|" + item.name,
         ]
         data_info.append(per)
     return HttpResponse(json.dumps({"data_list": data_info, "iTotalRecords": total, "iTotalDisplayRecords": total,"sEcho": sEcho}))
