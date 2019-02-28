@@ -3,6 +3,7 @@ import grpc,time
 from concurrent import futures
 from knows.grpc_test.example import test_pb2_grpc, test_pb2
 
+# 定义相关参数（推迟服务执行时间，服务器ip，服务器端口）
 _ONE_DAY_IN_SECONDS = 60 * 60 * 24
 _HOST = "localhost"
 _PORT = "8080"
@@ -39,6 +40,7 @@ def server():
     try:
         while True:
             print("服务器已开启")
+            # 设置服务器可执行的时间间隔，防止服务器的负载
             time.sleep(_ONE_DAY_IN_SECONDS)
     except KeyboardInterrupt:
         # 关闭服务
