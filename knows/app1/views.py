@@ -42,7 +42,7 @@ def sea(request):
     total = len(items)
     for item in items:
         per = [
-            item.id,
+            str(item.id) + " | " + item.name,
             item.sex,
             item.age,
             item.name,
