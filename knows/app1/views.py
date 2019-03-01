@@ -42,12 +42,12 @@ def sea(request):
     total = len(items)
     for item in items:
         per = [
-            str(item.id) + " | " + item.name,
+            item.id,
             item.sex,
             item.age,
             item.name,
-            item.id,
-            item.sex + "|" + item.name,
+            str(item.id) + " | " + item.name,
+            ""
         ]
         data_info.append(per)
     return HttpResponse(json.dumps({"data_list": data_info, "iTotalRecords": total, "iTotalDisplayRecords": total,"sEcho": sEcho}))
