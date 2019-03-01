@@ -24,12 +24,16 @@ def upload(request):
     return HttpResponse(json.dumps(msg))
 
 def sea(request):
+    # 分页数据
+    offset = int(request.GET.get("iDisplayStart", 0))
+    limit = int(request.GET.get("iDisplayLength", 10))
     id = request.GET.get('id',"")
     name = request.GET.get('name',"")
     sex = request.GET.get('sex',"")
     age = request.GET.get('age',"")
+    # sea_type = request.GET.get('search_type')   # 接收的“查询类型”
+    # sea_res = request.GET.get('search_res',"")   # 根据查询类型找到对应数据
     sEcho = request.GET.get('sEcho')
-    print(id,name,sex,age)
     data_info = []
     sea_items = {}
     if id:
@@ -41,7 +45,8 @@ def sea(request):
     if age:
         sea_items.update({'age': int(age)})
     items = SeaTest.objects.filter(**sea_items)
-    total = len(items)
+    total = items.count()
+    items = items[offset:offset + limit]
     for item in items:
         per = [
             item.id,
@@ -53,8 +58,8 @@ def sea(request):
         ]
         data_info.append(per)
     return HttpResponse(json.dumps({
-        "data":{
-           "data_list": data_info,
+        "data": {
+            "data_list": data_info,
             "iTotalRecords": total,
             "iTotalDisplayRecords": total,
             "sEcho": sEcho
