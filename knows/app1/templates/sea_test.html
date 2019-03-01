@@ -6,10 +6,13 @@
     <title>Test</title>
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="{% static 'css/buttons.dataTables.min.css' %}">   {#  button的相关css  #}
+    <link rel="stylesheet" href="{% static 'css/buttons.dataTables.min.css' %}">
+    {#  button的相关css  #}
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/datatables.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/dataTables.tableTools.min.js' %}"></script>
+    <script src="{% static 'js/jquery.dataTables.js' %}"></script>
     {#  button的相关js  #}
     <script src="{% static 'js/dataTables.buttons.min.js' %}"></script>
     <script src="{% static 'js/buttons.html5.min.js' %}"></script>
@@ -17,12 +20,65 @@
 </head>
 <body>
 <a href="https://www.cnblogs.com/amoniyibeizi/p/4548111.html" target="_blank"><h2>点击查看相关博客</h2></a>
-<div style="margin: 20px">
-    name:<input type="text" name="name"><br>
-    id: <input type="text" name="id"><br>
-    age:<input type="text" name="age"><br>
-    sex:<input type="text" name="sex"><br>
-    <button>搜索</button>
+
+<div id="form-search" style="margin:50px 0">
+    <form id="search-form" class="form-horizontal mb-lg" action="#" novalidate="novalidate">
+        <div class="form-group">
+            <label class="col-md-1 control-label">id</label>
+            <div class="choose_act col-md-2" data-actname="id" style="float: left">
+                <select id="id" class="select form-control input-sm">
+                    <option value="">全部</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <label class="col-md-1 control-label">age</label>
+            <div class="choose_act col-md-2" data-actname="age" style="float: left">
+                <select id="age" class="select form-control input-sm">
+                    <option value="">全部</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <label class="col-md-1 control-label">name</label>
+            <div class="choose_act col-md-2" data-actname="name" style="float: left">
+                <select id="name" class="select form-control input-sm">
+                    <option value="">全部</option>
+                    <option value="p1">p1</option>
+                    <option value="p2">p2</option>
+                    <option value="p3">p3</option>
+                    <option value="p4">p4</option>
+                    <option value="p5">p5</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-1 control-label">查询类型</label>
+            <div class="choose_act col-sm-3" data-actname="search_type">
+                <select id="search_type" class="form-control input-sm">
+                    <option value="id">id</option>
+                    <option value="age">age</option>
+                    <option value="name">name</option>
+                </select>
+            </div>
+            <div class='choose_act col-sm-3 search' data-actname="search_res">
+                <div class="input-group">
+                    <div id="searchInput">
+                        <input id="search_res" type="text" class="form-control input-sm" placeholder="Search for...">
+                    </div>
+                    <span class="input-group-btn" id="searchTubiao">
+                            <button class="btn btn-default input-sm" type="button">查询</button>
+                        </span>
+                </div><!-- /input-group -->
+            </div>
+        </div>
+    </form>
 </div>
 <div class="table-responsive">
     <table id="test" class="table table-bordered mb-none formTable" cellspacing="0" width="100%">
@@ -43,65 +99,144 @@
 
 </body>
 <script type="text/javascript">
+    // 定义函数，实现实时表格数据调用更新
+    function test_list(ajax_url) {
+        test_list_table = $('#test').dataTable({
+            "bProcessing": true,   //DataTables载入数据时，是否显示‘进度’提示
+            "sAjaxSource": ajax_url,  // 请求数据的ajax_url地址
+            {#"bServerSide": true,#}   //是否启动服务器端数据导入
+            "sAjaxDataProp": "data_list",  // 传来的值是键值对，接收对应的键，值是json类型的“列表”
+            "sPaginationType": "full_numbers",  //详细分页组，可以支持直接跳转到某页
+            "bScrollCollapse": true,  //是否开启DataTables的高度自适应，当数据条数不够分页数据条数的时候，插件高度是否随数据条数而改变
+            "aLengthMenu": [3, 5, 7],  //更改显示记录数选项，按给出列表顺序
+            "iDisplayLength": 5,  //默认显示的记录数
+            "bAutoWidth": false,  //是否自适应宽度
+            "bSort": true,  //是否启动各个字段的排序功能
+            "bInfo": true,  //是否显示页脚信息，DataTables插件左下角显示记录数
+            "bFilter": true,  //是否启动过滤、搜索功能
+            "bDestroy": true,  // 初始化表格，并如果有新的数据接入时，可以替换新的表格。（有搜索功能的必选，因为要根据搜索的条件替换初始化表格）
+            "aaSorting": [[0, "asc"]],  // 指定表格根据索引列默认排序。（asc升序，desc降序）
+            "oLanguage": {  // 国际化配置
+                "sProcessing": "正在加载中,请稍后...",
+                "sLengthMenu": "显示 _MENU_条",
+                "sZeroRecords": "没有找到符合条件的数据",
+                "sEmptyTable": "表中无数据存在！",
+                "sInfo": "当前第_START_-_END_条/共计_TOTAL_条",
+                "sInfoEmpty": "没有记录",
+                "sInfoFiltered": "(从 _MAX_ 条记录中过滤)",
+                "sSearch": "搜索：",
+                "sUrl": "", //多语言配置文件，可将oLanguage的设置放在一个txt文件中，例：Javascript/datatable/dtCH.txt
+                "oPaginate": {
+                    "sFirst": "首页",
+                    "sPrevious": "前一页",
+                    "sNext": "后一页",
+                    "sLast": "尾页"
+                }
+            },
+            "dom": 'lBfrti',  // 表格导出按钮的位置
+            "buttons": [  // 设置表格的相关导出按钮，可支持多种类型
+                {
+                    extend: 'excelHtml5', //csvHtml5 pdfHtml5
+                    title: '测试表格',
+                    filename: '测试表格',
+                    extension: '.xlsx',
+                    text: function (dt) { //buttontext
+                        return "测试表格导出";
+                    }
+                }
+            ],
+            "fnServerData": function (sSource, aoData, fnCallback) {
+                $("[name=ScreenAllCheck]").prop("checked", false);
+                $("#test tbody").html("");
+                $('#test_processing').css("top", "85%");
+                $('.dataTables_info').css("margin-top", "30px");
+                $('.dataTables_paginate').css("margin-top", "30px");
+                $.ajax({
+                    "dataType": 'json',
+                    "type": "GET",
+                    "url": sSource,
+                    "data": aoData,
+                    "success": function (json) {
+                        fnCallback(json.data);
+                        $('.dataTables_info').css("margin-top", "0");
+                        $('.dataTables_paginate').css("margin-top", "0");
+                    }
+                });
+            },
+            "fnRowCallback": function (nRow, aData, iDisplayIndex) {  // 此方法是对接收数据后，进行进一步处理
+                $('td:eq(5)', nRow).html("<button onclick='btn(this)' value=''>详情</button>");   //如此代码设置第5列为一个按钮，用来输出每行多余的数据
+                $('td:eq(5)', nRow).children().attr("value", aData[0] + "/" + aData[3])
+                //console.log(nRow);   // 指：当前显示每行的tr对象
+                //console.log(aData);   // 指：当前显示“每行的各列”数据，以数组形式
+                //console.log(iDisplayIndex);    // 指：当前显示每行的索引，每次从0开始
+            },
+            "aoColumnDefs": [  // 对指定列，或所有列（_all）进行操作
+                //{"bVisible": false, "aTargets":[0] , "bSearchable": false}   如：这句代码指将第0列隐藏，中括号里为列索引
+            ]
+        })
+    }
 
-    $('#test').dataTable({
-        "bProcessing": true,   //DataTables载入数据时，是否显示‘进度’提示
-        "sAjaxSource": '/app1/sea',  // 请求数据的ajax_url地址
-        {#"bServerSide": true,#}   //是否启动服务器端数据导入
-        "sAjaxDataProp": "data_list",  // 传来的值是键值对，接收对应的键，值是json类型的“列表”
-        "sPaginationType": "full_numbers",  //详细分页组，可以支持直接跳转到某页
-        "bScrollCollapse": true,  //是否开启DataTables的高度自适应，当数据条数不够分页数据条数的时候，插件高度是否随数据条数而改变
-        "aLengthMenu": [3, 5, 7],  //更改显示记录数选项，按给出列表顺序
-        "iDisplayLength" : 5,  //默认显示的记录数
-        "bAutoWidth": false,  //是否自适应宽度
-        "bSort": true,  //是否启动各个字段的排序功能
-        "bInfo": true,  //是否显示页脚信息，DataTables插件左下角显示记录数
-        "bFilter": true,  //是否启动过滤、搜索功能
-        "bDestroy": true,  // 初始化表格，并如果有新的数据接入时，可以替换新的表格。（有搜索功能的必选，因为要根据搜索的条件替换初始化表格）
-        "aaSorting": [[0, "asc"]],  // 指定表格根据索引列默认排序。（asc升序，desc降序）
-        "oLanguage": {  // 国际化配置
-            "sProcessing": "正在加载中,请稍后...",
-            "sLengthMenu": "显示 _MENU_条",
-            "sZeroRecords": "没有找到符合条件的数据",
-            "sEmptyTable": "表中无数据存在！",
-            "sInfo": "当前第_START_-_END_条/共计_TOTAL_条",
-            "sInfoEmpty": "没有记录",
-            "sInfoFiltered": "(从 _MAX_ 条记录中过滤)",
-            "sSearch": "搜索：",
-            "sUrl": "", //多语言配置文件，可将oLanguage的设置放在一个txt文件中，例：Javascript/datatable/dtCH.txt
-            "oPaginate": {
-                "sFirst": "首页",
-                "sPrevious": "前一页",
-                "sNext": "后一页",
-                "sLast": "尾页"
+    // 定义事件，根据搜索功能实时更新表格
+    var test_list_table = null;
+    var ajax_url = '{{ ajax_url }}';
+    $(function () {
+        // 调用表格数据函数
+        test_list(ajax_url);
+
+        // search
+        function search_url() {
+            $('.choose_act').each(function () {
+                var name_str = $(this).data("actname");
+                var val_str = $("#" + name_str).val();
+                ajax_url = window.replace_url_params(ajax_url, name_str, val_str);
+            });
+            console.log("new_ajax_url:", ajax_url);
+            return ajax_url;
+        }
+
+        // 将获取的数据和ajax_url融合格式化，返回为GET请求的格式
+        window.replace_url_params = function (url, key, val) {
+            url = url.replace(/amp;/g, '');
+            new_arr = url.split("?");
+            var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)", "i");
+            if (new_arr.length == 1) {
+                r = null;
+            } else {
+                var r = new_arr[1].match(reg);
             }
-        },
-        "dom": 'lBfrti',  // 表格导出按钮的位置
-        "buttons": [  // 设置表格的相关导出按钮，可支持多种类型
-            {
-                extend: 'excelHtml5', //csvHtml5 pdfHtml5
-                title: '测试表格',
-                filename: '测试表格',
-                extension: '.xlsx',
-                text: function (dt) { //buttontext
-                    return "测试表格导出";
+            if (r != null) {
+                name_val = unescape(r[2]);
+                var targetURL = '';
+
+                url = url.replace(key + "=" + name_val, key + "=" + val);
+            } else {
+                if (url.indexOf("?") > -1) {
+                    url += "&" + key + "=" + val
+                } else {
+                    url += "?" + key + "=" + val
                 }
             }
-        ],
-        "fnRowCallback": function (nRow, aData, iDisplayIndex) {  // 此方法是对接收数据后，进行进一步处理
-            $('td:eq(5)', nRow).html("<button onclick='btn(this)' value=''>详情</button>");   //如此代码设置第5列为一个按钮，用来输出每行多余的数据
-            $('td:eq(5)', nRow).children().attr("value", aData[0] + "/" + aData[3])
-            //console.log(nRow);   // 指：当前显示每行的tr对象
-            //console.log(aData);   // 指：当前显示“每行的各列”数据，以数组形式
-            //console.log(iDisplayIndex);    // 指：当前显示每行的索引，每次从0开始
-        },
-        "aoColumnDefs": [  // 对指定列，或所有列（_all）进行操作
-            //{"bVisible": false, "aTargets":[0] , "bSearchable": false}   如：这句代码指将第0列隐藏，中括号里为列索引
-        ]
+            return url
+        };
+
+        // 定义函数返回最新ajax_url   相关js：dataTable.tableTools.min.js / jquery.dataTables.js
+        function DrawTable() {
+            search_url();
+            oSettings = test_list_table.fnSettings();
+            oSettings.sAjaxSource = ajax_url;
+            test_list_table.fnDraw()
+        }
+
+        // 定义搜索的“回车”和“点击”事件
+        $("#searchInput").unbind().bind('keydown', function (event) {
+            if (event.which == "13") {
+                DrawTable();
+            }
+        });
+        $("#searchTubiao").unbind().bind('click', function (event) {
+            DrawTable();
+        });
     })
 
-    function btn(a) {
-        console.log($(a).val())
-    }
 </script>
 </html>

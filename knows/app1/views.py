@@ -11,7 +11,8 @@ def show_login(request):
     return render(request,"login.html",{"pers":pers})
 
 def sea_test(request):
-    return render(request,"sea_test.html")
+    ajax_url = '/app1/sea'
+    return render(request,"sea_test.html",{"ajax_url":ajax_url})
 
 @csrf_exempt
 def upload(request):
@@ -23,21 +24,22 @@ def upload(request):
     return HttpResponse(json.dumps(msg))
 
 def sea(request):
-    id = request.GET.get('id')
-    name = request.GET.get('name')
-    sex = request.GET.get('sex')
-    age = request.GET.get('age')
+    id = request.GET.get('id',"")
+    name = request.GET.get('name',"")
+    sex = request.GET.get('sex',"")
+    age = request.GET.get('age',"")
     sEcho = request.GET.get('sEcho')
+    print(id,name,sex,age)
     data_info = []
     sea_items = {}
     if id:
-        sea_items.update({'id':id})
+        sea_items.update({'id':int(id)})
     if name:
         sea_items.update({'name': name})
     if sex:
         sea_items.update({'sex': sex})
     if age:
-        sea_items.update({'age': age})
+        sea_items.update({'age': int(age)})
     items = SeaTest.objects.filter(**sea_items)
     total = len(items)
     for item in items:
@@ -50,4 +52,11 @@ def sea(request):
             ""
         ]
         data_info.append(per)
-    return HttpResponse(json.dumps({"data_list": data_info, "iTotalRecords": total, "iTotalDisplayRecords": total,"sEcho": sEcho}))
+    return HttpResponse(json.dumps({
+        "data":{
+           "data_list": data_info,
+            "iTotalRecords": total,
+            "iTotalDisplayRecords": total,
+            "sEcho": sEcho
+        }
+    }))
