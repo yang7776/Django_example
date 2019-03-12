@@ -44,7 +44,7 @@ def sea(request):
         sea_items.update({'sex': sex})
     if age:
         sea_items.update({'age': int(age)})
-    items = SeaTest.objects.filter(**sea_items)
+    items = SeaTest.objects.filter(**sea_items).order_by("age")  # order_by()：可以根据指定字段排序
     total = items.count()
     items = items[offset:offset + limit]
     for item in items:
