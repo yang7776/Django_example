@@ -6,14 +6,21 @@
     <title>Test</title>
     {#  button,datatables的相关css  #}
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
-    <link rel="stylesheet" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="{% static 'css/buttons.dataTables.min.css' %}">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+    <style type="text/css">
+        .paginate_button{
+            padding: 0!important;
+            border: 0!important;
+            margin: 0!important;
+        }
+    </style>
     {#  jquery,bootstrap,datatables的相关js  #}
     <script src="{% static 'js/jquery.min.js' %}"></script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/jquery.dataTables.js' %}"></script>
     <script src="{% static 'js/dataTables.tableTools.min.js' %}"></script>
     <script src="{% static 'js/datatables.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
     {#  button的相关js  #}
     <script src="{% static 'js/dataTables.buttons.min.js' %}"></script>
     <script src="{% static 'js/buttons.html5.min.js' %}"></script>
@@ -109,7 +116,7 @@
             {#"bStateSave" : true, //是否打开客户端状态记录功能,此功能在ajax刷新纪录的时候不会将个性化设定回复为初始化状态#}
             {#"bPaginate" : true, //是否显示（应用）分页器#}
             "sAjaxDataProp": "data_list",  // 传来的值是键值对，接收对应的键，值是json类型的“列表”
-            "sPaginationType": "full_numbers",  //详细分页组，可以支持直接跳转到某页
+            "pagingType": "full_numbers",  //详细分页组，可以支持直接跳转到某页
             "bScrollCollapse": true,  //是否开启DataTables的高度自适应，当数据条数不够分页数据条数的时候，插件高度是否随数据条数而改变
             "bLengthChange": true,
             "aLengthMenu": [3, 5, 7],  //更改显示记录数选项，按给出列表顺序
@@ -137,12 +144,27 @@
                     "sLast": "尾页"
                 }
             },
-            "dom": '1Bfrtip',  // 表格相关按钮（分页，导出按钮）
+            "sDom": '<"top"lB<"clear">>rt<"bottom"ip<"clear">>',
+            /*
+                sDom：自定义布局，可以在表格上方或下方添加对应的控件，如下列字母表示
+                <> 表示一个闭合DIV
+                例：<> = <div></div>
+
+                <"类名称"> 表示一个带类名称的闭合DIV
+                例：<"top"> = <div class="top"></div>
+
+                B - excel表格导出按钮
+                l - 每行显示的记录数
+                f - 搜索框
+                t - 表格
+                i - 表格信息
+                p - 分页条
+                r - 加载时的进度条
+            */
             "fnServerData": function (sSource, aoData, fnCallback) {
                 $("[name=ScreenAllCheck]").prop("checked", false);
                 $("#test tbody").html("");
                 $('#test_processing').css("top", "85%");
-                $('.dataTables_info').css("margin-top", "30px");
                 $('.dataTables_paginate').css("margin-top", "30px");
                 $.ajax({
                     "dataType": 'json',
@@ -151,8 +173,8 @@
                     "data": aoData,
                     "success": function (json) {
                         fnCallback(json.data);
-                        $('.dataTables_info').css("margin-top", "0");
-                        $('.dataTables_paginate').css("margin-top", "0");
+                        $('.dataTables_info').css("margin-left", "20px");
+                        $('.dataTables_paginate').css("margin", "-10px 20px 0 0");
                     }
                 });
             },
