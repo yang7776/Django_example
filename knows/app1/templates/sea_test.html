@@ -4,15 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Test</title>
+    {#  button,datatables的相关css  #}
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="{% static 'css/buttons.dataTables.min.css' %}">
-    {#  button的相关css  #}
+    {#  jquery,bootstrap,datatables的相关js  #}
     <script src="{% static 'js/jquery.min.js' %}"></script>
-    <script src="{% static 'js/datatables.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'js/dataTables.tableTools.min.js' %}"></script>
     <script src="{% static 'js/jquery.dataTables.js' %}"></script>
+    <script src="{% static 'js/dataTables.tableTools.min.js' %}"></script>
+    <script src="{% static 'js/datatables.min.js' %}"></script>
     {#  button的相关js  #}
     <script src="{% static 'js/dataTables.buttons.min.js' %}"></script>
     <script src="{% static 'js/buttons.html5.min.js' %}"></script>
@@ -103,16 +104,17 @@
     function test_list(ajax_url) {
         test_list_table = $('#test').dataTable({
             "bProcessing": true,   //DataTables载入数据时，是否显示‘进度’提示
-            "sAjaxSource": ajax_url,  // 请求数据的ajax_url地址
+            "sAjaxSource": ajax_url,  // 请求数据的ajax_url地址(注意：网址最后一定要带“/”)
             "bServerSide": true,   //是否启动服务器端数据导入,即动态识别ajax_url的变化
             {#"bStateSave" : true, //是否打开客户端状态记录功能,此功能在ajax刷新纪录的时候不会将个性化设定回复为初始化状态#}
             {#"bPaginate" : true, //是否显示（应用）分页器#}
             "sAjaxDataProp": "data_list",  // 传来的值是键值对，接收对应的键，值是json类型的“列表”
             "sPaginationType": "full_numbers",  //详细分页组，可以支持直接跳转到某页
             "bScrollCollapse": true,  //是否开启DataTables的高度自适应，当数据条数不够分页数据条数的时候，插件高度是否随数据条数而改变
+            "bLengthChange": true,
             "aLengthMenu": [3, 5, 7],  //更改显示记录数选项，按给出列表顺序
             "bAutoWidth": false,  //是否自适应宽度
-            {#"bSort": true,  //是否启动各个字段的排序功能#}
+            "bSort": false,  //是否启动各个字段的排序功能
             "bFilter": false,  //是否启动过滤、搜索功能
             "bInfo": true,  //是否显示页脚信息，DataTables插件左下角显示记录数
             "bDestroy": true,  // 初始化表格，并如果有新的数据接入时，可以替换新的表格。（有搜索功能的必选，因为要根据搜索的条件替换初始化表格）
@@ -135,7 +137,7 @@
                     "sLast": "尾页"
                 }
             },
-            "dom": 'Bfrtip',  // 表格相关按钮（分页，导出按钮）
+            "dom": '1Bfrtip',  // 表格相关按钮（分页，导出按钮）
             "fnServerData": function (sSource, aoData, fnCallback) {
                 $("[name=ScreenAllCheck]").prop("checked", false);
                 $("#test tbody").html("");
@@ -172,15 +174,15 @@
                 //console.log(aData);   // 指：当前显示“每行的各列”数据，以数组形式
                 //console.log(iDisplayIndex);    // 指：当前显示每行的索引，每次从0开始
             },
-            "aoColumnDefs": [  // 对指定列，或所有列（_all）进行操作
-                //{"bVisible": false, "aTargets":[0] , "bSearchable": false}   如：这句代码指将第0列隐藏，中括号里为列索引
-            ]
+            {#"aoColumnDefs": [  // 对指定列，或所有列（_all）进行操作#}
+            {#    //{"bVisible": false, "aTargets":[0] , "bSearchable": false}   如：这句代码指将第0列隐藏，中括号里为列索引#}
+            {#]#}
         })
     }
 
     // 定义事件，根据搜索功能实时更新表格
     var test_list_table = null;
-    var ajax_url = '{{ ajax_url }}';
+    var ajax_url = "{{ ajax_url }}";
     $(function () {
         // 调用表格数据函数
         test_list(ajax_url);
@@ -190,14 +192,14 @@
             $('.choose_act').each(function () {
                 var name_str = $(this).data("actname");
                 var val_str = $("#" + name_str).val();
-                ajax_url = window.replace_url_params(ajax_url, name_str, val_str);
+                ajax_url = replace_url_params(ajax_url, name_str, val_str);
             });
             console.log("new_ajax_url:", ajax_url);
             return ajax_url;
         }
 
         // 将获取的数据和ajax_url融合格式化，返回为GET请求的格式
-        window.replace_url_params = function (url, key, val) {
+        replace_url_params = function (url, key, val) {
             url = url.replace(/amp;/g, '');
             new_arr = url.split("?");
             var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)", "i");

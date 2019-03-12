@@ -11,7 +11,7 @@ def show_login(request):
     return render(request,"login.html",{"pers":pers})
 
 def sea_test(request):
-    ajax_url = '/app1/sea'
+    ajax_url = '/app1/sea/'
     return render(request,"sea_test.html",{"ajax_url":ajax_url})
 
 @csrf_exempt
