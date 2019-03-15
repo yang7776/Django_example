@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>form表单验证</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrapValidator.css' %}">
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    {#    <script src="{% static 'js/jquery.validate.min.js' %}"></script>#}
+    <script src="{% static 'js/bootstrapValidator.js' %}"></script>
+{#    <script src="{% static 'js/zh_CN.js' %}"></script>#}
+    <style type="text/css">
+        form{
+            width: 500px;
+            border: 1px solid #858585;
+            margin: 50px;
+            padding: 20px;
+        }
+        form div{
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+<form id="form_validate">
+    <div class="form-group">
+        <label>Username</label>
+        <input type="text" class="form-control" name="username" />
+    </div>
+    <div class="form-group">
+        <label>iphone</label>
+        <input type="text" class="form-control" name="tell" />
+    </div>
+    <div class="form-group">
+        <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
+</body>
+<script type="text/javascript">
+    // iPhone Validator
+    function checktell(phone) {
+        var phone_tell = /^1([358][0-9]|4[579]|66|7[0135678]|9[89])[0-9]{8}$/;
+        var phone_old = /^0\d{2,3}-?\d{7,8}$/;
+        if (phone_tell.test(phone) || phone_old.test(phone)) {
+            return true;
+        } else {
+            return false
+        }
+    }
+
+    // Form Validator
+    $('#form_validate').bootstrapValidator({
+        message: '',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            "username": {
+                validators: {
+                    notEmpty: {
+                        message: '不能为空'
+                    }
+                }
+            },
+            "tell": {
+                validators: {
+                    notEmpty: {
+                        message: '不能为空'
+                    },
+                    stringLength: {
+                        min: 11,
+                        max: 11,
+                        message: '手机号码为数字且长度11位'
+                    },
+                    callback: {
+                        message: '请正确填写手机号码',
+                        callback: function (value, validator) {
+                            return checktell(value);
+                        }
+                    }
+                }
+            }
+        },
+        /*submitHandler: function (validator, form, submitButton) {
+            // 表单提交成功时会调用此方法
+            // validator: 表单验证实例对象
+            // form  jq对象  指定表单对象
+            // submitButton  jq对象  指定提交按钮的对象
+            // 注意：由于版本问题，数据满足后的回调。可能是这个，也可能是下面的“on绑定方法”
+        }*/
+    }).on("success.form.bv",function (e) {
+        alert("aaa")
+    })
+</script>
+</html>

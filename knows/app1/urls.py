@@ -19,6 +19,7 @@ from .views import *
 urlpatterns = [
     path('show_login/',show_login,name='show_login'),
     path('sea_test/',sea_test,name='sea_test'),
+    path('form_val/',form_val,name='form_val'),
     path('upload/',upload,name='upload'),
     path('sea/',sea,name='sea'),
 ]

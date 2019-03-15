@@ -10,9 +10,14 @@ def show_login(request):
     pers = Person.objects.all()
     return render(request,"login.html",{"pers":pers})
 
+# datatable.js组件使用
 def sea_test(request):
     ajax_url = '/app1/sea/'
     return render(request,"sea_test.html",{"ajax_url":ajax_url})
+
+# Form表单验证bootstrapValidator组件使用
+def form_val(request):
+    return render(request,"from_validate.html")
 
 @csrf_exempt
 def upload(request):

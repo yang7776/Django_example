@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>more_know</title>
+</head>
+<body>
+<form>
+    <div>
+        name：<input type="text" name="name" value="123">
+    </div>
+    <div>
+        <button>test</button>
+    </div>
+</form>
+</body>
+<script src="../knows/app1/static/js/jquery.min.js"></script>
+<script type="text/javascript">
+    /*$('button').click(function () {
+        var res = $(this).parents('form:first');
+        console.log(res)
+        res.submit()
+    })*/
+    window.CompareDate = function (t1, t2) {
+        var date = new Date();
+        var a = t1.split(":");
+        var b = t2.split(":");
+        var c = parseInt(a[0]) + parseInt(b[0]);
+        var d = parseInt(a[1]) + parseInt(b[1]);
+        if ((parseInt(a[0]) + parseInt(b[0])) > 48 || (parseInt(a[1]) + parseInt(b[1])) > 120) {
+            return false
+        } else {
+            var aa = date.setHours(a[0], a[1]);
+            var bb = date.setHours(b[0], b[1]);
+            return aa < bb
+        }
+    }
+    var res = CompareDate("00:50","00:01")
+    console.log(res)
+</script>
+</html>
