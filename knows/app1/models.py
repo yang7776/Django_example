@@ -18,3 +18,7 @@ class SeaTest(models.Model):
     sex = models.CharField(max_length=30)
     age = models.IntegerField()
     name = models.CharField(max_length=50)
+    
+class User_Iphone(models.Model):
+    username = models.CharField(max_length=5)
+    iphone = models.CharField(max_length=20)

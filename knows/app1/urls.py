@@ -22,4 +22,6 @@ urlpatterns = [
     path('form_val/',form_val,name='form_val'),
     path('upload/',upload,name='upload'),
     path('sea/',sea,name='sea'),
+    path('user_info/',user_info,name='user_info'),
+    path('create_user/',create_user,name='create_user'),
 ]
