@@ -15,10 +15,6 @@ def sea_test(request):
     ajax_url = '/app1/sea/'
     return render(request,"sea_test.html",{"ajax_url":ajax_url})
 
-# Form表单验证bootstrapValidator组件使用
-def form_val(request):
-    return render(request,"from_validate.html")
-
 @csrf_exempt
 def upload(request):
     file_obj = request.FILES.get('file')
@@ -71,28 +67,19 @@ def sea(request):
         }
     }))
     
-# Django自带form组件
+# Form表单验证bootstrapValidator组件使用
 def user_info(request):
     from .forms import UserInfo
-    obj = UserInfo()   # 创建form对象
     if request.method == "POST":
         user_info_obj = UserInfo(request.POST)   # request.POST为提交过来的所有数据
-        if user_info_obj.is_valid():    # is_valid判断输入的内容是否合法 Ture 或False
-            info = user_info_obj.clean()    # clean()获取提交的数据
-            # 以下是以“GET”方法去处理get接收的数据，并通过HttpResponseRedirect发给指定的views函数
-            b = ""
-            for k,v in info.items():
-                a = "&{}={}".format(k,v)
-                b = a + b
-            return HttpResponseRedirect('/app1/create_user/?%s'%b)
-        else:
-            error_msg = user_info_obj.errors
-            return render(request,"from_validate.html",{'errors':"用户名超过三个字符"})
-    return render(request,'from_validate.html',{'msg':"请求方式错误"})
-
-def create_user(request):
-    username = request.GET.get("username")
-    iphone = request.GET.get("iphone")
-    print(username,iphone)
-    User_Iphone.objects.create(username=username,iphone=iphone)
-    return HttpResponse(json.dumps({"msg":"创建成功"}))
+        if not user_info_obj.is_valid():    # is_valid判断输入的内容是否合法 Ture 或False
+            error = ""
+            for k, err in user_info_obj.errors.items(): # for循环找出错误
+                error = err   # 错误信息
+                return HttpResponse(json.dumps({"msg": error}))   # 返回错误信息
+        info = user_info_obj.clean()  # clean()获取提交的数据
+        username = info.get("username")
+        iphone = info.get("iphone")
+        User_Iphone.objects.create(username=username, iphone=iphone)
+        return HttpResponse(json.dumps({"msg": "创建成功"}))
+    return render(request,'from_validate.html')   # 无论有没有数据，渲染页面

@@ -38,8 +38,7 @@
         <button type="submit" name="submit" class="btn btn-primary">Submit</button>
     </div>
 </form>
-<h2>结果：{{ obj }}</h2>
-<h2>错误：{{ errors }}</h2>
+<h2 style="margin-left: 30px">结果：{{ msg }}</h2>
 </body>
 <script type="text/javascript">
     // iPhone Validator
@@ -95,19 +94,20 @@
             // submitButton  jq对象  指定提交按钮的对象
             // 注意：由于版本问题，数据满足后的回调。可能是这个，也可能是下面的“on绑定方法”
         }*/
-    })
-        .on("success.form.bv",function (e) {
+    }).on("success.form.bv",function (e) {
         // 表单提交成功时会调用此方法
         // validator: 表单验证实例对象
         // form  jq对象  指定表单对象
         // submitButton  jq对象  指定提交按钮的对象
+        e.preventDefault();    // 必须要阻断默认事件
         var paras = $('#form_validate').serialize();
         $.ajax({
             type:"post",
             url:"{% url 'user_info' %}",
             data:paras,
             success:function (e) {
-                alert(e)
+                e = JSON.parse(e);
+                alert(e.msg)
             }
         })
     })
