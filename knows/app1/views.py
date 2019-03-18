@@ -76,7 +76,7 @@ def user_info(request):
             error = ""
             for k, err in user_info_obj.errors.items(): # for循环找出错误
                 error = err   # 错误信息
-            return HttpResponse(json.dumps({"msg": error}))   # 返回错误信息
+                return HttpResponse(json.dumps({"msg": error}))   # 返回错误信息
         info = user_info_obj.clean()  # clean()获取提交的数据
         username = info.get("username")
         iphone = info.get("iphone")
