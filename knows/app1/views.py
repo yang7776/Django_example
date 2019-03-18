@@ -73,13 +73,16 @@ def user_info(request):
     if request.method == "POST":
         user_info_obj = UserInfo(request.POST)   # request.POST为提交过来的所有数据
         if not user_info_obj.is_valid():    # is_valid判断输入的内容是否合法 Ture 或False
-            error = ""
             for k, err in user_info_obj.errors.items(): # for循环找出错误
-                error = err   # 错误信息
-                return HttpResponse(json.dumps({"msg": error}))   # 返回错误信息
-        info = user_info_obj.clean()  # clean()获取提交的数据
+                return HttpResponse(json.dumps({"code":400,"msg": "错误参数：{}，错误原因：{}".format(k,err)}))   # 返回错误信息
+
+        # clean()获取提交的数据，这个函数主要作用是单独拿出来一些数据再次效验
+        # 因为forms类中的一些效验是没有逻辑的，如果需要一些逻辑性效验或者字段联系性效验，就需要单独拿出来效验
+        info = user_info_obj.clean()
         username = info.get("username")
+        if int(username) % 7 != 0 :
+            return HttpResponse(json.dumps({"code":401,"msg": "用户名ID必须是7的倍数"}))  # 返回错误信息
         iphone = info.get("iphone")
         User_Iphone.objects.create(username=username, iphone=iphone)
-        return HttpResponse(json.dumps({"msg": "创建成功"}))
+        return HttpResponse(json.dumps({"code":200,"msg": "创建成功"}))
     return render(request,'from_validate.html')   # 无论有没有数据，渲染页面

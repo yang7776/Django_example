@@ -27,7 +27,7 @@
 <form id="form_validate">
     {% csrf_token %}
     <div class="form-group">
-        <label>Username</label>
+        <label>UserId</label>
         <input type="text" class="form-control" name="username" />
     </div>
     <div class="form-group">
@@ -38,7 +38,7 @@
         <button type="submit" name="submit" class="btn btn-primary">Submit</button>
     </div>
 </form>
-<h2 style="margin-left: 30px">结果：{{ msg }}</h2>
+<div id="res" style="margin-left: 30px"></div>
 </body>
 <script type="text/javascript">
     // iPhone Validator
@@ -68,24 +68,24 @@
                     }
                 }
             },
-            "iphone": {
-                validators: {
-                    notEmpty: {
-                        message: '不能为空'
-                    },
-                    stringLength: {
-                        min: 11,
-                        max: 11,
-                        message: '手机号码为数字且长度11位'
-                    },
-                    callback: {
-                        message: '请正确填写手机号码',
-                        callback: function (value, validator) {
-                            return checktell(value);
-                        }
-                    }
-                }
-            }
+            {#"iphone": {#}
+            {#    validators: {#}
+            {#        notEmpty: {#}
+            {#            message: '不能为空'#}
+            {#        },#}
+            {#        stringLength: {#}
+            {#            min: 11,#}
+            {#            max: 11,#}
+            {#            message: '手机号码为数字且长度11位'#}
+            {#        },#}
+            {#        callback: {#}
+            {#            message: '请正确填写手机号码',#}
+            {#            callback: function (value, validator) {#}
+            {#                return checktell(value);#}
+            {#            }#}
+            {#        }#}
+            {#    }#}
+            {#}#}
         }
         /*submitHandler: function (validator, form, submitButton) {
             // 表单提交成功时会调用此方法
@@ -107,7 +107,16 @@
             data:paras,
             success:function (e) {
                 e = JSON.parse(e);
-                alert(e.msg)
+                if(e.code==200){
+                    alert(e.msg);
+                }
+                else if(e.code==401){
+                    alert(e.msg);
+                }
+                else {
+                    $('#res').html(e.msg)
+                }
+                $('button').removeAttr("disabled")
             }
         })
     })
