@@ -68,24 +68,24 @@
                     }
                 }
             },
-            {#"iphone": {#}
-            {#    validators: {#}
-            {#        notEmpty: {#}
-            {#            message: '不能为空'#}
-            {#        },#}
-            {#        stringLength: {#}
-            {#            min: 11,#}
-            {#            max: 11,#}
-            {#            message: '手机号码为数字且长度11位'#}
-            {#        },#}
-            {#        callback: {#}
-            {#            message: '请正确填写手机号码',#}
-            {#            callback: function (value, validator) {#}
-            {#                return checktell(value);#}
-            {#            }#}
-            {#        }#}
-            {#    }#}
-            {#}#}
+            "iphone": {
+                validators: {
+                    notEmpty: {
+                        message: '不能为空'
+                    },
+                    stringLength: {
+                        min: 11,
+                        max: 11,
+                        message: '手机号码为数字且长度11位'
+                    },
+                    callback: {
+                        message: '请正确填写手机号码',
+                        callback: function (value, validator) {
+                            return checktell(value);
+                        }
+                    }
+                }
+            }
         }
         /*submitHandler: function (validator, form, submitButton) {
             // 表单提交成功时会调用此方法
