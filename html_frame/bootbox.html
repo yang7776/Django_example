@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {#  使用bootbox需要注意bootbox所支持的jquery和bootstrap的版本号，官网可看  #}
+    {#  使用bootbox必须注意引入顺序，顺序如下：  #}
+    <link rel="stylesheet" href="../knows/app1/static/css/bootstrap.css">
+    <script type="text/javascript" src="../knows/app1/static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="../knows/app1/static/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../source/js/bootbox.min.js"></script>
+</head>
+<body>
+</body>
+
+<script type="text/javascript">
+    function isclick_notify(msg, callback) {
+        bootbox.confirm({
+            title: "标题",
+            message: msg,
+            buttons: {
+                cancel: {
+                    label: '<i class="fa fa-times"></i> 取消'
+                },
+                confirm: {
+                    label: '<i class="fa fa-check"></i> 确定'
+                }
+            },
+            callback: function (result) {
+                callback(result)
+            }
+        });
+    }
+
+    // 封装的函数
+    isclick_notify("这是一个测试",function (result) {
+        if(result){
+            console.log("您点击了确定~")
+        }else {
+            console.log("您点击了取消或者按了“Esc”键~")
+        }
+    })
+</script>
+</html>
