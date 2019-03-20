@@ -14,12 +14,30 @@
     </style>
 </head>
 <body>
-<h5>使用bootbox需要注意bootbox所支持的jquery和bootstrap的版本号，官网可看</h5>
+<h5>使用bootbox需要注意bootbox所支持的jquery和bootstrap的版本号，官网可看 <a target="_blank" href="http://bootboxjs.com/documentation.html#bb-dialog">http://bootboxjs.com/documentation.html#bb-dialog</a></h5>
 <h5>使用bootbox必须注意引入顺序，顺序如下：bootstrap.css --> jquery --> bootstrap.js --> bootbox.js</h5>
 </body>
 
 <script type="text/javascript">
-    function isclick_notify(msg, callback) {
+    // 警报框封装
+    function isclick_notify1(msg, callback) {
+        bootbox.alert({
+            size: "normal",   // small,large
+            title: "错误",
+            message: msg,
+            buttons:{
+                ok:{
+                    label:"关闭",
+                    className:"btn btn-default"
+                }
+            },
+            callback: function () {
+            }
+        });
+    }
+
+    // 确认框封装
+    function isclick_notify2(msg, callback) {
         bootbox.confirm({
             title: "标题",
             message: msg,
@@ -37,13 +55,80 @@
         });
     }
 
-    // 封装的函数
-    isclick_notify("这是一个测试",function (result) {
-        if(result){
+    // 提示可输入框封装
+    function isclick_notify3() {
+        bootbox.prompt({
+            size: "normal",
+            title: "这是一个提示可输入框",
+            inputType:'date',
+            buttons: {
+                cancel: {
+                    label: '<i class="fa fa-times"></i> 取消'
+                },
+                confirm: {
+                    label: '<i class="fa fa-check"></i> 确定'
+                }
+            },
+            callback: function (result) {
+                console.log(result)
+                /* result = 输入进去的值，注意：点击取消result==null */
+            }
+        });
+    }
+
+    // 自定义操作框封装
+    function isclick_notify4() {
+        bootbox.dialog({
+            title: '自定义操作框',
+            message: '这是一个自定义操作框',
+            size: 'normal',
+            onEscape: true,
+            backdrop: true,
+            buttons: {
+                fee: {
+                    label: '按钮1',
+                    className: 'btn-primary',
+                    callback: function () {
+
+                    }
+                },
+                fi: {
+                    label: '按钮2',
+                    className: 'btn-info',
+                    callback: function () {
+
+                    }
+                },
+                fo: {
+                    label: '按钮3',
+                    className: 'btn-success',
+                    callback: function () {
+
+                    }
+                },
+                fum: {
+                    label: '按钮4',
+                    className: 'btn-danger',
+                    callback: function () {
+
+                    }
+                }
+            }
+        })
+    }
+
+    // form表单框   -->  其实确认框/自定义框的内容不仅可以是文字，也可以是html，所以可以直接用html方式写入内容。不过还是建议使用bootstrap的模态框
+
+    // 调用警报框函数
+    /*isclick_notify1("这是一个提示框")*/
+
+    // 调用确认框函数
+    /*isclick_notify2("这是一个测试", function (result) {
+        if (result) {
             console.log("您点击了确定~")
-        }else {
+        } else {
             console.log("您点击了取消或者按了“Esc”键~")
         }
-    })
+    })*/
 </script>
 </html>
