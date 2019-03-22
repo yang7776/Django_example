@@ -47,6 +47,7 @@
                 matchContains: true,    //包含匹配，就是data参数里的数据，是否只要包含文本框里的数据就显示
                 autoFill: true,    //自动填充
                 minLength: 0,
+                // 注意，这些属性定义后不会有y轴滚动条以及长度限制，一定要写相关css，在上方"overflow:hidden auto;max-height: 300px"
                 select: function (event, ui) {  //选中选项自动请求
                     // 这里面可以是ajax请求 或 其他操作
                     alert("选中的值为："+ui.item.value)
