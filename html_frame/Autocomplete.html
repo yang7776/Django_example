@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Autocomplete提示下拉菜单以及带搜索功能</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <style type="text/css">
+        .ui-autocomplete{
+            overflow:hidden auto;
+            max-height: 300px
+        }
+    </style>
+    <script>
+        $(function () {
+            var availableTags = [
+                "ActionScript",
+                "AppleScript",
+                "Asp",
+                "BASIC",
+                "C",
+                "C++",
+                "Clojure",
+                "COBOL",
+                "ColdFusion",
+                "Erlang",
+                "Fortran",
+                "Groovy",
+                "Haskell",
+                "Java",
+                "JavaScript",
+                "Lisp",
+                "Perl",
+                "PHP",
+                "Python",
+                "Ruby",
+                "Scala",
+                "Scheme"
+            ];
+            var option = {
+                max: 3,    //列表里的条目数
+                minChars: 0,    //自动完成激活之前填入的最小字符
+                width: 150,     //提示的宽度，溢出隐藏
+                scrollHeight: 50,   //提示的高度，溢出显示滚动条
+                matchContains: true,    //包含匹配，就是data参数里的数据，是否只要包含文本框里的数据就显示
+                autoFill: true,    //自动填充
+                minLength: 0,
+                select: function (event, ui) {  //选中选项自动请求
+                    // 这里面可以是ajax请求 或 其他操作
+                    alert("选中的值为："+ui.item.value)
+                }
+            };
+            $("#tags").autocomplete({source: availableTags},"option",option).on('focus', function () {
+                $(this).keydown();
+            });
+        });
+    </script>
+</head>
+<body>
+
+<div class="ui-widget">
+    <label for="tags">Tags: </label>
+    <input id="tags">
+</div>
+
+</body>
+</html>
