@@ -16,11 +16,8 @@
 </body>
 <script src="../knows/app1/static/js/jquery.min.js"></script>
 <script type="text/javascript">
-    /*$('button').click(function () {
-        var res = $(this).parents('form:first');
-        console.log(res)
-        res.submit()
-    })*/
+    /*
+    判断时间前后，比较时间
     window.CompareDate = function (t1, t2) {
         var date = new Date();
         var a = t1.split(":");
@@ -37,5 +34,28 @@
     }
     var res = CompareDate("00:50","00:01")
     console.log(res)
+    */
+
+    /*
+     60秒倒计时封装，注意：只能倒计时到1s，若想0秒可每秒减一
+     var countDown = function (times) {
+        if (!times || isNaN(parseInt(times))) return;
+        var args = arguments;
+        var self = this;
+        console.log(times);
+        setTimeout(function () {
+            args.callee.call(self, --times)
+        }, 1000);
+    }
+    countDown(10)
+    */
+
+    /*
+    判断一串字符中只包含数字和字母
+    function judge_num_and_letter(str) {
+        var regx = /^[a-zA-Z0-9]+$/;
+        return regx.test(str)
+    }
+    */
 </script>
 </html>
