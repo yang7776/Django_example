@@ -20,8 +20,14 @@ def upload(request):
     file_obj = request.FILES.get('file')
     id = request.POST.get("id")
     name = request.POST.get("name")
-    Person.objects.create(selfid=id, name=name,photo=file_obj)
-    msg = {'code': 200,'infor': '注册成功'}
+    # photo_format = file_obj.name
+    if not file_obj:
+        msg = {'code': 401, 'infor': '请上传图片'}
+    elif file_obj.name.split('.')[1] not in ['jpg','png','gif']:
+        msg = {'code': 400, 'infor': '不支持该类型图片格式'}
+    else:
+        Person.objects.create(selfid=id, name=name,photo=file_obj)
+        msg = {'code': 200,'infor': '注册成功'}
     return HttpResponse(json.dumps(msg))
 
 def sea(request):
