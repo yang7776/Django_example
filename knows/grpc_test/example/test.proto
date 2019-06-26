@@ -20,5 +20,5 @@ message TestResponse {
 }
 
 message TestResponse1{
-    string message
+    string message = 77;
 }
