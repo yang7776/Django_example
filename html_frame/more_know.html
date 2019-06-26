@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>more_know</title>
+    <link rel="stylesheet" href="../knows/app1/static/css/bootstrap.css">
+    <script type="text/javascript" src="../knows/app1/static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="../knows/app1/static/js/bootstrap.min.js"></script>
 </head>
 <body>
 <form>
@@ -13,9 +16,30 @@
         <button>test</button>
     </div>
 </form>
+
+<div class="modal fade" id="myModalDialog1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #ededed;">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h3 class="msg_title">总控消息中心提示您:</h3>
+            </div>
+            <div id="mb" class="modal-body" style="height: 80px;overflow: hidden">
+                <p style="float: left" class="msg_info">正在绑定手机号，请稍等...</p><img style="width: 20px;margin-left: 20px;float: left" src="https://grayds.instwall.com/djstatics/ds_admin_v3/img/ajax-loader.gif" alt=""><br>
+                <input type='text' style='width: 80%; height: 36px; margin: 0 auto; margin-top:20px; display: none;' class='form-control form_style' id='PromptMsg' placeholder='' >
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
-<script src="../knows/app1/static/js/jquery.min.js"></script>
 <script type="text/javascript">
+    $('#myModalDialog1').modal('show');
+    setTimeout(function () {
+        $('#mb p').text('绑定成功!')
+        $('#mb img').remove()
+        $('#myModalDialog1').modal('hide')
+    },3000)
     /*
     判断时间前后，比较时间
     window.CompareDate = function (t1, t2) {
@@ -57,5 +81,6 @@
         return regx.test(str)
     }
     */
+
 </script>
 </html>
