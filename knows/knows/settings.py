@@ -56,7 +56,6 @@ INSTALLED_APPS = [
     'app2',
     'rest_framework',
     'django_filters',
-    'restful'
 ]
 
 MIDDLEWARE = [
@@ -102,7 +101,7 @@ DATABASES = {
         'NAME': 'dg_test',
         'USER': 'root',
         'PASSWORD': 'ysh7776...',
-        'HOST':'127.0.0.1',
+        'HOST':'localhost',
         'PORT':'3306',
     }
 }
