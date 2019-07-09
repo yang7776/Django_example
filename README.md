@@ -6,6 +6,8 @@ Contains methods：<br>
   &nbsp;&nbsp; **log**<br>
   &nbsp;&nbsp; **unit test**<br>
   &nbsp;&nbsp; **cache : six-types**<br> 
+  &nbsp;&nbsp; **django-forms**<br> 
+  &nbsp;&nbsp; **google-grpc**<br> 
   &nbsp;&nbsp; **Use of "ImageField"**<br>
   &nbsp;&nbsp; **Use of "DateTimeField"  attention:auto_now_add/auto_now**<br>
   &nbsp;&nbsp; **Use of "models.Manager"**<br>
@@ -20,6 +22,7 @@ HTML frame：<br>
   &nbsp;&nbsp; **app1 : datatable.js**<br> 
   &nbsp;&nbsp; **bootbox**<br>
   &nbsp;&nbsp; **fileinput**<br>
+  &nbsp;&nbsp; **highcharts**<br>
 </font>
 
 <br>
