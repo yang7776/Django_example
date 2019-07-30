@@ -1,6 +1,7 @@
-import grpc
+import grpc,json
 
 from knows.grpc_test.example import test_pb2_grpc, test_pb2
+from google.protobuf.json_format import  Parse,MessageToJson
 
 _HOST = 'localhost'
 _PORT = '8080'
@@ -19,6 +20,12 @@ def run(username,password):
     req = test_pb2.TestRequest(**data)
     # 并接收服务端返回的数据
     response = client.GetInfo(req)
+    """
+    res = json.loads(MessageToJson(response, including_default_value_fields=True, preserving_proto_field_name=True))
+    当结构是包含“嵌套字段”的复杂结构时，需要利用“MessageToJson”方法，将server传过来的数据格式反序列化，即转化为json，方便取值
+    """
+    # res = json.loads(MessageToJson(response, including_default_value_fields=True, preserving_proto_field_name=True))
+    # print(res)
     # 打印数据
     msg = {"code": response.code, "msg": response.message}
     # 打印返回的数据,(运用到项目时，是用“return”返回请求的数据，再讲数据发送到前端)
