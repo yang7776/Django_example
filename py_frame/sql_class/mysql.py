@@ -6,7 +6,6 @@ import pymysql
 
 
 class MysqlConnect(object):
-	# 魔术方法, 初始化, 构造函数
 	def __init__(self, host, user, password, database):
 		'''
 		:param host: IP
