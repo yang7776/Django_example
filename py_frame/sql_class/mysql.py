@@ -2,9 +2,18 @@
 # writer        Yang   
 # create_time   2019/8/1 14:30
 # file_name     mysql.py
-import pymysql
+import pymysql,os,json
 
-
+# 设置同级文件目录
+path = os.path.join(os.getcwd(),'mysql_result.txt')
+def write_res_to_file(path,result):
+	if not os.path.exists(path):
+		with open(path, 'w', encoding='utf-8') as f:
+			f.write(result)
+	else:
+		with open(path, 'a', encoding='utf-8') as f:
+			f.write(result)
+			
 class MysqlConnect(object):
 	def __init__(self, host, user, password, database):
 		'''
@@ -29,9 +38,10 @@ class MysqlConnect(object):
 	def select(self, sql):
 		self.cursor.execute(sql)
 		# 获取所有记录列表
-		results = self.cursor.fetchall()
-		for row in results:
+		rows = self.cursor.fetchall()
+		for row in rows:
 			print(row)
+		return json.dumps(rows)
 	
 	# 退出后关闭数据库
 	def __del__(self):
@@ -47,4 +57,5 @@ if __name__ == '__main__':
 	# mc.execute(
 	# 	"insert into person(id, sex, age, name) value (1,'男',17,'张三')"
 	# )
-	mc.select('select * from person')
+	result = mc.select('select * from person')
+	write_res_to_file(path,result)
