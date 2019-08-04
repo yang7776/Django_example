@@ -3,6 +3,7 @@ This is an example of django
 
 Contains methods：<br>
  <font color="red">
+  &nbsp;&nbsp; **restful**<br>
   &nbsp;&nbsp; **log**<br>
   &nbsp;&nbsp; **unit test**<br>
   &nbsp;&nbsp; **cache : six-types**<br> 

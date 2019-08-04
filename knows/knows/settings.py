@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app1',
     'app2',
+    'view_CBV',
     'rest_framework',
     'django_filters',
 ]
