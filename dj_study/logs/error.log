@@ -1,0 +1,187 @@
+2019-08-04 14:52:30,412 [Thread-1:140304636180224] [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /view_cbv/api
+Traceback (most recent call last):
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/utils/deprecation.py", line 93, in __call__
+    response = self.process_request(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/middleware/common.py", line 53, in process_request
+    path = self.get_full_path_with_slash(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/middleware/common.py", line 93, in get_full_path_with_slash
+    'url': request.get_host() + new_path,
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 127.0.0.1:8000/view_cbv/api/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+2019-08-04 14:52:30,546 [Thread-1:140304636180224] [django.server:154] [basehttp:log_message] [ERROR]- "POST /view_cbv/api HTTP/1.1" 500 73143
+2019-08-04 14:58:20,894 [Thread-1:139732476540672] [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /view_cbv/api
+Traceback (most recent call last):
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/utils/deprecation.py", line 93, in __call__
+    response = self.process_request(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/middleware/common.py", line 53, in process_request
+    path = self.get_full_path_with_slash(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/middleware/common.py", line 93, in get_full_path_with_slash
+    'url': request.get_host() + new_path,
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 127.0.0.1:8000/view_cbv/api/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+2019-08-04 14:58:20,975 [Thread-1:139732476540672] [django.server:154] [basehttp:log_message] [ERROR]- "POST /view_cbv/api HTTP/1.1" 500 73143
+2019-08-04 14:58:40,440 [Thread-2:139732476540672] [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /view_cbv/api
+Traceback (most recent call last):
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/utils/deprecation.py", line 93, in __call__
+    response = self.process_request(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/middleware/common.py", line 53, in process_request
+    path = self.get_full_path_with_slash(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/middleware/common.py", line 93, in get_full_path_with_slash
+    'url': request.get_host() + new_path,
+RuntimeError: You called this URL via PUT, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining PUT data. Change your form to point to 127.0.0.1:8000/view_cbv/api/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+2019-08-04 14:58:40,523 [Thread-2:139732476540672] [django.server:154] [basehttp:log_message] [ERROR]- "PUT /view_cbv/api HTTP/1.1" 500 73128
+2019-08-04 14:58:47,211 [Thread-3:139732476540672] [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /view_cbv/api
+Traceback (most recent call last):
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/utils/deprecation.py", line 93, in __call__
+    response = self.process_request(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/middleware/common.py", line 53, in process_request
+    path = self.get_full_path_with_slash(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/middleware/common.py", line 93, in get_full_path_with_slash
+    'url': request.get_host() + new_path,
+RuntimeError: You called this URL via PATCH, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining PATCH data. Change your form to point to 127.0.0.1:8000/view_cbv/api/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+2019-08-04 14:58:47,346 [Thread-3:139732476540672] [django.server:154] [basehttp:log_message] [ERROR]- "PATCH /view_cbv/api HTTP/1.1" 500 73158
+2019-08-04 14:58:56,034 [Thread-4:139732476540672] [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /view_cbv/api
+Traceback (most recent call last):
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/utils/deprecation.py", line 93, in __call__
+    response = self.process_request(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/middleware/common.py", line 53, in process_request
+    path = self.get_full_path_with_slash(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/middleware/common.py", line 93, in get_full_path_with_slash
+    'url': request.get_host() + new_path,
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 127.0.0.1:8000/view_cbv/api/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+2019-08-04 14:58:56,123 [Thread-4:139732476540672] [django.server:154] [basehttp:log_message] [ERROR]- "POST /view_cbv/api HTTP/1.1" 500 73143
+2019-08-04 15:00:15,087 [Thread-1:140347159492352] [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /view_cbv/api
+Traceback (most recent call last):
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/utils/deprecation.py", line 93, in __call__
+    response = self.process_request(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/middleware/common.py", line 53, in process_request
+    path = self.get_full_path_with_slash(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/middleware/common.py", line 93, in get_full_path_with_slash
+    'url': request.get_host() + new_path,
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 127.0.0.1:8000/view_cbv/api/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+2019-08-04 15:00:15,174 [Thread-1:140347159492352] [django.server:154] [basehttp:log_message] [ERROR]- "POST /view_cbv/api HTTP/1.1" 500 73143
+2019-08-04 15:10:47,929 [Thread-1:139839798425344] [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /view_cbv/api/
+Traceback (most recent call last):
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/views/generic/base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/utils/decorators.py", line 45, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/yang/文档/code/django/Django_example/knows/view_CBV/views.py", line 10, in dispatch
+    res = super(Common,self).dispatch(self,request,*args,**kwargs)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/views/generic/base.py", line 93, in dispatch
+    if request.method.lower() in self.http_method_names:
+AttributeError: 'CbvViews' object has no attribute 'method'
+2019-08-04 15:10:48,020 [Thread-1:139839798425344] [django.server:154] [basehttp:log_message] [ERROR]- "POST /view_cbv/api/ HTTP/1.1" 500 93382
+2019-08-04 15:13:28,907 [Thread-1:139997697980160] [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /view_cbv/api/
+Traceback (most recent call last):
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/views/generic/base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/utils/decorators.py", line 45, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/yang/文档/code/django/Django_example/knows/view_CBV/views.py", line 10, in dispatch
+    res = super(Common,self).dispatch(self,request,*args,**kwargs)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/views/generic/base.py", line 93, in dispatch
+    if request.method.lower() in self.http_method_names:
+AttributeError: 'CbvViews' object has no attribute 'method'
+2019-08-04 15:13:28,996 [Thread-1:139997697980160] [django.server:154] [basehttp:log_message] [ERROR]- "GET /view_cbv/api/ HTTP/1.1" 500 93370
+2019-08-04 15:14:42,364 [Thread-1:140338411353856] [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /view_cbv/api/
+Traceback (most recent call last):
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/views/generic/base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/utils/decorators.py", line 45, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/yang/文档/code/django/Django_example/knows/view_CBV/views.py", line 19, in dispatch
+    res = super(CbvViews,self).dispatch(self,request,*args,**kwargs)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/views/generic/base.py", line 93, in dispatch
+    if request.method.lower() in self.http_method_names:
+AttributeError: 'CbvViews' object has no attribute 'method'
+2019-08-04 15:14:42,464 [Thread-1:140338411353856] [django.server:154] [basehttp:log_message] [ERROR]- "GET /view_cbv/api/ HTTP/1.1" 500 93264
+2019-08-04 15:22:28,950 [Thread-1:139664609851136] [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /view_cbv/api/
+Traceback (most recent call last):
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/views/generic/base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/utils/decorators.py", line 45, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/yang/文档/code/django/Django_example/knows/view_CBV/views.py", line 22, in dispatch
+    func = getattr(self,request.method)
+AttributeError: 'CbvViews' object has no attribute 'GET'
+2019-08-04 15:22:29,044 [Thread-1:139664609851136] [django.server:154] [basehttp:log_message] [ERROR]- "GET /view_cbv/api/ HTTP/1.1" 500 88552
+2019-08-06 21:37:41,522 [Thread-1:140468918679296] [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /view_cbv/apis/
+Traceback (most recent call last):
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/rest_framework/views.py", line 483, in dispatch
+    self.initial(request, *args, **kwargs)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/rest_framework/views.py", line 400, in initial
+    self.perform_authentication(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/rest_framework/views.py", line 326, in perform_authentication
+    request.user
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/rest_framework/request.py", line 223, in user
+    self._authenticate()
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/rest_framework/request.py", line 376, in _authenticate
+    user_auth_tuple = authenticator.authenticate(self)
+  File "/home/yang/文档/code/django/Django_example/knows/view_CBV/views.py", line 38, in authenticate
+    raise exceptions.AuthenticationFailed("用户认证失败")
+rest_framework.exceptions.AuthenticationFailed: 用户认证失败
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/views/generic/base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/rest_framework/views.py", line 495, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/rest_framework/views.py", line 442, in handle_exception
+    auth_header = self.get_authenticate_header(self.request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/rest_framework/views.py", line 192, in get_authenticate_header
+    return authenticators[0].authenticate_header(request)
+TypeError: authenticate_header() takes 1 positional argument but 2 were given
+2019-08-06 21:37:41,622 [Thread-1:140468918679296] [django.server:154] [basehttp:log_message] [ERROR]- "GET /view_cbv/apis/ HTTP/1.1" 500 116770

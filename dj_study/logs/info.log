@@ -1,0 +1,559 @@
+2019-08-04 14:51:18,027 [MainThread:140083887007552] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-04 14:51:25,503 [Thread-1:140083748910848] [django.server:154] [basehttp:log_message] [WARNING]- "GET / HTTP/1.1" 404 2365
+2019-08-04 14:51:26,488 [Thread-1:140083748910848] [django.server:154] [basehttp:log_message] [WARNING]- "GET /favicon.ico HTTP/1.1" 404 2416
+2019-08-04 14:51:38,117 [Thread-3:140083731601152] [django.server:154] [basehttp:log_message] [WARNING]- "GET / HTTP/1.1" 404 2365
+2019-08-04 14:51:49,113 [Thread-3:140083731601152] [django.server:154] [basehttp:log_message] [WARNING]- "GET /cbv_view HTTP/1.1" 404 2407
+2019-08-04 14:52:08,101 [Thread-3:140083731601152] [django.server:154] [basehttp:log_message] [WARNING]- "GET /view_cbv HTTP/1.1" 404 2407
+2019-08-04 14:52:20,140 [MainThread:140083887007552] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/urls.py changed, reloading.
+2019-08-04 14:52:20,966 [MainThread:140304849147712] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-04 14:52:25,222 [Thread-1:140304636180224] [django.server:154] [basehttp:log_message] [INFO]- "GET /view_cbv/api HTTP/1.1" 301 0
+2019-08-04 14:52:25,235 [Thread-1:140304636180224] [django.server:154] [basehttp:log_message] [INFO]- "GET /view_cbv/api/ HTTP/1.1" 200 3
+2019-08-04 14:52:30,412 [Thread-1:140304636180224] [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /view_cbv/api
+Traceback (most recent call last):
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/utils/deprecation.py", line 93, in __call__
+    response = self.process_request(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/middleware/common.py", line 53, in process_request
+    path = self.get_full_path_with_slash(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/middleware/common.py", line 93, in get_full_path_with_slash
+    'url': request.get_host() + new_path,
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 127.0.0.1:8000/view_cbv/api/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+2019-08-04 14:52:30,546 [Thread-1:140304636180224] [django.server:154] [basehttp:log_message] [ERROR]- "POST /view_cbv/api HTTP/1.1" 500 73143
+2019-08-04 14:53:33,229 [MainThread:140304849147712] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-04 14:53:34,116 [MainThread:139873401632576] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-04 14:54:02,802 [MainThread:139873401632576] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-04 14:54:03,487 [MainThread:139775257974592] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-04 14:54:39,475 [MainThread:139775257974592] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-04 14:54:40,320 [MainThread:140535672117056] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-04 14:58:14,340 [MainThread:139732614637376] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-04 14:58:20,894 [Thread-1:139732476540672] [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /view_cbv/api
+Traceback (most recent call last):
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/utils/deprecation.py", line 93, in __call__
+    response = self.process_request(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/middleware/common.py", line 53, in process_request
+    path = self.get_full_path_with_slash(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/middleware/common.py", line 93, in get_full_path_with_slash
+    'url': request.get_host() + new_path,
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 127.0.0.1:8000/view_cbv/api/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+2019-08-04 14:58:20,975 [Thread-1:139732476540672] [django.server:154] [basehttp:log_message] [ERROR]- "POST /view_cbv/api HTTP/1.1" 500 73143
+2019-08-04 14:58:36,891 [Thread-2:139732476540672] [django.server:154] [basehttp:log_message] [INFO]- "GET /view_cbv/api HTTP/1.1" 301 0
+2019-08-04 14:58:36,902 [Thread-2:139732476540672] [django.server:154] [basehttp:log_message] [INFO]- "GET /view_cbv/api/ HTTP/1.1" 200 3
+2019-08-04 14:58:40,440 [Thread-2:139732476540672] [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /view_cbv/api
+Traceback (most recent call last):
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/utils/deprecation.py", line 93, in __call__
+    response = self.process_request(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/middleware/common.py", line 53, in process_request
+    path = self.get_full_path_with_slash(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/middleware/common.py", line 93, in get_full_path_with_slash
+    'url': request.get_host() + new_path,
+RuntimeError: You called this URL via PUT, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining PUT data. Change your form to point to 127.0.0.1:8000/view_cbv/api/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+2019-08-04 14:58:40,523 [Thread-2:139732476540672] [django.server:154] [basehttp:log_message] [ERROR]- "PUT /view_cbv/api HTTP/1.1" 500 73128
+2019-08-04 14:58:47,211 [Thread-3:139732476540672] [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /view_cbv/api
+Traceback (most recent call last):
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/utils/deprecation.py", line 93, in __call__
+    response = self.process_request(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/middleware/common.py", line 53, in process_request
+    path = self.get_full_path_with_slash(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/middleware/common.py", line 93, in get_full_path_with_slash
+    'url': request.get_host() + new_path,
+RuntimeError: You called this URL via PATCH, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining PATCH data. Change your form to point to 127.0.0.1:8000/view_cbv/api/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+2019-08-04 14:58:47,346 [Thread-3:139732476540672] [django.server:154] [basehttp:log_message] [ERROR]- "PATCH /view_cbv/api HTTP/1.1" 500 73158
+2019-08-04 14:58:51,222 [Thread-4:139732476540672] [django.server:154] [basehttp:log_message] [INFO]- "GET /view_cbv/api HTTP/1.1" 301 0
+2019-08-04 14:58:51,238 [Thread-4:139732476540672] [django.server:154] [basehttp:log_message] [INFO]- "GET /view_cbv/api/ HTTP/1.1" 200 3
+2019-08-04 14:58:56,034 [Thread-4:139732476540672] [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /view_cbv/api
+Traceback (most recent call last):
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/utils/deprecation.py", line 93, in __call__
+    response = self.process_request(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/middleware/common.py", line 53, in process_request
+    path = self.get_full_path_with_slash(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/middleware/common.py", line 93, in get_full_path_with_slash
+    'url': request.get_host() + new_path,
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 127.0.0.1:8000/view_cbv/api/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+2019-08-04 14:58:56,123 [Thread-4:139732476540672] [django.server:154] [basehttp:log_message] [ERROR]- "POST /view_cbv/api HTTP/1.1" 500 73143
+2019-08-04 15:00:10,539 [MainThread:139732614637376] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-04 15:00:11,433 [MainThread:140347364579136] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-04 15:00:15,087 [Thread-1:140347159492352] [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /view_cbv/api
+Traceback (most recent call last):
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/utils/deprecation.py", line 93, in __call__
+    response = self.process_request(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/middleware/common.py", line 53, in process_request
+    path = self.get_full_path_with_slash(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/middleware/common.py", line 93, in get_full_path_with_slash
+    'url': request.get_host() + new_path,
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 127.0.0.1:8000/view_cbv/api/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+2019-08-04 15:00:15,174 [Thread-1:140347159492352] [django.server:154] [basehttp:log_message] [ERROR]- "POST /view_cbv/api HTTP/1.1" 500 73143
+2019-08-04 15:00:43,238 [Thread-2:140347159492352] [django.security.csrf:228] [log:log_response] [WARNING]- Forbidden (CSRF cookie not set.): /view_cbv/api/
+2019-08-04 15:00:43,239 [Thread-2:140347159492352] [django.server:154] [basehttp:log_message] [WARNING]- "POST /view_cbv/api/ HTTP/1.1" 403 2868
+2019-08-04 15:00:58,688 [MainThread:140347364579136] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-04 15:00:59,518 [MainThread:139999304742720] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-04 15:01:01,662 [Thread-1:139999166510848] [django.server:154] [basehttp:log_message] [INFO]- "POST /view_cbv/api/ HTTP/1.1" 200 4
+2019-08-04 15:07:14,315 [MainThread:139999304742720] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-04 15:07:15,126 [MainThread:140586757166912] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-04 15:08:40,888 [MainThread:140586757166912] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-04 15:08:41,859 [MainThread:139972854806336] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-04 15:09:46,467 [MainThread:139972854806336] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-04 15:09:47,364 [MainThread:140163657791296] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-04 15:10:38,670 [MainThread:140163657791296] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-04 15:10:39,556 [MainThread:139839936403264] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-04 15:10:47,929 [Thread-1:139839798425344] [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /view_cbv/api/
+Traceback (most recent call last):
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/views/generic/base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/utils/decorators.py", line 45, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/yang/文档/code/django/Django_example/knows/view_CBV/views.py", line 10, in dispatch
+    res = super(Common,self).dispatch(self,request,*args,**kwargs)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/views/generic/base.py", line 93, in dispatch
+    if request.method.lower() in self.http_method_names:
+AttributeError: 'CbvViews' object has no attribute 'method'
+2019-08-04 15:10:48,020 [Thread-1:139839798425344] [django.server:154] [basehttp:log_message] [ERROR]- "POST /view_cbv/api/ HTTP/1.1" 500 93382
+2019-08-04 15:11:47,060 [MainThread:139839936403264] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-04 15:11:48,123 [MainThread:139997835958080] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-04 15:13:28,907 [Thread-1:139997697980160] [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /view_cbv/api/
+Traceback (most recent call last):
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/views/generic/base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/utils/decorators.py", line 45, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/yang/文档/code/django/Django_example/knows/view_CBV/views.py", line 10, in dispatch
+    res = super(Common,self).dispatch(self,request,*args,**kwargs)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/views/generic/base.py", line 93, in dispatch
+    if request.method.lower() in self.http_method_names:
+AttributeError: 'CbvViews' object has no attribute 'method'
+2019-08-04 15:13:28,996 [Thread-1:139997697980160] [django.server:154] [basehttp:log_message] [ERROR]- "GET /view_cbv/api/ HTTP/1.1" 500 93370
+2019-08-04 15:14:38,424 [MainThread:139997835958080] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-04 15:14:39,379 [MainThread:140338549331776] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-04 15:14:42,364 [Thread-1:140338411353856] [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /view_cbv/api/
+Traceback (most recent call last):
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/views/generic/base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/utils/decorators.py", line 45, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/yang/文档/code/django/Django_example/knows/view_CBV/views.py", line 19, in dispatch
+    res = super(CbvViews,self).dispatch(self,request,*args,**kwargs)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/views/generic/base.py", line 93, in dispatch
+    if request.method.lower() in self.http_method_names:
+AttributeError: 'CbvViews' object has no attribute 'method'
+2019-08-04 15:14:42,464 [Thread-1:140338411353856] [django.server:154] [basehttp:log_message] [ERROR]- "GET /view_cbv/api/ HTTP/1.1" 500 93264
+2019-08-04 15:21:28,611 [MainThread:140338549331776] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-04 15:21:29,666 [MainThread:140428260112192] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-04 15:21:55,173 [MainThread:140428260112192] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-04 15:21:56,051 [MainThread:140105126209344] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-04 15:22:22,713 [MainThread:140105126209344] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-04 15:22:23,510 [MainThread:139664815224640] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-04 15:22:28,950 [Thread-1:139664609851136] [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /view_cbv/api/
+Traceback (most recent call last):
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/views/generic/base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/utils/decorators.py", line 45, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/yang/文档/code/django/Django_example/knows/view_CBV/views.py", line 22, in dispatch
+    func = getattr(self,request.method)
+AttributeError: 'CbvViews' object has no attribute 'GET'
+2019-08-04 15:22:29,044 [Thread-1:139664609851136] [django.server:154] [basehttp:log_message] [ERROR]- "GET /view_cbv/api/ HTTP/1.1" 500 88552
+2019-08-04 15:25:12,239 [MainThread:139664815224640] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-04 15:25:13,058 [MainThread:140215217887040] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-04 15:25:16,175 [Thread-1:140215079909120] [django.server:154] [basehttp:log_message] [INFO]- "GET /view_cbv/api/ HTTP/1.1" 200 3
+2019-08-04 15:25:22,551 [Thread-1:140215079909120] [django.server:154] [basehttp:log_message] [INFO]- "POST /view_cbv/api/ HTTP/1.1" 200 4
+2019-08-04 15:25:24,864 [Thread-1:140215079909120] [django.server:154] [basehttp:log_message] [INFO]- "GET /view_cbv/api/ HTTP/1.1" 200 3
+2019-08-04 15:26:32,656 [MainThread:140215217887040] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-04 15:26:33,574 [MainThread:139702103054144] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-04 15:26:36,657 [Thread-1:139701965076224] [django.server:154] [basehttp:log_message] [INFO]- "GET /view_cbv/api/ HTTP/1.1" 200 3
+2019-08-04 15:27:01,254 [MainThread:139702103054144] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-04 15:27:02,109 [MainThread:140130922501952] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-04 15:27:04,624 [Thread-1:140130784524032] [django.server:154] [basehttp:log_message] [INFO]- "GET /view_cbv/api/ HTTP/1.1" 200 3
+2019-08-04 15:27:08,418 [Thread-1:140130784524032] [django.server:154] [basehttp:log_message] [INFO]- "POST /view_cbv/api/ HTTP/1.1" 200 4
+2019-08-06 21:36:25,738 [MainThread:140035800794944] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-06 21:36:58,880 [Thread-1:140035594569472] [django.server:154] [basehttp:log_message] [INFO]- "GET /view_cbv/apis/ HTTP/1.1" 200 28
+2019-08-06 21:37:38,270 [MainThread:140035800794944] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-06 21:37:39,163 [MainThread:140469127247680] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-06 21:37:41,522 [Thread-1:140468918679296] [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /view_cbv/apis/
+Traceback (most recent call last):
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/rest_framework/views.py", line 483, in dispatch
+    self.initial(request, *args, **kwargs)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/rest_framework/views.py", line 400, in initial
+    self.perform_authentication(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/rest_framework/views.py", line 326, in perform_authentication
+    request.user
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/rest_framework/request.py", line 223, in user
+    self._authenticate()
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/rest_framework/request.py", line 376, in _authenticate
+    user_auth_tuple = authenticator.authenticate(self)
+  File "/home/yang/文档/code/django/Django_example/knows/view_CBV/views.py", line 38, in authenticate
+    raise exceptions.AuthenticationFailed("用户认证失败")
+rest_framework.exceptions.AuthenticationFailed: 用户认证失败
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/django/views/generic/base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/rest_framework/views.py", line 495, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/rest_framework/views.py", line 442, in handle_exception
+    auth_header = self.get_authenticate_header(self.request)
+  File "/home/yang/.virtualenvs/venv_py3/lib/python3.6/site-packages/rest_framework/views.py", line 192, in get_authenticate_header
+    return authenticators[0].authenticate_header(request)
+TypeError: authenticate_header() takes 1 positional argument but 2 were given
+2019-08-06 21:37:41,622 [Thread-1:140468918679296] [django.server:154] [basehttp:log_message] [ERROR]- "GET /view_cbv/apis/ HTTP/1.1" 500 116770
+2019-08-06 21:37:57,264 [MainThread:140469127247680] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-06 21:37:58,023 [MainThread:140060214044480] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-06 21:38:01,245 [Thread-1:140060008597248] [django.server:154] [basehttp:log_message] [WARNING]- "GET /view_cbv/apis/ HTTP/1.1" 403 31
+2019-08-06 21:40:17,798 [MainThread:140060214044480] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-06 21:40:18,768 [MainThread:140214873139008] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-06 21:40:53,132 [MainThread:140214873139008] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-06 21:40:53,966 [MainThread:140041868158784] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-06 21:41:25,015 [MainThread:140041868158784] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-06 21:41:25,977 [MainThread:139778165942080] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-06 21:42:25,275 [MainThread:139778165942080] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-06 21:42:26,165 [MainThread:140640938895168] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-06 21:42:30,197 [MainThread:140640938895168] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-06 21:42:31,178 [MainThread:140422242203456] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-06 21:43:18,353 [MainThread:140422242203456] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-06 21:43:19,202 [MainThread:140603237377856] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-06 21:44:58,555 [MainThread:140603237377856] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-06 21:44:59,477 [MainThread:139780044171072] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-06 21:45:10,449 [Thread-1:139779838428928] [django.server:154] [basehttp:log_message] [INFO]- "GET /view_cbv/apis/?token=123 HTTP/1.1" 200 28
+2019-08-06 21:45:43,904 [MainThread:139780044171072] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-06 21:45:44,827 [MainThread:140341078099776] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-06 21:45:46,005 [Thread-1:140340872791808] [django.server:154] [basehttp:log_message] [INFO]- "GET /view_cbv/apis/?token=123 HTTP/1.1" 200 54
+2019-08-06 21:48:07,364 [MainThread:140341078099776] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-06 21:48:08,302 [MainThread:139970274719552] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-06 21:48:49,120 [MainThread:139970274719552] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-06 21:48:49,951 [MainThread:139653565482816] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-06 21:49:29,486 [MainThread:139653565482816] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-06 21:49:30,363 [MainThread:140287839905600] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-06 21:58:36,464 [MainThread:140287839905600] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-06 21:58:37,375 [MainThread:139982397384512] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-06 22:01:12,844 [MainThread:139982397384512] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-06 22:01:13,904 [MainThread:140055484794688] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-06 22:08:56,838 [MainThread:140055484794688] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/urls.py changed, reloading.
+2019-08-06 22:08:57,782 [MainThread:140341447984960] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-06 22:09:10,505 [MainThread:140341447984960] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/urls.py changed, reloading.
+2019-08-06 22:09:11,436 [MainThread:140069593163584] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-06 22:09:56,643 [MainThread:140069593163584] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/urls.py changed, reloading.
+2019-08-06 22:09:57,606 [MainThread:139785201284928] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-06 22:10:25,546 [MainThread:139785201284928] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-06 22:10:26,545 [MainThread:139928783062848] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-06 22:10:52,179 [MainThread:139928783062848] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-06 22:10:53,048 [MainThread:139871057291072] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-06 22:12:56,422 [MainThread:139871057291072] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-06 22:12:57,272 [MainThread:140618840450880] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-06 22:13:37,847 [MainThread:140618840450880] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/models.py changed, reloading.
+2019-08-06 22:13:38,632 [MainThread:140351904819008] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-06 22:13:54,993 [MainThread:140351904819008] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/models.py changed, reloading.
+2019-08-06 22:13:55,767 [MainThread:140593590171456] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-06 22:13:59,039 [MainThread:140593590171456] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/models.py changed, reloading.
+2019-08-06 22:13:59,724 [MainThread:140218808268608] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-06 22:15:16,664 [MainThread:140218808268608] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/models.py changed, reloading.
+2019-08-06 22:15:17,475 [MainThread:139871986067264] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-06 22:16:52,632 [MainThread:139871986067264] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/models.py changed, reloading.
+2019-08-06 22:16:53,346 [MainThread:139946529425216] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-06 22:17:55,548 [MainThread:139946529425216] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/admin.py changed, reloading.
+2019-08-06 22:17:56,310 [MainThread:140533858510656] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-06 22:19:06,589 [Thread-1:140533652670208] [django.server:154] [basehttp:log_message] [INFO]- "GET /admin HTTP/1.1" 301 0
+2019-08-06 22:19:06,636 [Thread-1:140533652670208] [django.server:154] [basehttp:log_message] [INFO]- "GET /admin/ HTTP/1.1" 302 0
+2019-08-06 22:19:06,751 [Thread-1:140533652670208] [django.server:154] [basehttp:log_message] [INFO]- "GET /admin/login/?next=/admin/ HTTP/1.1" 200 1823
+2019-08-06 22:19:06,855 [Thread-2:140533644277504] [django.server:154] [basehttp:log_message] [INFO]- "GET /static/admin/css/login.css HTTP/1.1" 200 1233
+2019-08-06 22:19:06,856 [Thread-1:140533652670208] [django.server:154] [basehttp:log_message] [INFO]- "GET /static/admin/css/base.css HTTP/1.1" 200 16378
+2019-08-06 22:19:06,857 [Thread-3:140533634311936] [django.server:154] [basehttp:log_message] [INFO]- "GET /static/admin/css/responsive.css HTTP/1.1" 200 17944
+2019-08-06 22:19:06,958 [Thread-1:140533652670208] [django.server:154] [basehttp:log_message] [INFO]- "GET /static/admin/css/fonts.css HTTP/1.1" 200 423
+2019-08-06 22:19:07,138 [Thread-1:140533652670208] [django.server:154] [basehttp:log_message] [INFO]- "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 200 85876
+2019-08-06 22:19:07,139 [Thread-3:140533634311936] [django.server:154] [basehttp:log_message] [INFO]- "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 200 85692
+2019-08-06 22:19:07,210 [Thread-3:140533634311936] [django.server:154] [basehttp:log_message] [WARNING]- "GET /favicon.ico HTTP/1.1" 404 2416
+2019-08-06 22:19:10,446 [Thread-3:140533634311936] [django.server:154] [basehttp:log_message] [INFO]- "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+2019-08-06 22:19:10,500 [Thread-3:140533634311936] [django.server:154] [basehttp:log_message] [INFO]- "GET /admin/ HTTP/1.1" 200 6812
+2019-08-06 22:19:10,581 [Thread-3:140533634311936] [django.server:154] [basehttp:log_message] [INFO]- "GET /static/admin/css/dashboard.css HTTP/1.1" 200 412
+2019-08-06 22:19:10,607 [Thread-1:140533652670208] [django.server:154] [basehttp:log_message] [INFO]- "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+2019-08-06 22:19:10,608 [Thread-2:140533644277504] [django.server:154] [basehttp:log_message] [INFO]- "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+2019-08-06 22:19:10,623 [Thread-2:140533644277504] [django.server:154] [basehttp:log_message] [INFO]- "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 200 86184
+2019-08-06 22:19:17,966 [Thread-2:140533644277504] [django.server:154] [basehttp:log_message] [INFO]- "GET /admin/ HTTP/1.1" 200 6812
+2019-08-06 22:19:20,008 [Thread-2:140533644277504] [django.server:154] [basehttp:log_message] [INFO]- "GET /admin/view_CBV/userinfo/ HTTP/1.1" 200 3198
+2019-08-06 22:19:20,075 [Thread-2:140533644277504] [django.server:154] [basehttp:log_message] [INFO]- "GET /static/admin/css/changelists.css HTTP/1.1" 200 6170
+2019-08-06 22:19:20,077 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "GET /static/admin/js/core.js HTTP/1.1" 200 7099
+2019-08-06 22:19:20,077 [Thread-3:140533634311936] [django.server:154] [basehttp:log_message] [INFO]- "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+2019-08-06 22:19:20,087 [Thread-2:140533644277504] [django.server:154] [basehttp:log_message] [INFO]- "GET /static/admin/js/actions.js HTTP/1.1" 200 6766
+2019-08-06 22:19:20,088 [Thread-4:140533625132800] [django.server:154] [basehttp:log_message] [INFO]- "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 363
+2019-08-06 22:19:20,090 [Thread-6:140533401904896] [django.server:154] [basehttp:log_message] [INFO]- "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 6918
+2019-08-06 22:19:20,105 [Thread-3:140533634311936] [django.server:154] [basehttp:log_message] [INFO]- "GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1530
+2019-08-06 22:19:20,107 [Thread-1:140533652670208] [django.server:154] [basehttp:log_message] [INFO]- "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 271817
+2019-08-06 22:19:20,108 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "GET /static/admin/js/urlify.js HTTP/1.1" 200 8941
+2019-08-06 22:19:20,111 [Thread-4:140533625132800] [django.server:154] [basehttp:log_message] [INFO]- "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 128820
+2019-08-06 22:19:20,190 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 331
+2019-08-06 22:19:21,939 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "GET /admin/view_CBV/userinfo/add/ HTTP/1.1" 200 5000
+2019-08-06 22:19:21,968 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "GET /static/admin/css/forms.css HTTP/1.1" 200 8518
+2019-08-06 22:19:21,980 [Thread-4:140533625132800] [django.server:154] [basehttp:log_message] [INFO]- "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 200 495
+2019-08-06 22:19:21,981 [Thread-2:140533644277504] [django.server:154] [basehttp:log_message] [INFO]- "GET /static/admin/js/change_form.js HTTP/1.1" 200 712
+2019-08-06 22:19:21,988 [Thread-3:140533634311936] [django.server:154] [basehttp:log_message] [INFO]- "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+2019-08-06 22:19:22,020 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "GET /static/admin/css/widgets.css HTTP/1.1" 200 10340
+2019-08-06 22:19:24,993 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "GET /admin/view_CBV/userinfo/ HTTP/1.1" 200 3198
+2019-08-06 22:19:25,743 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "GET /admin/ HTTP/1.1" 200 6812
+2019-08-06 22:19:26,926 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "GET /admin/view_CBV/usertoken/ HTTP/1.1" 200 3205
+2019-08-06 22:19:26,971 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+2019-08-06 22:19:28,467 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "GET /admin/view_CBV/usertoken/add/ HTTP/1.1" 200 5381
+2019-08-06 22:19:28,499 [Thread-4:140533625132800] [django.server:154] [basehttp:log_message] [INFO]- "GET /static/admin/img/icon-deletelink.svg HTTP/1.1" 200 392
+2019-08-06 22:19:28,507 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+2019-08-06 22:19:31,118 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "GET /admin/view_CBV/usertoken/ HTTP/1.1" 200 3205
+2019-08-06 22:20:07,737 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "GET /admin/view_CBV/ HTTP/1.1" 200 2928
+2019-08-06 22:20:08,965 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "GET /admin/view_CBV/userinfo/ HTTP/1.1" 200 3198
+2019-08-06 22:20:09,005 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+2019-08-06 22:20:10,551 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "GET /admin/view_CBV/userinfo/add/ HTTP/1.1" 200 5000
+2019-08-06 22:20:10,638 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+2019-08-06 22:20:25,086 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "POST /admin/view_CBV/userinfo/add/ HTTP/1.1" 302 0
+2019-08-06 22:20:25,166 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "GET /admin/view_CBV/userinfo/add/ HTTP/1.1" 200 5237
+2019-08-06 22:20:25,249 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+2019-08-06 22:20:25,406 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "GET /static/admin/img/icon-yes.svg HTTP/1.1" 200 436
+2019-08-06 22:20:51,792 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "POST /admin/view_CBV/userinfo/add/ HTTP/1.1" 302 0
+2019-08-06 22:20:51,862 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "GET /admin/view_CBV/userinfo/add/ HTTP/1.1" 200 5237
+2019-08-06 22:20:51,943 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+2019-08-06 22:20:53,764 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "GET /admin/view_CBV/userinfo/ HTTP/1.1" 200 4619
+2019-08-06 22:20:53,816 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+2019-08-06 22:20:55,163 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "GET /admin/view_CBV/userinfo/1/change/ HTTP/1.1" 200 5262
+2019-08-06 22:20:55,200 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+2019-08-06 22:21:08,153 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "POST /admin/view_CBV/userinfo/1/change/ HTTP/1.1" 302 0
+2019-08-06 22:21:08,236 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "GET /admin/view_CBV/userinfo/ HTTP/1.1" 200 4821
+2019-08-06 22:21:08,319 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+2019-08-06 22:21:10,632 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "GET /admin/view_CBV/userinfo/2/change/ HTTP/1.1" 200 5265
+2019-08-06 22:21:10,669 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+2019-08-06 22:21:11,973 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "GET /admin/view_CBV/userinfo/ HTTP/1.1" 200 4619
+2019-08-06 22:21:12,965 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "GET /admin/view_CBV/userinfo/1/change/ HTTP/1.1" 200 5264
+2019-08-06 22:21:13,009 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+2019-08-06 22:21:14,113 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "GET /admin/view_CBV/userinfo/ HTTP/1.1" 200 4619
+2019-08-06 22:21:27,293 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "GET /admin/view_CBV/userinfo/add/ HTTP/1.1" 200 5000
+2019-08-06 22:21:27,368 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+2019-08-06 22:21:39,048 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "POST /admin/view_CBV/userinfo/add/ HTTP/1.1" 302 0
+2019-08-06 22:21:39,140 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "GET /admin/view_CBV/userinfo/add/ HTTP/1.1" 200 5237
+2019-08-06 22:21:39,221 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+2019-08-06 22:21:55,064 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "POST /admin/view_CBV/userinfo/add/ HTTP/1.1" 302 0
+2019-08-06 22:21:55,156 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "GET /admin/view_CBV/userinfo/ HTTP/1.1" 200 5291
+2019-08-06 22:21:55,253 [Thread-5:140533410297600] [django.server:154] [basehttp:log_message] [INFO]- "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+2019-08-12 20:42:44,427 [MainThread:140533858510656] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/urls.py changed, reloading.
+2019-08-12 20:42:45,894 [MainThread:140235051042624] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-12 20:43:02,989 [MainThread:140235051042624] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/urls.py changed, reloading.
+2019-08-12 20:43:03,970 [MainThread:140272916625216] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-12 20:43:09,056 [MainThread:140272916625216] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/urls.py changed, reloading.
+2019-08-12 20:43:10,093 [MainThread:139982414411584] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-12 20:43:39,937 [MainThread:139982414411584] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/urls.py changed, reloading.
+2019-08-12 20:43:40,878 [MainThread:139675985540928] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-12 20:43:47,861 [MainThread:139675985540928] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/urls.py changed, reloading.
+2019-08-12 20:43:48,675 [MainThread:139927820642112] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-12 20:47:18,819 [MainThread:139927820642112] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/urls.py changed, reloading.
+2019-08-12 20:47:19,645 [MainThread:139644670617408] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-12 20:50:54,312 [MainThread:139644670617408] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-12 20:50:55,302 [MainThread:140150864377664] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-12 20:52:20,361 [MainThread:140150864377664] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-12 20:52:21,367 [MainThread:140715414128448] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-12 20:52:58,133 [MainThread:140715414128448] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-12 20:52:59,265 [MainThread:139891783968576] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-12 20:57:55,544 [MainThread:139891783968576] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-12 20:57:56,728 [MainThread:140136512227136] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-12 20:58:10,925 [MainThread:140136512227136] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-12 20:58:12,090 [MainThread:139624875362112] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-12 21:01:08,031 [MainThread:139624875362112] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-12 21:01:08,898 [MainThread:140338975876928] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-12 21:09:21,985 [MainThread:140338975876928] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-12 21:09:22,999 [MainThread:140047186405184] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-12 21:10:30,021 [Thread-1:140046980761344] [django.server:154] [basehttp:log_message] [INFO]- "POST /view_cbv/rest_ful3/v1/auth/ HTTP/1.1" 200 27
+2019-08-12 21:11:25,956 [Thread-1:140046980761344] [django.server:154] [basehttp:log_message] [INFO]- "POST /view_cbv/rest_ful3/v1/auth/ HTTP/1.1" 200 27
+2019-08-12 21:11:47,486 [Thread-1:140046980761344] [django.server:154] [basehttp:log_message] [INFO]- "POST /view_cbv/rest_ful3/v1/auth/ HTTP/1.1" 200 27
+2019-08-12 21:11:50,682 [Thread-1:140046980761344] [django.server:154] [basehttp:log_message] [INFO]- "POST /view_cbv/rest_ful3/v1/auth/ HTTP/1.1" 200 27
+2019-08-12 21:12:24,250 [MainThread:140047186405184] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-12 21:12:25,084 [MainThread:140550382454592] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-12 21:12:28,461 [Thread-1:140550176556800] [django.server:154] [basehttp:log_message] [WARNING]- "GET / HTTP/1.1" 404 2365
+2019-08-12 21:12:34,139 [Thread-3:140550159247104] [django.server:154] [basehttp:log_message] [INFO]- "POST /view_cbv/rest_ful3/v1/auth/ HTTP/1.1" 200 27
+2019-08-12 21:13:16,931 [MainThread:140550382454592] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-12 21:13:17,715 [MainThread:140271235430208] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-12 21:13:20,650 [Thread-1:140271096809216] [django.server:154] [basehttp:log_message] [INFO]- "POST /view_cbv/rest_ful3/v1/auth/ HTTP/1.1" 200 27
+2019-08-12 21:13:56,162 [MainThread:140271235430208] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-12 21:13:57,025 [MainThread:140433898972992] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-12 21:14:00,673 [Thread-1:140433686525696] [django.server:154] [basehttp:log_message] [INFO]- "POST /view_cbv/rest_ful3/v1/auth/ HTTP/1.1" 200 73
+2019-08-12 21:14:09,670 [MainThread:140433898972992] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-12 21:14:10,462 [MainThread:139970772797248] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-12 21:14:14,497 [Thread-1:139970566682368] [django.server:154] [basehttp:log_message] [INFO]- "POST /view_cbv/rest_ful3/v1/auth/ HTTP/1.1" 200 27
+2019-08-12 21:14:21,120 [Thread-1:139970566682368] [django.server:154] [basehttp:log_message] [INFO]- "POST /view_cbv/rest_ful3/v1/auth/ HTTP/1.1" 200 27
+2019-08-12 21:15:00,860 [Thread-1:139970566682368] [django.server:154] [basehttp:log_message] [INFO]- "POST /view_cbv/rest_ful3/v1/auth/ HTTP/1.1" 200 27
+2019-08-12 21:15:56,759 [MainThread:139970772797248] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-12 21:15:57,760 [MainThread:140089627379520] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-12 21:16:02,979 [Thread-1:140089418053376] [django.server:154] [basehttp:log_message] [INFO]- "POST /view_cbv/rest_ful3/v1/auth/ HTTP/1.1" 200 72
+2019-08-12 21:20:19,572 [MainThread:140089627379520] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/urls.py changed, reloading.
+2019-08-12 21:20:20,665 [MainThread:140098215446336] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-12 21:20:31,269 [MainThread:140098215446336] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/urls.py changed, reloading.
+2019-08-12 21:20:32,265 [MainThread:139723217381184] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-12 21:21:44,368 [MainThread:139723217381184] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-12 21:21:45,335 [MainThread:140346579887936] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-12 21:22:31,160 [MainThread:140346579887936] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-12 21:22:32,706 [MainThread:140432412124992] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-12 21:24:01,306 [MainThread:140432412124992] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-12 21:24:02,981 [MainThread:140338891917120] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-12 21:25:56,041 [MainThread:140338891917120] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-12 21:25:57,651 [MainThread:140251544004416] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-12 21:26:18,336 [MainThread:140251544004416] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-12 21:26:20,079 [MainThread:140091722639168] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-12 21:27:34,833 [MainThread:140091722639168] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-12 21:27:36,613 [MainThread:140561653606208] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-12 21:27:47,785 [Thread-1:140561447962368] [django.server:154] [basehttp:log_message] [INFO]- "GET /view_cbv/rest_ful3/v1/order/ HTTP/1.1" 200 157
+2019-08-12 21:38:56,980 [MainThread:140561653606208] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-12 21:38:58,044 [MainThread:140646120257344] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-12 21:39:17,326 [MainThread:140646120257344] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-12 21:39:18,170 [MainThread:139786105497408] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-12 21:39:41,439 [MainThread:139786105497408] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-12 21:39:42,228 [MainThread:140102747326272] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-12 21:42:29,000 [MainThread:140102747326272] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-12 21:42:29,831 [MainThread:140029128574784] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-12 21:45:00,285 [MainThread:140029128574784] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-12 21:45:01,180 [MainThread:139723459602240] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-12 21:45:23,572 [MainThread:139723459602240] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-12 21:45:24,423 [MainThread:139894937921344] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-12 21:46:21,187 [MainThread:139894937921344] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-12 21:46:22,026 [MainThread:140601439823680] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-12 21:46:36,463 [MainThread:140601439823680] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-12 21:46:37,318 [MainThread:140691740100416] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-12 21:46:40,051 [Thread-1:140691601344256] [django.server:154] [basehttp:log_message] [INFO]- "GET /view_cbv/rest_ful3/v1/order/ HTTP/1.1" 200 157
+2019-08-12 21:47:32,046 [MainThread:140691740100416] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-12 21:47:32,948 [MainThread:140131409078080] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-12 21:47:36,282 [Thread-1:140131203434240] [django.server:154] [basehttp:log_message] [WARNING]- "GET /view_cbv/rest_ful3/v1/order/ HTTP/1.1" 403 31
+2019-08-12 21:48:30,819 [MainThread:140131409078080] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-12 21:48:31,579 [MainThread:140025627748160] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-12 21:48:58,063 [MainThread:140025627748160] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-12 21:48:58,917 [MainThread:140045224453952] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-13 21:22:41,537 [MainThread:140632359176000] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-13 21:32:40,273 [MainThread:140632359176000] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-13 21:32:41,221 [MainThread:140678121129792] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-13 21:33:16,560 [MainThread:140678121129792] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-13 21:33:17,435 [MainThread:139806145972032] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-13 21:40:22,133 [MainThread:139806145972032] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/view_CBV/views.py changed, reloading.
+2019-08-13 21:40:22,946 [MainThread:139660063008576] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-13 21:54:53,115 [MainThread:139660063008576] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/knows/settings.py changed, reloading.
+2019-08-13 21:54:53,966 [MainThread:140529792190272] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-13 21:55:33,540 [MainThread:140529792190272] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/knows/settings.py changed, reloading.
+2019-08-13 21:55:34,468 [MainThread:140433852524352] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-13 21:55:39,548 [MainThread:140433852524352] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/knows/settings.py changed, reloading.
+2019-08-13 21:55:40,549 [MainThread:140455630866240] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-13 21:56:01,605 [MainThread:140455630866240] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/knows/settings.py changed, reloading.
+2019-08-13 21:56:02,530 [MainThread:139655700154176] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-13 21:58:40,043 [MainThread:139655700154176] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/knows/settings.py changed, reloading.
+2019-08-13 21:58:40,936 [MainThread:139770305087296] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-13 21:58:54,575 [MainThread:139770305087296] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/knows/settings.py changed, reloading.
+2019-08-13 21:58:55,402 [MainThread:139917119326016] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-13 21:59:08,864 [MainThread:139917119326016] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/knows/settings.py changed, reloading.
+2019-08-13 21:59:09,816 [MainThread:140607701145408] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-13 22:07:05,952 [MainThread:140380874868544] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-13 22:07:51,701 [MainThread:140297492268864] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-13 22:09:36,105 [MainThread:140297492268864] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/manage.py changed, reloading.
+2019-08-13 22:09:46,552 [MainThread:140645343266624] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-13 22:10:23,836 [MainThread:139658466297664] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-13 22:10:45,804 [MainThread:139658466297664] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/utils/settings.py changed, reloading.
+2019-08-13 22:10:46,481 [MainThread:139910080685888] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-13 22:11:50,118 [MainThread:139910080685888] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/manage.py changed, reloading.
+2019-08-13 22:15:03,537 [MainThread:140058411665216] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-13 22:21:21,888 [MainThread:140058411665216] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/utils/settings.py changed, reloading.
+2019-08-13 22:21:22,608 [MainThread:140203862853440] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-13 22:22:05,844 [MainThread:139648976127808] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-13 22:26:32,410 [MainThread:140132084090688] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-13 22:26:42,655 [MainThread:140132084090688] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/utils/settings.py changed, reloading.
+2019-08-13 22:26:43,357 [MainThread:140515660326720] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-13 22:27:07,255 [MainThread:140515660326720] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/knows/utils/settings.py changed, reloading.
+2019-08-13 22:27:07,884 [MainThread:140110415595328] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-13 22:36:18,489 [MainThread:139800125146944] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-13 22:37:04,442 [MainThread:140547820676928] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-13 22:38:27,334 [MainThread:140547820676928] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/dj_study/utils/settings.py changed, reloading.
+2019-08-13 22:38:47,749 [MainThread:140257009141568] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-13 22:40:26,052 [MainThread:140072673400640] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-13 22:42:02,696 [MainThread:140072673400640] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/dj_study/utils/settings.py changed, reloading.
+2019-08-13 22:42:03,464 [MainThread:140671955920704] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-13 22:42:23,147 [MainThread:140671955920704] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/dj_study/utils/settings.py changed, reloading.
+2019-08-13 22:42:23,846 [MainThread:140217235769152] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-13 22:44:13,360 [MainThread:140217235769152] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/dj_study/utils/settings.py changed, reloading.
+2019-08-13 22:44:14,137 [MainThread:139725988824896] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-13 22:44:42,452 [MainThread:139725988824896] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/dj_study/utils/settings.py changed, reloading.
+2019-08-13 22:44:43,150 [MainThread:139737739945792] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-13 22:45:55,155 [MainThread:139814832203584] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-14 20:28:28,466 [MainThread:139737739945792] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/dj_study/utils/settings.py changed, reloading.
+2019-08-14 20:28:28,488 [MainThread:139814832203584] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/dj_study/utils/settings.py changed, reloading.
+2019-08-14 20:28:29,332 [MainThread:140249715967808] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-14 20:28:29,371 [MainThread:140514353080128] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-14 20:29:07,070 [MainThread:139730379179840] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-14 20:29:15,935 [MainThread:140514353080128] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/dj_study/utils/settings.py changed, reloading.
+2019-08-14 20:29:16,082 [MainThread:139730379179840] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/dj_study/utils/settings.py changed, reloading.
+2019-08-14 20:29:16,849 [MainThread:139916181137216] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-14 20:29:16,852 [MainThread:139938092287808] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-14 20:30:29,770 [MainThread:139664963929920] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-14 20:32:08,397 [MainThread:139664963929920] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/dj_study/utils/settings.py changed, reloading.
+2019-08-14 20:32:08,751 [MainThread:139916181137216] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/dj_study/utils/settings.py changed, reloading.
+2019-08-14 20:32:09,154 [MainThread:140174441600832] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-14 20:32:09,589 [MainThread:140665291986752] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-14 20:33:15,870 [MainThread:140174441600832] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/dj_study/utils/settings.py changed, reloading.
+2019-08-14 20:33:16,109 [MainThread:140665291986752] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/dj_study/utils/settings.py changed, reloading.
+2019-08-14 20:33:16,707 [MainThread:139932909725504] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-14 20:33:16,971 [MainThread:140636616820544] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-14 20:33:28,155 [MainThread:140636616820544] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/dj_study/view_CBV/urls.py changed, reloading.
+2019-08-14 20:33:28,924 [MainThread:139929728374592] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-14 20:33:29,013 [MainThread:139932909725504] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/dj_study/view_CBV/urls.py changed, reloading.
+2019-08-14 20:33:29,741 [MainThread:140059029505856] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-14 20:34:04,817 [MainThread:139929728374592] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/dj_study/utils/settings.py changed, reloading.
+2019-08-14 20:34:05,531 [MainThread:139905195792192] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-14 20:34:07,821 [MainThread:139950820382528] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-14 20:37:06,094 [MainThread:140576287164224] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-14 20:37:46,800 [MainThread:139905195792192] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/dj_study/utils/settings.py changed, reloading.
+2019-08-14 20:37:47,711 [MainThread:139669862287168] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-14 20:38:58,678 [MainThread:139669862287168] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/dj_study/utils/settings.py changed, reloading.
+2019-08-14 20:38:59,442 [MainThread:139911464617792] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-14 20:38:59,721 [MainThread:139809767458624] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-14 20:39:12,985 [MainThread:139809767458624] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/dj_study/utils/settings.py changed, reloading.
+2019-08-14 20:39:13,776 [MainThread:139970807359296] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-14 20:39:13,823 [MainThread:139911464617792] [django.utils.autoreload:213] [autoreload:trigger_reload] [INFO]- /home/yang/文档/code/django/Django_example/dj_study/utils/settings.py changed, reloading.
+2019-08-14 20:39:14,591 [MainThread:139735077619520] [django.utils.autoreload:586] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+2019-08-14 20:39:18,534 [Thread-1:139970668603136] [django.server:154] [basehttp:log_message] [WARNING]- "GET / HTTP/1.1" 404 2365
+2019-08-14 20:39:18,822 [Thread-1:139970668603136] [django.server:154] [basehttp:log_message] [WARNING]- "GET /favicon.ico HTTP/1.1" 404 2416
+2019-08-14 20:39:26,345 [Thread-3:139970651293440] [django.server:154] [basehttp:log_message] [INFO]- "GET /view_cbv/rest_ful3/v1/order/ HTTP/1.1" 200 157

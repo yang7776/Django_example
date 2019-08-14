@@ -1,6 +1,6 @@
 import grpc,json
 
-from knows.grpc_test.example import test_pb2_grpc, test_pb2
+from dj_study.grpc_test.example import test_pb2_grpc, test_pb2
 from google.protobuf.json_format import  Parse,MessageToJson
 
 _HOST = 'localhost'

@@ -1,6 +1,6 @@
 import grpc,time,json
 from concurrent import futures
-from knows.grpc_test.example import test_pb2_grpc, test_pb2
+from dj_study.grpc_test.example import test_pb2_grpc, test_pb2
 from google.protobuf.json_format import  Parse,MessageToJson
 # 定义相关参数（推迟服务执行时间，服务器ip，服务器端口）
 _ONE_DAY_IN_SECONDS = 60 * 60 * 24

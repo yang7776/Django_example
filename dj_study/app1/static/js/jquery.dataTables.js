@@ -14088,7 +14088,7 @@
 		 * 
 		 * This type of ordering is useful if you want to do ordering based on data
 		 * live from the DOM (for example the contents of an 'input' element) rather
-		 * than just the static string that DataTables knows of.
+		 * than just the static string that DataTables utils of.
 		 * 
 		 * The way these plug-ins work is that you create an array of the values you
 		 * wish to be ordering for the column in question and then return that
