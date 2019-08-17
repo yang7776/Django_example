@@ -6,6 +6,13 @@
 from dj_study.view_CBV.models import *
 from rest_framework import exceptions
 # 定义认证类，和上方相同，定义一个执行http请求前的认证类
+class FirstAuthentication(object):
+    def authenticate(self,request):
+        pass
+
+    def authenticate_header(self,val):  # 配合认证方法的头部信息
+        pass
+
 class Authentication(object):
     def authenticate(self,request):
         token = request._request.GET.get("token")

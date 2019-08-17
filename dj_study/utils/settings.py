@@ -10,10 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
-import os
+import os,sys
+# 设置路径，使得“dj_study”这个路径可以被查询到
+APP_BASE_PATH = os.path.abspath('..')
+sys.path.append(APP_BASE_PATH)
 
-from utils.logs import *     # 导入log文件
-
+from dj_study.utils.logs import *     # 导入log文件
 
 # 缓存
 CACHES = {
@@ -54,7 +56,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app1',
     'app2',
-    'view_CBV',
+    'dj_study.view_CBV',
     'rest_framework',
     'django_filters',
 ]
@@ -163,5 +165,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 # restful配置逻辑，如认证等
 REST_FRAMEWORK = {
-    # "DEFAULT_AUTHENTICATION_CLASSES":['view_CBV.auth.Authentication',]
+    "DEFAULT_AUTHENTICATION_CLASSES":['dj_study.view_CBV.rest_auth.auth.FirstAuthentication','dj_study.view_CBV.rest_auth.auth.Authentication',]
 }

@@ -3,13 +3,9 @@ from django.http import JsonResponse
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
-from .models import *
-"""
-认证
-权限
-节流（控制访问频率）
-版本
-"""
+from dj_study.view_CBV.models import *
+import json
+
 # 若需要给多个CBV视图同时加上一个方法，我们就需要改变父类中的“dispatch”方法，并让对应视图类继承即可
 class Common(object):
     def dispatch(self,request,*args,**kwargs):
@@ -34,7 +30,12 @@ class CbvViews(Common,View):
         return HttpResponse('DELETE')
 
 ##########################################################
-import json
+"""
+认证
+权限
+节流（控制访问频率）
+版本
+"""
 from rest_framework.views import APIView
 from rest_framework import exceptions
 """
@@ -129,20 +130,12 @@ ORDER_DICT = {
 }
 # 定义认证类，和上方相同，定义一个执行http请求前的认证类
 """
-注意：此认证可以配置到settings中，成为全局认证方法，即执行任何请求前，都会先执行settings中的"REST_FRAMEWORK"配置的认证类
-如果一些请求不需要全局认证，如上方的登录，只需要在请求类中加入“authentication_classes = []”即可。
-"""
-# class Authentication(object):
-#     def authenticate(self,request):
-#         token = request._request.GET.get("token")
-#         token_obj = UserToken.objects.filter(token=token).first()
-#         if not token_obj:
-#             raise exceptions.AuthenticationFailed("用户认证失败")
-#         return (token_obj.user,token_obj)
-#
-#     def authenticate_header(self,val):  # 配合认证方法的头部信息
-#         pass
+注意：此认证可以配置到settings中，成为全局认证方法，即执行任何请求前，都会先执行settings中的"REST_FRAMEWORK"配置的认证类,
+对应认证文件要和view层分离，直接将路径导入settings中的REST_FRAMEWORK即可，“注意如果发生模块找不到错误，利用sys方法”，之后
+若出现INSTALLED_APPS找不到app错误，要在对应的app名称前加上前缀。   认证文件路径：dj_study.view_CBV.rest_auth.auth
 
+如果一些请求"不需要全局认证"，如上方的登录，只需要在请求类中加入“authentication_classes = []”即可。
+"""
 # 订单相关业务
 class OrderView(APIView):
     # authentication_classes = [Authentication, ]
