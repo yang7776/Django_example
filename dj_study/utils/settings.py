@@ -163,7 +163,17 @@ STATIC_ROOT = os.path.join(BASE_DIR,'static')
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
-# restful配置逻辑，如认证等
+# restful配置全局认证
 REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES":['dj_study.view_CBV.rest_auth.auth.FirstAuthentication','dj_study.view_CBV.rest_auth.auth.Authentication',]
+    # 认证
+    "DEFAULT_AUTHENTICATION_CLASSES":['dj_study.view_CBV.rest_auth.auth.FirstAuthentication','dj_study.view_CBV.rest_auth.auth.Authentication',],
+    "UNAUTHENTICATED_USER":None,     # 匿名登录时设置，  request.user = None
+    # "UNAUTHENTICATED_USER":lambda :"这是一个匿名用户",   # 当需要返回匿名用户的值时，可利用函数设置。
+    "UNAUTHENTICATED_TOKEN":None,    # 匿名登录时设置，  request.token = None
+
+    # 权限
+    "DEFAULT_PERMISSION_CLASSES":['dj_study.view_CBV.rest_auth.permission.SvipPermission'],
+
+    # 节流
+    "DEFAULT_THROTTLE_CLASSES":['dj_study.view_CBV.rest_auth.throttle.VisitThrottle']
 }
