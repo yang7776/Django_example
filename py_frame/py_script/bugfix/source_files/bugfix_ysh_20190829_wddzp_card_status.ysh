@@ -1,0 +1,3 @@
+gunicorn
+
+djapps/ds_admin/templates/ds_admin_v5/app_wddzp/cf_detail.html

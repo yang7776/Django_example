@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Swiper demo</title>
+  <!-- Link Swiper's CSS -->
+  <link rel="stylesheet" href="css/swiper.min.css">
+{#<link rel="stylesheet" href="css/animate.min.css">#}
+
+  <!-- Demo styles -->
+  <style>
+    * {
+	margin: 0;
+	padding: 0;
+	}
+	.blue-slide {
+		background: #4390EE;
+	}
+	.red-slide {
+		background: #CA4040;
+	}
+	.orange-slide {
+		background: #FF8604;
+	}
+	.swiper-slide {
+		line-height: 300px;
+		color: #fff;
+		font-size: 36px;
+		text-align: center;
+	}
+
+  </style>
+</head>
+<body>
+  <!-- Swiper -->
+  <!-- swiper-no-swiping 禁止鼠标拖动滑动 -->
+  <div class="swiper-no-swiping swiper-container">
+    <ul class="swiper-wrapper">
+        <li class="swiper-slide blue-slide">
+            <span>asdasdasd</span>
+            <span>asdasdasd</span>
+            <span>asdasdasd</span>
+        </li>
+        <li class="swiper-slide red-slide"><p class="ani" swiper-animate-effect="bounceInLeft" swiper-animate-duration="0.5s" swiper-animate-delay="0.3s">内容</p></li>
+        <li class="swiper-slide orange-slide"><p class="ani" swiper-animate-effect="shake" swiper-animate-duration="1.5s" swiper-animate-delay="0s">内容</p></li>
+    </ul>
+
+    <!-- 如果需要导航按钮 -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next" id="next1"></div>
+       <!-- 如果需要滚动条 -->
+    <div class="swiper-scrollbar"></div>
+  </div>
+
+  <!-- Swiper JS -->
+  <script src="js/jquery.min.js"></script>
+  <script src="js/swiper.min.js"></script>
+{#  <script src="js/swiper.animate.min.js"></script>#}
+  <!-- Initialize Swiper -->
+  <script>
+      $(function () {
+          var mySwiper = new Swiper('.swiper-container', {
+              loop:true,
+              pagination: {
+                  el: '.swiper-pagination',
+
+              },
+              navigation: {
+                  nextEl: '.swiper-button-next',
+                  prevEl: '.swiper-button-prev',
+              },
+              // 如果需要滚动条
+              /*scrollbar: {
+                  el: '.swiper-scrollbar',
+              },*/
+              observer: true,//修改swiper自己或子元素时，自动初始化swiper
+              observeParents: true,//修改swiper的父元素时，自动初始化swiper
+              /*on: {
+                  init: function () {
+                      swiperAnimateCache(this); //隐藏动画元素
+                      this.emit('slideChangeTransitionEnd');//在初始化时触发一次slideChangeTransitionEnd事件
+                  },
+                  slideChangeTransitionEnd: function () {
+                      swiperAnimate(this); //每个slide切换结束时运行当前slide动画
+                      this.slides.eq(this.activeIndex).find('.ani').removeClass('ani');//动画只展示一次
+                  }
+              }*/
+          });
+          $('#next1').click(function () {
+              console.log(mySwiper)
+          })
+      })
+
+  </script>
+</body>
+</html>
