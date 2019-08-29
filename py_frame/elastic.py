@@ -2,10 +2,10 @@
 # writer        Yang   
 # create_time   2019/8/1 18:23
 # file_name     elastic.py
-# version：7.3.0
+# version：7.3.0（注意：info()里面的“number”是版本号）
 from elasticsearch import Elasticsearch
 es = Elasticsearch("127.0.0.1:9200")
-# print(es.info())  # 可查看elasticsearch相关信息
+# print(es.info())  # 可查看elasticsearch相关信息，测试连接
 """
 创建/删除索引，如果检测到已创建，就会返回“400”错误。
 注意：在插入数据的时候，也可以实现创建索引
