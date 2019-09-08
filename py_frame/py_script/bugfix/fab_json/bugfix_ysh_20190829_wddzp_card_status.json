@@ -1,0 +1,16 @@
+{
+    "type": "filelist",
+    "signal_mods": [
+        "gunicorn"
+    ],
+    "statics_cdn": [],
+    "spec_files": [
+        "djapps/ds_admin/templates/ds_admin_v5/app_wddzp/cf_detail.html"
+    ],
+    "apps": [],
+    "djapps": [
+        "ds_admin"
+    ],
+    "common": [],
+    "fix_common": []
+}

@@ -24,6 +24,7 @@ HTML frame：<br>
   &nbsp;&nbsp; **bootbox**<br>
   &nbsp;&nbsp; **fileinput**<br>
   &nbsp;&nbsp; **highcharts**<br>
+  &nbsp;&nbsp; **swiper**<br>
 </font>
 
 <br>
@@ -32,4 +33,15 @@ Python konwledge：<br>
  <font color="red">
   &nbsp;&nbsp; **monkey patch**<br>
   &nbsp;&nbsp; **property improve**<br>
+  &nbsp;&nbsp; **python log**<br>
+  &nbsp;&nbsp; **sql connent&pack**<br>
+  &nbsp;&nbsp; **os**<br>
+  &nbsp;&nbsp; **elasticsearch**<br>
+</font>
+
+<br>
+
+Python Script：<br>
+ <font color="red">
+  &nbsp;&nbsp; **bugfix**<br>
 </font>

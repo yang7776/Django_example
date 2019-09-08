@@ -2,10 +2,10 @@
 # writer        Yang   
 # create_time   2019/8/1 18:23
 # file_name     elastic.py
-# version：7.3.0
+# version：7.3.0（注意：info()里面的“number”是版本号）
 from elasticsearch import Elasticsearch
 es = Elasticsearch("127.0.0.1:9200")
-# print(es.info())  # 可查看elasticsearch相关信息
+# print(es.info())  # 可查看elasticsearch相关信息，测试连接
 """
 创建/删除索引，如果检测到已创建，就会返回“400”错误。
 注意：在插入数据的时候，也可以实现创建索引
@@ -91,6 +91,50 @@ search：根据条件（字典的值）查询，一般使用这个进行索引�
   ...更多请参考el文件，以及
 }
 """
+# 以下为级联查询
+# query = {
+# 	'query': {
+# 		'bool': {
+# 			'should': [  # 需要满足的条件
+# 				{'match': {'scene': '夜宵,产品展示,单品推荐'}},
+# 				{'match': {'color_style': '青色'}},
+# 				{'match': {'pay_word': '人均50-100，早期'}},
+# 				{'match': {'category': '美食,烧烤'}},
+# 				{'match': {'human': '靠近旅游景点'}},
+# 			],
+# 			"minimum_should_match": 3,  # 起码匹配3个信息以上
+# 			"must": [  # 必须满足的条件
+# 				{'match': {'v_or_h': 0}}
+# 			]
+# 		}
+#
+# 	},
+# 	"from": 0,
+# 	"size": 5,
+# 	"sort": [{"_score": {'order': 'desc'}}]  # 按相关性降序排序
+# }
+
+# 以下为全文多字段查询
+# match= {
+# 	"query": "零食",
+# 	"fields": ["name", "desc", "custom_label", "color_style", "scene", "pk_str", "category", 	"pay_word", "human"],
+# 	"operator": "or",  # 如果多字段，需要指明“operator”字段，or：指字段中一个有即可，and：全部字段中都匹配才可以
+# }
+# query = {
+# 	'query': {
+# 		'bool': {
+# 			"must": [  # 必须满足的条件
+# 				{'multi_match': match}
+# 			]
+# 		}
+#
+# 	},
+# 	"from": 0,
+# 	"size": 5,
+# 	"sort": [{"_score": {'order': 'desc'}}]  # 按相关性降序排序
+# }
+
+
 # res = es.get(index='t_index',doc_type='default',id=1)
 # res1 = es.search(index='t_index',body={"query":{"match_all":{}}})
 # for hit in res1['hits']['hits']:
