@@ -1,6 +1,6 @@
 
 from django.urls import path
-from dj_study.view_CBV.views import *
+from dj_study.view_CBV.views.rest_view1 import *
 
 
 urlpatterns = [

@@ -175,5 +175,11 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES":['dj_study.view_CBV.rest_auth.permission.SvipPermission'],
 
     # 节流
-    "DEFAULT_THROTTLE_CLASSES":['dj_study.view_CBV.rest_auth.throttle.VisitThrottle']
+    "DEFAULT_THROTTLE_CLASSES":['dj_study.view_CBV.rest_auth.throttle.VisitThrottle'],
+
+    # 配置限流次数  “3/m”表示一分钟访问3次，s表示秒，h表示小时，d表示天
+    "DEFAULT_THROTTLE_RATES":{
+        "Luffy":"3/m",
+        "LuffyUser":"10/m",
+    }
 }

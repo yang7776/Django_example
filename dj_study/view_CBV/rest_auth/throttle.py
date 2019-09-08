@@ -4,9 +4,10 @@
 # @Author  : Yang
 
 # 节流类方法
+from rest_framework.throttling import BaseThrottle,SimpleRateThrottle
 
-VISIT_RECORD = {}
-from rest_framework.throttling import BaseThrottle
+"""
+----------------------------个人实现限流操作（限流原理）-----------------------
 import time
 class VisitThrottle(BaseThrottle):
 
@@ -16,8 +17,10 @@ class VisitThrottle(BaseThrottle):
     # 返回True：可以继续访问     返回False：表示访问频率太高，限制访问
     # 限制同一IP， 10s内只能访问3次
     def allow_request(self,request,view):  # 源码节流方法
+        VISIT_RECORD = {}
         # 1、获取用户IP
-        remote_addr = request.META.get('REMOTE_ADDR')
+        # remote_addr = request.META.get('REMOTE_ADDR')
+        remote_addr = self.get_ident(request)
         # 2、判断用户IP是否已经记录，没有记录则直接返回True
         ctime = time.time()
         if remote_addr not in VISIT_RECORD:
@@ -41,3 +44,17 @@ class VisitThrottle(BaseThrottle):
         ctime = time.time()
         wait_time = 10 - (ctime - self.history[-1])  # 注意时间戳之间的运算一定加括号，这样算出来结果为“秒”
         return wait_time
+"""
+# 对匿名用户操作
+class VisitThrottle(SimpleRateThrottle):
+    scope = "Luffy"  #　全局配置访问次数key值,settings配置后内部已经实现限流
+
+    def get_cache_key(self, request, view):
+        return self.get_ident(request) # 返回唯一标识ip
+
+# 用登录用户操作
+class UserThrottle(SimpleRateThrottle):
+    scope = "LuffyUser"  #　全局配置访问次数key值,settings配置后内部已经实现限流
+
+    def get_cache_key(self, request, view):
+        return self.get_ident(request) # 返回唯一标识ip

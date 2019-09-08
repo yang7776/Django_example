@@ -9,7 +9,11 @@ class UserInfo(models.Model):
     user_type = models.IntegerField()
     username = models.CharField(max_length=77,unique=True)
     password = models.CharField(max_length=77)
+    class Meta:
+        db_table = "rest1_userinfo"
 
 class UserToken(models.Model):
     user = models.OneToOneField(to='UserInfo',on_delete=None)
     token = models.CharField(max_length=77)
+    class Meta:
+        db_table = "rest1_usertoken"

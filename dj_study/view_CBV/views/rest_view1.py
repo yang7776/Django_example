@@ -1,12 +1,11 @@
-from django.shortcuts import render,HttpResponse
+from django.shortcuts import HttpResponse
 from django.http import JsonResponse
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
-from dj_study.view_CBV.models import *
+from dj_study.view_CBV.models.rest_model1 import *
 from rest_framework.views import APIView
-from rest_framework import exceptions
-import json
+from dj_study.view_CBV.rest_auth.throttle import UserThrottle
 
 """
 简单restful使用：（其实就是将"rest_framework"自带的认证方法源码，取出来以方便自定义用户认证方法）
@@ -60,7 +59,7 @@ class CbvViews(Common,View):
     
 节流（控制访问频率）
     1、和认证相似，与view分离，在其他文件中写对应希望实现的节流类
-    2、“allow_request”源码自带权限方法，优先执行
+    2、“allow_request”源码自带权限方法，优先执行 
     3、可以在settings中配置全局"DEFAULT_THROTTLE_CLASSES"或者直接导入使用。想执行非全局权限类的话，throttle_classes = []去执行对应的节流类方法。若需要多个权限分类，就定义多个权限类方法即可。
     4、规范性规定：自定义的权限类必须继承“BaseThrottle”
 版本
@@ -77,6 +76,7 @@ def md5(user):
 class AuthView(APIView):
     authentication_classes = []
     permission_classes = []
+    throttle_classes = [UserThrottle]
     def post(self,request,*args,**kwargs):
         ret = {'code':1000,'msg':None}
         try:
@@ -129,3 +129,18 @@ class OrderView(APIView):
         except Exception as e:
             pass
         return JsonResponse(ret)
+
+###############################################################
+
+"""
+1、版本(*)
+2、解析器(*)
+3、序列化(***)
+    1.请求数据进行校验（django-form也可以校验）
+    2.QuerySet进行序列化
+4、分页(**)
+5、路由(**)
+6、视图(**)
+7、渲染器(*)
+"""
+

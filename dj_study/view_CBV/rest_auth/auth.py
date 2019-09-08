@@ -5,7 +5,7 @@
 
 # 认证类方法
 
-from dj_study.view_CBV.models import *
+from dj_study.view_CBV.models.rest_model1 import *
 from rest_framework import exceptions
 # 认证类，必须继承“BaseAuthentication”
 from rest_framework.authentication import BaseAuthentication
