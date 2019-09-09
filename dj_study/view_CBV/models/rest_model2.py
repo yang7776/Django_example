@@ -21,7 +21,7 @@ class Role(models.Model):
 
 
 class UserInfoT(models.Model):
-    user_type = models.IntegerField()
+    user_type = models.IntegerField(choices=user_type_choices)
     username = models.CharField(max_length=77,unique=True)
     password = models.CharField(max_length=77)
     group = models.ForeignKey("UserGroup",on_delete=None)

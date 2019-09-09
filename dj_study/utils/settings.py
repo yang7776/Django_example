@@ -181,5 +181,13 @@ REST_FRAMEWORK = {
     "DEFAULT_THROTTLE_RATES":{
         "Luffy":"3/m",
         "LuffyUser":"10/m",
-    }
+    },
+    # 版本
+    "DEFAULT_VERSIONING_CLASS":"rest_framework.versioning.URLPathVersioning",  # 配置全局版本号获取方法
+    "DEFAULT_VERSION":"v1",          # 默认版本
+    "ALLOWED_VERSIONS":["v1","v2","v3"],  # 允许指定版本访问
+    "VERSION_PARAM":"version",        # 默认获取版本的key值
+
+    # 解析器
+    "DEFAULT_PARSER_CLASSES":["rest_framework.parsers.JSONParser","rest_framework.parsers.FormParser"],
 }
