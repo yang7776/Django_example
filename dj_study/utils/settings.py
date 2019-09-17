@@ -190,4 +190,7 @@ REST_FRAMEWORK = {
 
     # 解析器
     "DEFAULT_PARSER_CLASSES":["rest_framework.parsers.JSONParser","rest_framework.parsers.FormParser"],
+
+    # 分页
+    "PAGE_SIZE":2,  # 一页显示多少个数据
 }
