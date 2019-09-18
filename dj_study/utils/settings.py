@@ -193,4 +193,7 @@ REST_FRAMEWORK = {
 
     # 分页
     "PAGE_SIZE":2,  # 一页显示多少个数据
+
+    # 渲染
+    "DEFAULT_RENDERER_CLASSES":["rest_framework.renderers.JSONRenderer","rest_framework.renderers.BrowsableAPIRenderer"]
 }

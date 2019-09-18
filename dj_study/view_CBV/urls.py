@@ -1,8 +1,13 @@
 
-from django.urls import path,re_path
+from django.urls import path,re_path,include
 from dj_study.view_CBV.views.rest_view1 import *
 from dj_study.view_CBV.views.rest_view2 import *
+from dj_study.view_CBV.views.content_type_view import *
 
+# 自动生成路由
+from rest_framework import routers
+router = routers.DefaultRouter()  # 实例化路由对象
+router.register(r"auto_url",View2View)  # 注册路由对象，自动生成四种类型url（获取全部数据，基本增删改查，format参数，format+增删改查）
 
 urlpatterns = [
 
@@ -35,8 +40,11 @@ urlpatterns = [
     # 视图
     re_path('(?P<version>[v1|v2|v3]+)/view1/$',View1View.as_view()),
     # put:全部更新  patch：局部更新  "get":"retrieve"获取一条数据（list是获取全部数据）
-    # http://127.0.0.1:8000/view_cbv/v3/view2/3/
+    # http://127.0.0.1:8000/view_cbv/v3/view2/   # 查看全部数据
     re_path('(?P<version>[v1|v2|v3]+)/view2/$',View2View.as_view({"get":"list"})),
+    # http://127.0.0.1:8000/view_cbv/v3/view2.json
+    re_path('(?P<version>[v1|v2|v3]+)/view2\.(?P<format>\w+)$',View2View.as_view({"get":"list"})),
+    # http://127.0.0.1:8000/view_cbv/v3/1/    查询id为1的数据
     re_path('(?P<version>[v1|v2|v3]+)/view2/(?P<pk>\d+)/$',View2View.as_view({
         "get":"retrieve",
         "post":"create",
@@ -44,5 +52,14 @@ urlpatterns = [
         "patch":"partial_update",
         "delete":"destroy",
     })),
-    # re_path('(?P<version>[v1|v2|v3]+)/view2/',View2View.as_view({"get":"list","post":"post_list"})),
+
+    # 路由（配置后自动生成四种url）
+    # http://127.0.0.1:8000/view_cbv/v3/auto_url.json
+    re_path('(?P<version>[v1|v2|v3]+)/',include(router.urls)),
+
+    # 渲染器
+    re_path('(?P<version>[v1|v2|v3]+)/view3/$',View3View.as_view()),
+
+    # Content_Type
+    path('content_type_test/',content_type_test),
 ]

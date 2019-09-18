@@ -330,3 +330,49 @@ class View2View(CancelRest1Class,ModelViewSet):
     queryset = Role.objects.all()  # 获取全部数据对象
     serializer_class = PagerSerialiser  # 获取序列化对象
     pagination_class = PageNumberPagination  # 获取分页对象
+
+# TODO 路由（注重配置，根据情况而定）
+"""
+    - http://127.0.0.1:8000/view_cbv/v3/view2/   # 查看全部数据
+        re_path('(?P<version>[v1|v2|v3]+)/view2/$',View2View.as_view({"get":"list"})),
+    - http://127.0.0.1:8000/view_cbv/v3/view2.json  # 将查询的数据格式转化为json格式
+        re_path('(?P<version>[v1|v2|v3]+)/view2\.(?P<format>\w+)$',View2View.as_view({"get":"list"})),
+    - http://127.0.0.1:8000/view_cbv/v3/1/    查询id为1的数据
+        re_path('(?P<version>[v1|v2|v3]+)/view2/(?P<pk>\d+)/$',View2View.as_view({...}))
+    
+    # 自动生成路由
+    from rest_framework import routers
+    router = routers.DefaultRouter()  # 实例化路由对象
+    router.register(r"auto_url",View2View)  # 注册路由对象，自动生成四种类型url（获取全部数据，基本增删改查，format参数，format+增删改查）
+   
+    # http://127.0.0.1:8000/view_cbv/v3/auto_url.json  # 自动生成的路由链接，以auto_url为开头
+    re_path('(?P<version>[v1|v2|v3]+)/',include(router.urls)),
+"""
+
+# TODO 渲染器
+"""
+四种渲染格式：（一般只用JSONRenderer，BaseRenderer）
+    JSONRenderer:渲染json格式
+    BrowsableAPIRenderer:基本渲染格式。若以API方式访问，返回json格式数据；以网页访问，返回html网页渲染方式展现。
+    AdminRenderer:渲染成table格式
+    HTMLFormRenderer:渲染成form格式
+配置方法：
+    - renderer_classes = [JSONRenderer]  在指定视图中配置
+    - 在settings配置文件中配置全局（推荐），配置字段：DEFAULT_RENDERER_CLASSES
+"""
+from rest_framework.renderers import JSONRenderer,BrowsableAPIRenderer,AdminRenderer,HTMLFormRenderer
+class View3View(CancelRest1Class,GenericAPIView):
+
+    # renderer_classes = [JSONRenderer,BrowsableAPIRenderer]   # 已在settings中配置
+    def get(self, request, *args, **kwargs):
+
+        roles = Role.objects.all()
+
+        pg = MyCursorPagination()
+
+        page_role = pg.paginate_queryset(queryset=roles, request=request, view=self)
+
+        ser = PagerSerialiser(instance=page_role, many=True)
+
+        get_page_response = pg.get_paginated_response(ser.data)
+        return get_page_response
