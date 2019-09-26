@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# writer        Yang   
+# writer        Yang
 # create_time   2019/8/1 18:23
 # file_name     elastic.py
 # version：7.3.0（注意：info()里面的“number”是版本号）
@@ -35,7 +35,7 @@ type：（注意：版本不同，对应的类型也会有所改变）
 注意：使用ik分词器，必须下载ik插件：
 	1、cd到\elasticsearch-7.3.0\bin目录下
 	2、执行“elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.3.0/elasticsearch-analysis-ik-7.3.0.zip”，然后重启elasticsearch即可使用
-	
+
 :param analyzer：分析指定字段值时，拆分方式
 :param search_analyzer：查询指定字段值时，检索方式
 	ik_max_word：细粒度拆分,按照最大拆分可能性去检索，如输入“张三丰” 将拆分为：
@@ -43,16 +43,16 @@ type：（注意：版本不同，对应的类型也会有所改变）
 	ik_smart：粗粒度拆分
 """
 mapping = {
-	"id":{'type':'long'},
-	"name":{u'analyzer': u'ik_max_word', u'type': u'text',u"search_analyzer": u"ik_smart"},
-	"age":{'type':'long'},
-	"sex":{u"type": u"text"}
+    "id": {'type': 'long'},
+    "name": {u'analyzer': u'ik_max_word', u'type': u'text', u"search_analyzer": u"ik_smart"},
+    "age": {'type': 'long'},
+    "sex": {u"type": u"text"}
 }
 body = {
-	"properties": mapping
+    "properties": mapping
 }
 # 注意7.x版本，需要include_type_name=True
-res_map = es.indices.put_mapping(include_type_name=True,index="t_index",doc_type='default',body=body)
+res_map = es.indices.put_mapping(include_type_name=True, index="t_index", doc_type='default', body=body)
 print(res_map)
 
 """
@@ -65,16 +65,16 @@ print(res_map)
 :param body: 单条的完整数据，字典类型
 """
 data = {
-	"id":1,
-	"name":"张三",
-	"age":17,
-	"sex":"男"
+    "id": 1,
+    "name": "张三",
+    "age": 17,
+    "sex": "男"
 }
 data1 = {
-	"id":11,
-	"name":"李四",
-	"age":27,
-	"sex":"男"
+    "id": 11,
+    "name": "李四",
+    "age": 27,
+    "sex": "男"
 }
 # es.index(index='t_index',doc_type="default",id=data["id"],body=data)
 # es.index(index='t_index1',doc_type="default",id=data1["id"],body=data1)
@@ -151,11 +151,11 @@ body：对应的修改参数必须是字典，且键必须为“doc”，即{"do
 将对应的值添加到数据中。
 """
 data_up = {
-	"id":1,
-	"name":"小七",
-	"age":17,
-	"sex":"男",
-	"new_key":"test"
+    "id": 1,
+    "name": "小七",
+    "age": 17,
+    "sex": "男",
+    "new_key": "test"
 }
 # 一次传一个大字典，检索到对应key，就更改，检索不到，就添加。
 # res = es.update(index="t_index",doc_type="default",body={'doc':data_up},id=1,ignore=400)

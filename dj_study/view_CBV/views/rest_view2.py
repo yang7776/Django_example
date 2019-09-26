@@ -2,6 +2,20 @@
 # @Software: PyCharm
 # @Time    : 2019/9/8 下午5:34
 # @Author  : Yang
+from rest_framework.renderers import JSONRenderer, BrowsableAPIRenderer, AdminRenderer, HTMLFormRenderer
+from rest_framework.viewsets import ModelViewSet  # ModelViewSet继承了数据的增删改查功能，以及GenericViewSet功能
+from rest_framework.mixins import CreateModelMixin, DestroyModelMixin  # 增加，删除类方法，ModelViewSet都包含
+from rest_framework.viewsets import GenericViewSet
+from rest_framework.generics import GenericAPIView
+from rest_framework.response import Response  # 数据渲染类
+from rest_framework.pagination import PageNumberPagination, LimitOffsetPagination, CursorPagination
+from dj_study.view_CBV.rest_auth.serializers.page_util import PagerSerialiser  # 引入文件自定义的序列化类
+from rest_framework import serializers
+from rest_framework.parsers import FormParser  # 允许前端发送form表单数据
+from rest_framework.parsers import JSONParser  # 允许前端发送json数据
+from rest_framework.versioning import URLPathVersioning  # rest版本类，在url中取值，即是将版本号嵌套在url链接中
+from rest_framework.versioning import QueryParameterVersioning  # rest中版本类，在get传递的参数中取值
+from rest_framework.versioning import BaseVersioning  # 获取版本信息的类
 import json
 from django.shortcuts import HttpResponse
 from django.http import JsonResponse
@@ -23,13 +37,16 @@ from dj_study.view_CBV.rest_auth.throttle import UserThrottle
 6、视图(**)
 7、渲染器(*)
 """
+
+
 class CancelRest1Class(object):
     # 全局定义类
     authentication_classes = []
     permission_classes = []
     throttle_classes = []
 
-#TODO：版本相关
+
+# TODO：版本相关
 """
 版本：有以下六种方式，推荐第三种方法，嵌套在url中。在settings中配置相关参数，如默认版本号等，可在settings中配置为全局获取方法。注意全局配置时，指定的不是列表，而是字符串。
     - 普通方法，版本可以通过url“GET”传参
@@ -39,25 +56,26 @@ class CancelRest1Class(object):
     - NamespaceVersioning：基于url中的name_space来指定对应的版本
     - HostNameVersioning：基于子域名来指定对应的版本
 """
-from rest_framework.versioning import BaseVersioning  # 获取版本信息的类
-from rest_framework.versioning import QueryParameterVersioning  # rest中版本类，在get传递的参数中取值
-from rest_framework.versioning import URLPathVersioning  # rest版本类，在url中取值，即是将版本号嵌套在url链接中
+
+
 class ParamVersion(object):
     # 获取version版本值，若需要扩展的话，可以使用此方法自定义，即自定义类后，使用一下函数
     def determine_version(self, request, *args, **kwargs):  # 内部定义好的方法，获取版本信息
-        version = request.query_params.get("version") # query_params获取版本信息
+        version = request.query_params.get("version")  # query_params获取版本信息
         return version
 
-class UsersView(CancelRest1Class,APIView):
+
+class UsersView(CancelRest1Class, APIView):
     # 版本类
     # versioning_class = QueryParameterVersioning  # 获取版本类信息(GET传参)
     # versioning_class = URLPathVersioning  # 获取版本类信息(url嵌套版本号),可在setting中设置为全局
 
-    def get(self,request,*args,**kwargs):
+    def get(self, request, *args, **kwargs):
         print(request.version)  # 输出版本号
         print(request.versioning_scheme)  # 输出版本对象
-        print(request.versioning_scheme.reverse(viewname="user",request=request))   # 输出“反向生成对应的url”(注意在url配置中，设置“name”参数)
+        print(request.versioning_scheme.reverse(viewname="user", request=request))   # 输出“反向生成对应的url”(注意在url配置中，设置“name”参数)
         return HttpResponse('用户列表')
+
 
 # TODO：解析器相关
 """
@@ -66,10 +84,10 @@ class UsersView(CancelRest1Class,APIView):
     - Content-Type = application/x-www-form-urlencoded
     - 数据格式：  name=xiaoqi&age=17 (接收的格式化数据，非json)
 """
-from rest_framework.parsers import JSONParser  # 允许前端发送json数据
-from rest_framework.parsers import FormParser  # 允许前端发送form表单数据
-class AnalyzeView(CancelRest1Class,APIView):
-    parser_classes = [JSONParser,FormParser]  # 可以导入解析器类直接使用或全局设置
+
+
+class AnalyzeView(CancelRest1Class, APIView):
+    parser_classes = [JSONParser, FormParser]  # 可以导入解析器类直接使用或全局设置
     """
     parser_classes：也可以进行全局配置
     JSONParser：只能解析Content-Type = application/json头的数据
@@ -77,7 +95,8 @@ class AnalyzeView(CancelRest1Class,APIView):
     MultiPartParser：只能解析请求头content-type = multipart/form-data的请求体的数据，是form表单的上传文件
     FileUploadParser：可以解析全部格式，一般多用于上传文件
     """
-    def post(self,request,*args,**kwargs):
+
+    def post(self, request, *args, **kwargs):
         """
         :param request:
         :param args:
@@ -95,6 +114,7 @@ class AnalyzeView(CancelRest1Class,APIView):
         print(request.data)  # 获取解析后的数据，接收的直接就是json解析后的数据
         return HttpResponse('request.post/request.body')
 
+
 # TODO：序列化
 """
 序列化有以下两种功能：
@@ -107,12 +127,15 @@ class AnalyzeView(CancelRest1Class,APIView):
         - 一些字段需要自定义校验，可自定义校验类validators=[CustomValid("七")]
 """
 ##########################################序列化功能一：数据序列化################################################
-from rest_framework import serializers
+
+
 class RoleSerializer(serializers.Serializer):
     title = serializers.CharField()  # 将指定字段序列化，注意“字段”必须是数据表中的字段，在这里不能自定义
     id = serializers.CharField()
-class RoleView(CancelRest1Class,APIView):
-    def get(self,request,*args,**kwargs):
+
+
+class RoleView(CancelRest1Class, APIView):
+    def get(self, request, *args, **kwargs):
 
         # # 方式一：简单序列化
         # roles = Role.objects.values("id","title")
@@ -121,33 +144,40 @@ class RoleView(CancelRest1Class,APIView):
 
         # 方式二：rest自带类"serializers"进行序列化转换
         roles = Role.objects.values("id", "title")
-        ser = RoleSerializer(instance=roles,many=True)  # instance:序列化Queryset列表，many：指定实例化Queryset列表中有多个对象时，指定为True；若为一个对象，必须many设为False
+        ser = RoleSerializer(instance=roles, many=True)  # instance:序列化Queryset列表，many：指定实例化Queryset列表中有多个对象时，指定为True；若为一个对象，必须many设为False
         ret = json.dumps(ser.data, ensure_ascii=False)  # ser.data：为序列化之后的结果，ensure_ascii：默认为True，是否为输出的结果进行转码，若不设置为False，用网页访问时，返回的数据为“中文”转码后的数据
         return HttpResponse(ret)
 
 # 方式二：下面为使用自定义序列化类展示的所有类型的数据序列化，如一对多，多对多等，适合需要自定义返回值时使用。
+
+
 class UserInfoSerializer(serializers.Serializer):
     username = serializers.CharField()
     password = serializers.CharField()
     u_type = serializers.CharField(source="get_user_type_display")  # source：相当于<UserInfoT>.get_user_type_display
     u_group = serializers.CharField(source="group.id")  # 一对多外键可用
     u_roles = serializers.SerializerMethodField()  # 自定义显示，一般用于多对多
-    def get_u_roles(self,row): # 注意：多对多自定义返回值的方法名，必须是“get+对应字段名”
-        role_obj_list = row.roles.all().values_list("title",flat=True)
+
+    def get_u_roles(self, row):  # 注意：多对多自定义返回值的方法名，必须是“get+对应字段名”
+        role_obj_list = row.roles.all().values_list("title", flat=True)
         return list(role_obj_list)
 
 # 方式三，直接返回对应表里的所有数据，将所有数据序列化，不用一个一个写,并且可以扩展自定义字段输出方式
+
+
 class MyField(serializers.CharField):  # 可以自定义类返回字段（不常用）
     def to_representation(self, value):
         return value   # value；就是调用该类指定字段的返回值
 
 # 单独定义某个字段的url
+
+
 class LinkSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = UserInfoT
         # HyperlinkedModelSerializer 会自动生成一个 url 字段来表示超链接
         # 我们希望 API 中包括这个字段，所以这里我们在 fields 加上
-        fields = ["id","username","password","user_type","group"]
+        fields = ["id", "username", "password", "user_type", "group"]
 
         # 我们可以在 extra_kwargs 设置中的 view_name 和 lookup_field
         # 来正确配置我们的 URL
@@ -155,24 +185,27 @@ class LinkSerializer(serializers.HyperlinkedModelSerializer):
         # lookup_field 表示用哪个字段来作为 url 的唯一识别标记
         # 本例中每个 Profile 的 url 是通过 id 来区分的，所以该字段用 id
         extra_kwargs = {
-            'group': {'view_name': 'group', 'lookup_field': 'id','lookup_url_kwarg':'gid'},
+            'group': {'view_name': 'group', 'lookup_field': 'id', 'lookup_url_kwarg': 'gid'},
         }
 
+
 class UserInfoSerializerT(serializers.ModelSerializer):
-    group = serializers.HyperlinkedIdentityField(view_name='group',lookup_field='group_id',lookup_url_kwarg='gid')  # 反向生成url，点击可以查看对应资源
+    group = serializers.HyperlinkedIdentityField(view_name='group', lookup_field='group_id', lookup_url_kwarg='gid')  # 反向生成url，点击可以查看对应资源
+
     class Meta:
         model = UserInfoT
 
         # fields = "__all__"  # 表示输出全部字段数据
-        fields = ["id","username","password","user_type","group"]  # 只输出指定字段
+        fields = ["id", "username", "password", "user_type", "group"]  # 只输出指定字段
         depth = 1  # 深度取值，1即表示，判断取的字段中，是否有往下一层可取的值（如一对多，多对多等关联表），若有输出下一层的值（即自动联表取值）。注意：深度取值也意味着值越大，深度层数越多，即会影响取值效率，官网建议“0~10”之间。
 
         extra_kwargs = {
-            'username':{'min_length':50},
+            'username': {'min_length': 50},
         }  # 可以使用extra_kwargs参数为ModelSerializer添加或修改原有的选项参数
 
-class UserInfoView(CancelRest1Class,APIView):
-    def get(self,request,*args,**kwargs):
+
+class UserInfoView(CancelRest1Class, APIView):
+    def get(self, request, *args, **kwargs):
 
         users = UserInfoT.objects.all()
         # context={'request': request}：需要字段反向生成url时，需要设置此字段
@@ -182,23 +215,26 @@ class UserInfoView(CancelRest1Class,APIView):
             1.实例化，将参数传递的数据封装到对象，指向"__new__()"<根据many的真假，确定返回的对象>返回的对象
             2.调用对象的data属性
         """
-        ser = LinkSerializer(instance=users,many=True,context={'request': request})   # 方式一：使用获取“字段link”的类，来获取所需的所有字段
+        ser = LinkSerializer(instance=users, many=True, context={'request': request})   # 方式一：使用获取“字段link”的类，来获取所需的所有字段
         # ser = UserInfoSerializerT(instance=users,many=True,context={'request': request})  # 方式二：使用获取“字段”的类，来获取所需的所有字段，link字段再使用HyperlinkedIdentityField获取
         ret = json.dumps(ser.data, ensure_ascii=False)
         return HttpResponse(ret)
 
-class GroupView(CancelRest1Class,APIView):
+
+class GroupView(CancelRest1Class, APIView):
     def get(self, request, *args, **kwargs):
         gid = kwargs.get("gid")
         group = UserGroup.objects.get(id=gid)
-        data = {"id":group.id,"title":group.title}
-        ret = json.dumps(data,ensure_ascii=False)
+        data = {"id": group.id, "title": group.title}
+        ret = json.dumps(data, ensure_ascii=False)
         return HttpResponse(ret)
 
 ##########################################序列化功能二：数据校验################################################
 # 自定义验证类
+
+
 class CustomValid(object):
-    def __init__(self,base):
+    def __init__(self, base):
         self.base = base
 
     def __call__(self, value):  # 当执行字段校验的时候，就会执行__call__函数,value为用户传来的值
@@ -209,20 +245,22 @@ class CustomValid(object):
             __call__: 改变实体的位置，当传入的值符合__call__对应的参数时，就是执行__call__，而不执行__init__。
         """
         if not value.startswith(self.base):
-            err_msg = "标题必须以%s为开头"%self.base
+            err_msg = "标题必须以%s为开头" % self.base
             raise serializers.ValidationError(err_msg)
 
-    def set_context(self,serializer_field):
+    def set_context(self, serializer_field):
         """
         执行验证之前调用，serializer_field为当前字段对象
         """
         print("执行验证之前调用")
 
+
 class UserGroupSerializer(serializers.Serializer):
     # 定义字段，并设置对应校验
-    title = serializers.CharField(error_messages={"required":"标题不能为空"},validators=[CustomValid("七"),])
+    title = serializers.CharField(error_messages={"required": "标题不能为空"}, validators=[CustomValid("七"), ])
 
-class UserGroupView(CancelRest1Class,APIView):
+
+class UserGroupView(CancelRest1Class, APIView):
     def post(self, request, *args, **kwargs):
 
         ser = UserGroupSerializer(data=request.data)  # 定义的序列化类
@@ -235,6 +273,7 @@ class UserGroupView(CancelRest1Class,APIView):
 
         return HttpResponse("提交数据")
 
+
 # TODO：分页
 """
 分页类型
@@ -242,11 +281,10 @@ class UserGroupView(CancelRest1Class,APIView):
     - 类型二：在n个位置，向后查看n条数据
     - 类型三：加密分页，只能看上一页和下一页。一次只读取一页的值，速度快（适用于数据量大）
 """
-from dj_study.view_CBV.rest_auth.serializers.page_util import PagerSerialiser  # 引入文件自定义的序列化类
-from rest_framework.pagination import PageNumberPagination,LimitOffsetPagination,CursorPagination
-from rest_framework.response import Response  # 数据渲染类
 
 # 分页类型一
+
+
 class MyPageNumberPagination(PageNumberPagination):
     # http://127.0.0.1:8000/view_cbv/v3/page1/?page=3&size=4  读取第3页的4条数据
     page_size = 2   # 一页显示多少个
@@ -255,6 +293,8 @@ class MyPageNumberPagination(PageNumberPagination):
     max_page_size = 5   # 每页显示最多几条数据
 
 # 分页类型二
+
+
 class MyLimitOffsetPagination(LimitOffsetPagination):
     # http://127.0.0.1:8000/view_cbv/v3/page1/?offset=0&limit=4  从索引0开始读取4条数据
     default_limit = 2  # 默认读取多少条数据
@@ -263,6 +303,8 @@ class MyLimitOffsetPagination(LimitOffsetPagination):
     max_limit = 5                  # 最多读取多少条数据
 
 # 分页类型三
+
+
 class MyCursorPagination(CursorPagination):
     # http://127.0.0.1:8000/view_cbv/v3/page1/?size=4   注意使用“get_paginated_response”来返回，才可看到上一页和下一页的链接
     cursor_query_param = 'cursor'  # 翻页时的key，注意这个key是随机生成，不知道页码，即需要get_paginated_response来显示上一页和下一页的链接
@@ -271,7 +313,8 @@ class MyCursorPagination(CursorPagination):
     page_size_query_param = "size"  # 设置在url中还可以”再设置“一页显示数，key值为size
     max_page_size = 5  # 每页显示最多几条数据
 
-class Page1View(CancelRest1Class,APIView):
+
+class Page1View(CancelRest1Class, APIView):
     def get(self, request, *args, **kwargs):
         # 获取所有数据
         roles = Role.objects.all()
@@ -283,15 +326,16 @@ class Page1View(CancelRest1Class,APIView):
         pg = MyCursorPagination()         # 自定义加密分页类，继承专用类后，可灵活修改参数
 
         # 在数据库中获取分页的数据（返回的是数据modal对象）
-        page_role = pg.paginate_queryset(queryset=roles,request=request,view=self)
+        page_role = pg.paginate_queryset(queryset=roles, request=request, view=self)
 
         # 对数据进行序列化
         ser = PagerSerialiser(instance=page_role, many=True)
 
         # 通过get_paginated_response方法返回分页的详细信息和数据
         get_page_response = pg.get_paginated_response(ser.data)
-        return get_page_response  #　不仅返回对应数据，也返回数据总数，下一页和上一页的链接(加密分页需要)等
+        return get_page_response  # 　不仅返回对应数据，也返回数据总数，下一页和上一页的链接(加密分页需要)等
         # return Response(ser.data)   # 直接返回对应页数的数据
+
 
 # TODO：视图
 """
@@ -303,8 +347,9 @@ class Page1View(CancelRest1Class,APIView):
     GenericAPIView.get_object
         check_object_permissions.has_object_permission(之前的是“has_permission”,是指对所有数据的权限)
 """
-from rest_framework.generics import GenericAPIView
-class View1View(CancelRest1Class,GenericAPIView):
+
+
+class View1View(CancelRest1Class, GenericAPIView):
     # 提前定义需要用的类对象
     queryset = Role.objects.all()
     serializer_class = PagerSerialiser
@@ -316,35 +361,36 @@ class View1View(CancelRest1Class,GenericAPIView):
         # 分页
         page_roles = self.paginate_queryset(roles)   # 获取上方定义的 PagerSerialiser
         # 序列化
-        ser = self.get_serializer(instance=page_roles,many=True)  # 获取上方定义的 PageNumberPagination
+        ser = self.get_serializer(instance=page_roles, many=True)  # 获取上方定义的 PageNumberPagination
 
         return Response(ser.data)
 
+
 # 继承ModelViewSet后，只需要明确数据对象即可
-from rest_framework.viewsets import GenericViewSet
-from rest_framework.mixins import CreateModelMixin,DestroyModelMixin # 增加，删除类方法，ModelViewSet都包含
-from rest_framework.viewsets import ModelViewSet  # ModelViewSet继承了数据的增删改查功能，以及GenericViewSet功能
 # class View2View(CancelRest1Class,CreateModelMixin,ModelViewSet):  # 也可以单独只定义视图增加功能
-class View2View(CancelRest1Class,ModelViewSet):
+
+
+class View2View(CancelRest1Class, ModelViewSet):
     # 提前定义需要用的类对象
     queryset = Role.objects.all()  # 获取全部数据对象
     serializer_class = PagerSerialiser  # 获取序列化对象
     pagination_class = PageNumberPagination  # 获取分页对象
+
 
 # TODO 路由（注重配置，根据情况而定）
 """
     - http://127.0.0.1:8000/view_cbv/v3/view2/   # 查看全部数据
         re_path('(?P<version>[v1|v2|v3]+)/view2/$',View2View.as_view({"get":"list"})),
     - http://127.0.0.1:8000/view_cbv/v3/view2.json  # 将查询的数据格式转化为json格式
-        re_path('(?P<version>[v1|v2|v3]+)/view2\.(?P<format>\w+)$',View2View.as_view({"get":"list"})),
+        re_path(r'(?P<version>[v1|v2|v3]+)/view2\.(?P<format>\w+)$',View2View.as_view({"get":"list"})),
     - http://127.0.0.1:8000/view_cbv/v3/1/    查询id为1的数据
-        re_path('(?P<version>[v1|v2|v3]+)/view2/(?P<pk>\d+)/$',View2View.as_view({...}))
-    
+        re_path(r'(?P<version>[v1|v2|v3]+)/view2/(?P<pk>\d+)/$',View2View.as_view({...}))
+
     # 自动生成路由
     from rest_framework import routers
     router = routers.DefaultRouter()  # 实例化路由对象
     router.register(r"auto_url",View2View)  # 注册路由对象，自动生成四种类型url（获取全部数据，基本增删改查，format参数，format+增删改查）
-   
+
     # http://127.0.0.1:8000/view_cbv/v3/auto_url.json  # 自动生成的路由链接，以auto_url为开头
     re_path('(?P<version>[v1|v2|v3]+)/',include(router.urls)),
 """
@@ -360,8 +406,9 @@ class View2View(CancelRest1Class,ModelViewSet):
     - renderer_classes = [JSONRenderer]  在指定视图中配置
     - 在settings配置文件中配置全局（推荐），配置字段：DEFAULT_RENDERER_CLASSES
 """
-from rest_framework.renderers import JSONRenderer,BrowsableAPIRenderer,AdminRenderer,HTMLFormRenderer
-class View3View(CancelRest1Class,GenericAPIView):
+
+
+class View3View(CancelRest1Class, GenericAPIView):
 
     # renderer_classes = [JSONRenderer,BrowsableAPIRenderer]   # 已在settings中配置
     def get(self, request, *args, **kwargs):

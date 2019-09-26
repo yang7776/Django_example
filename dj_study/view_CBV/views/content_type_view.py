@@ -7,10 +7,12 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from dj_study.view_CBV.models.content_type_model import *
 """
-　注意：ContentType只运用于1对多的关系！！！并且多的那张表中有多个ForeignKey字段。 
+　注意：ContentType只运用于1对多的关系！！！并且多的那张表中有多个ForeignKey字段。
   注意！！！！！！！：
     -  GenericForeignKey("content_type","object_id")  外键ContentType对应的字段名必须是“content_type”，对应的表id字段名必须是“object_id”
 """
+
+
 def content_type_test(request):
     """
     1、为学位课“python全站”添加一个策略：一个月9.9元

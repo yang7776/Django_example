@@ -20,7 +20,7 @@ import json
 
 SOURCE_FILE_DIR = "source_files"
 OUT_PUT_DIR = "fab_json"
-STATIC_FILE_EX_NAME = ("js", "css", "png", "gif", "jpg", "jpeg", 'json', 'map','eot','woff','ttf', 'svg')
+STATIC_FILE_EX_NAME = ("js", "css", "png", "gif", "jpg", "jpeg", 'json', 'map', 'eot', 'woff', 'ttf', 'svg')
 
 
 def parse_fab_file(source_file, target_file):

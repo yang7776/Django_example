@@ -15,27 +15,31 @@ from dj_study.view_CBV.rest_auth.throttle import UserThrottle
     3、规定：返回值为元组类型，第一个值表示user的信息，也可以是user_id，即使用“request.user”获取
 """
 # 若需要给多个CBV视图同时加上一个方法，我们就需要改变父类中的“dispatch”方法，并让对应视图类继承即可
+
+
 class Common(object):
-    def dispatch(self,request,*args,**kwargs):
+    def dispatch(self, request, *args, **kwargs):
         print("执行method方法之前")
-        res = super(Common,self).dispatch(request,*args,**kwargs)
+        res = super(Common, self).dispatch(request, *args, **kwargs)
         print("执行method方法之后")
         return res
 
-@method_decorator(csrf_exempt,name='dispatch')  # CBV中csrf验证方法，和FBV不同
-class CbvViews(Common,View):
-    def get(self,request,*args,**kwargs):
+
+@method_decorator(csrf_exempt, name='dispatch')  # CBV中csrf验证方法，和FBV不同
+class CbvViews(Common, View):
+    def get(self, request, *args, **kwargs):
         print("执行get方式的视图方法")
         return HttpResponse('GET')
 
-    def post(self,request,*args,**kwargs):
+    def post(self, request, *args, **kwargs):
         return HttpResponse('POST')
 
-    def put(self,request,*args,**kwargs):
+    def put(self, request, *args, **kwargs):
         return HttpResponse('PUT')
 
-    def delete(self,request,*args,**kwargs):
+    def delete(self, request, *args, **kwargs):
         return HttpResponse('DELETE')
+
 
 #############################################################
 """
@@ -50,57 +54,65 @@ class CbvViews(Common,View):
     注意：（文件导入问题解决）
     对应认证文件要和view层分离，直接将路径导入settings中的REST_FRAMEWORK即可，“注意如果发生模块找不到错误，利用sys方法”，之后
     若出现INSTALLED_APPS找不到app错误，要在对应的app名称前加上前缀。   认证文件路径：dj_study.view_CBV.rest_auth.auth
-    
+
 权限：
     1、和认证相似，与view分离，在其他文件中写对应希望实现的权限类
     2、“has_permission”源码自带权限方法，优先执行
     3、可以在settings中配置全局"DEFAULT_PERMISSION_CLASSES"或者直接导入使用。想执行非全局权限类的话，利用permission_classes = []去执行对应的权限类方法。若需要多个权限分类，就定义多个权限类方法即可。
     4、规范性规定：自定义的权限类必须继承“BasePermission”
-    
+
 节流（控制访问频率）
     1、和认证相似，与view分离，在其他文件中写对应希望实现的节流类
-    2、“allow_request”源码自带权限方法，优先执行 
+    2、“allow_request”源码自带权限方法，优先执行
     3、可以在settings中配置全局"DEFAULT_THROTTLE_CLASSES"或者直接导入使用。想执行非全局权限类的话，throttle_classes = []去执行对应的节流类方法。若需要多个权限分类，就定义多个权限类方法即可。
     4、规范性规定：自定义的权限类必须继承“BaseThrottle”
 版本
-    
+
 """
 # 生成随机token值封装
+
+
 def md5(user):
-    import hashlib,time
+    import hashlib
+    import time
     ctime = str(time.time())
-    m = hashlib.md5(bytes(user,encoding='utf-8'))
-    m.update(bytes(ctime,encoding='utf-8'))
+    m = hashlib.md5(bytes(user, encoding='utf-8'))
+    m.update(bytes(ctime, encoding='utf-8'))
     return m.hexdigest()
 # 用户登录认证
+
+
 class AuthView(APIView):
     authentication_classes = []
     permission_classes = []
     throttle_classes = [UserThrottle]
-    def post(self,request,*args,**kwargs):
-        ret = {'code':1000,'msg':None}
+
+    def post(self, request, *args, **kwargs):
+        ret = {'code': 1000, 'msg': None}
         try:
             user = request._request.POST.get('username')
             pwd = request._request.POST.get('password')
-            obj = UserInfo.objects.filter(username=user,password=pwd).first()
+            obj = UserInfo.objects.filter(username=user, password=pwd).first()
             if not obj:
                 ret["code"] = 1001
                 ret["msg"] = '用户名或密码错误'
             # 为登录用户创建token
             token = md5(user)
             # 存在就更新，不存在就创建
-            UserToken.objects.update_or_create(user=obj,defaults={'token':token})
+            UserToken.objects.update_or_create(user=obj, defaults={'token': token})
             ret['token'] = token
         except Exception as e:
             ret['code'] = 1002
             ret['msg'] = "请求异常"
         return JsonResponse(ret)
+
+
 # 虚拟数据
 ORDER_DICT = {
-    1:{
-        'name':'apple',
-        "color":'red',
-        'content':'...'
+    1: {
+        'name': 'apple',
+        "color": 'red',
+        'content': '...'
     },
     2: {
         'name': 'orange',
@@ -110,6 +122,8 @@ ORDER_DICT = {
 }
 # 订单相关业务
 # （只有SVIP用户有权限访问 --> 利用权限类方法）
+
+
 class OrderView(APIView):
 
     # from dj_study.view_CBV.rest_auth.auth import Authentication      # 可以导入认证类直接使用或全局设置
@@ -121,7 +135,7 @@ class OrderView(APIView):
     # from dj_study.view_CBV.rest_auth.throttle import VisitThrottle     # 可以导入节流类直接使用或全局设置
     # throttle_classes = [VisitThrottle]           # 执行节流类，为空则不需要权限
 
-    def get(self,request,*args,**kwargs):
+    def get(self, request, *args, **kwargs):
         # self.dispatch
         ret = {'code': 1000, 'msg': None}
         try:
@@ -131,5 +145,3 @@ class OrderView(APIView):
         return JsonResponse(ret)
 
 ###############################################################
-
-

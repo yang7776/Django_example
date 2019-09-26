@@ -4,7 +4,7 @@
 # @Author  : Yang
 
 # 节流类方法
-from rest_framework.throttling import BaseThrottle,SimpleRateThrottle
+from rest_framework.throttling import BaseThrottle, SimpleRateThrottle
 
 """
 ----------------------------个人实现限流操作（限流原理）-----------------------
@@ -46,15 +46,19 @@ class VisitThrottle(BaseThrottle):
         return wait_time
 """
 # 对匿名用户操作
+
+
 class VisitThrottle(SimpleRateThrottle):
-    scope = "Luffy"  #　全局配置访问次数key值,settings配置后内部已经实现限流
+    scope = "Luffy"  # 　全局配置访问次数key值,settings配置后内部已经实现限流
 
     def get_cache_key(self, request, view):
-        return self.get_ident(request) # 返回唯一标识ip
+        return self.get_ident(request)  # 返回唯一标识ip
 
 # 用登录用户操作
+
+
 class UserThrottle(SimpleRateThrottle):
-    scope = "LuffyUser"  #　全局配置访问次数key值,settings配置后内部已经实现限流
+    scope = "LuffyUser"  # 　全局配置访问次数key值,settings配置后内部已经实现限流
 
     def get_cache_key(self, request, view):
-        return self.get_ident(request) # 返回唯一标识ip
+        return self.get_ident(request)  # 返回唯一标识ip

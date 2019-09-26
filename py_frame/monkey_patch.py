@@ -1,4 +1,4 @@
-#coding=utf-8
+# coding=utf-8
 
 # 猴子补丁
 """
@@ -25,14 +25,16 @@
 # 例2
 
 class test:
-	def func(self,x,y):
-		return x+y
-	
-print("这是正常的结果：%s"% test().func(2,5) )
+    def func(self, x, y):
+        return x + y
+
+
+print("这是正常的结果：%s" % test().func(2, 5))
 
 
 def monkey(self, x, y):
-	return x * y
+    return x * y
+
 
 test.func = monkey
-print("这是通过猴子补丁动态改变的结果：%s"% test().func(2,5) )
+print("这是通过猴子补丁动态改变的结果：%s" % test().func(2, 5))
