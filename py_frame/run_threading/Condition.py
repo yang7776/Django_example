@@ -45,6 +45,7 @@ thread1.start()
 thread2.start()
 
 time.sleep(3)
+# 注意：notify必须在获取锁和释放锁之间
 con.acquire()
 con.notify(2)
 con.release()
