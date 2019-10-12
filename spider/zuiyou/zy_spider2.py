@@ -8,13 +8,13 @@ import requests
 import random
 import json
 import sys
-import re
 
 # 建立ip代理池
 proxy_list = [
-    {'http': '59.57.148.29:9999','https': '59.57.148.29:9999'},
-    {"http": "27.128.187.22:3128","https": "27.128.187.22:3128"}
+    {'http': '59.57.148.29:9999', 'https': '59.57.148.29:9999'},
+    {"http": "27.128.187.22:3128", "https": "27.128.187.22:3128"}
 ]
+
 
 def get_page():
     url = "http://izuiyou.com/api/index/webrecommend"
@@ -60,8 +60,9 @@ def parse(url, headers, data):
                 # 将数据从对应的网址上下载到本地，以下即时把网址对应的url下载到本地文件夹中，_progress是下载完成后的回调函数
                 request.urlretrieve(imgs, "zuiyou_source/%s" % imgs.split("/")[-3] + ".jpg", _progress)
     except Exception as e:
-        print("异常IP：%s"%(ip.get("http")))
-        print("异常信息：%s"%(e))
+        print("异常IP：%s" % (ip.get("http")))
+        print("异常信息：%s" % (e))
+
 
 if __name__ == '__main__':
     get_page()
