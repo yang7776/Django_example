@@ -26,6 +26,7 @@ if __name__ == '__main__':
     q = Queue()
     p1 = Process(target=write, args=(q, 10))
     p2 = Process(target=read, args=(q, 5))
+    p1.daemon = True   # 守护进程
     p1.start()
     p1.join()
     p2.start()

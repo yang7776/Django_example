@@ -2,9 +2,10 @@
 # writer        Yang
 # create_time   2019/10/12 15:33
 # file_name     multiprocess.py
-from multiprocessing import Process, Pool
+from multiprocessing import Process, Pool, Lock
 # Process：进程类，用来创建进程对象
 # Pool：进程池类，用来实现进程的批量创建
+# Lock：进程锁，和线程的互斥锁使用相同，也是在对资源操作时，进行获取和释放。 进程锁使用实例：火车票抢票
 import os
 import time
 # 定义函数，模仿进程需要执行的任务
@@ -34,8 +35,9 @@ if __name__ == '__main__':
     其中apply_async用来向进程池中添加一个异步执行的进程。 apply则用来向进程池中添加一个同步执行的融进程。
     close：用来关闭进程池，一旦进程池调用close操作，此后，进程池不再接受任何进程任务。
     """
-    pool = Pool()
-    for i in range(7):
-        pool.apply_async(task1, kwds={'name': 'phone', 'age': '7'})
+    pool = Pool(3)  # 允许进程池同时放入3个进程
+    for i in range(5):
+        # pool.apply(task1, kwds={'name': 'phone', 'age': '7'})    进程同步执行，不管进程池允许同时运行多少个，都是一个一个运行
+        pool.apply_async(task1, kwds={'name': 'phone', 'age': '7'})   # 进程异步执行
     pool.close()
     pool.join()

@@ -3,12 +3,15 @@
 多进程模块为我们提供了一个更加高级的进程通信类Manager，该类支持比较丰富的数据结构。比如：list，dict，namespace等，Manager类是对Queue和Pipe更加高级的封装。能够轻松实现多进程之间的数据共享。
 """
 from multiprocessing import Manager, Process
-
+"""
+注意：
+	Queue()或Pipe()是实现进程间的数据传递；
+	Manager()是实现进程间的数据共享
+"""
 
 def write(dict, **kwargs):
     for key, value in kwargs.items():
         dict[key] = value
-    print(dict)
 
 
 def read(d):
