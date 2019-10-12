@@ -58,16 +58,22 @@ def parse(url,headers,data):
     :param data:参数
     :return:
     """
+    # 建立一个请求，注意：参数必须是字节流类型
     req = request.Request(url=url, headers=headers, data=bytes(data, encoding="utf-8"))
+    # 接收返回的response对象
     response = request.urlopen(req)
+    # 读取response对象中的数据
     res = response.read().decode("utf-8")
+    # json解析
     res = json.loads(res)
+    
     data_list = res['data']['list']
     for i in data_list:
         img_list = i['imgs']
         for j in img_list:
             imgs = j['urls']['origin']['urls'][0]
             print("  资源地址：%s"%(imgs))
+            # 将数据从对应的网址上下载到本地，以下即时把网址对应的url下载到本地文件夹中，_progress是下载完成后的回调函数
             request.urlretrieve(imgs, "zuiyou_source/%s" % imgs.split("/")[-3] + ".jpg" , _progress)
 
 if __name__ == '__main__':
