@@ -28,7 +28,7 @@ gevent.joinall()方法的参数是一个协程对象列表，它会等待所有�
 
 import gevent
 from gevent import monkey
-monkey.patch_socket()
+monkey.patch_socket()  # monkey.patch_socket()#猴子补丁代替python原有的socket
 
 
 def f(n):
