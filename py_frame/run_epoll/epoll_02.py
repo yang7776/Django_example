@@ -28,7 +28,7 @@ if __name__ == "__main__":
     ])
 
 """
-使用monkey.patch_all()后，运行结果：
+不使用monkey.patch_all()后，运行结果：
 	get: https://stackoverflow.com/
 	https://stackoverflow.com/: 115049
 	get: https://www.douban.com
@@ -36,7 +36,7 @@ if __name__ == "__main__":
 	get: https://www.github.com
 	https://www.github.com: 134566
 
-不使用monkey.patch_all()后，运行结果：
+使用monkey.patch_all()后，运行结果：
 	get: https://stackoverflow.com/
 	get: https://www.douban.com
 	get: https://www.github.com

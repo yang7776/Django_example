@@ -31,7 +31,8 @@ from gevent import monkey
 monkey.patch_socket()  # monkey.patch_socket()#猴子补丁代替python原有的socket
 
 
-def f(n):
+def f(n,a,b):
+    print(n,a,b)
     for i in range(n):
         print(gevent.getcurrent(), i)
         """
@@ -43,9 +44,9 @@ def f(n):
         gevent.sleep(1)   # 休息一秒，模拟遇到IO状况，此时协程自动切换成其他的gevent。
 
 
-g1 = gevent.spawn(f, 5)  # 实例化一个协程
-g2 = gevent.spawn(f, 5)
-g3 = gevent.spawn(f, 5)
+g1 = gevent.spawn(f, 5,2,3)  # 实例化一个协程
+g2 = gevent.spawn(f, 5,2,3)
+g3 = gevent.spawn(f, 5,2,3)
 
 # join()：将对应协程加入任务队列； joinall()：将多个协程（列表）加入到任务队列
 gevent.joinall([g1, g2, g3])
