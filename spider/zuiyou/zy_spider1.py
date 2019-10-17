@@ -9,6 +9,7 @@ from urllib import request
 import json
 import sys
 import random
+import socket
 """
 爬取方式：主要是根据http请求爬取数据
 """
@@ -82,17 +83,23 @@ def parse(url, headers, data):
     opener = request.build_opener(proxy)
     # 将代理IP设置成全局,当使用urlopen()请求时自动使用代理IP
     request.install_opener(opener)
-
-    # 建立一个请求，注意：参数必须是字节流类型
-    req = request.Request(url=url, headers=headers, data=bytes(data, encoding="utf-8"))
-    # 接收返回的response对象
-    response = opener.open(req)  # 当使用opener时，就需要使用此方式来接收返回的数据
-    # response = request.urlopen(req)
-    # 读取response对象中的数据
-    res = response.read().decode("utf-8")
-    # json解析
-    res = json.loads(res)
-    data_list = res['data']['list']
+    # 设置超时
+    socket.setdefaulttimeout(1)
+    
+    try:
+        # 建立一个请求，注意：参数必须是字节流类型
+        req = request.Request(url=url, headers=headers, data=bytes(data, encoding="utf-8"))
+        # 接收返回的response对象
+        response = opener.open(req)  # 当使用opener时，就需要使用此方式来接收返回的数据
+        # response = request.urlopen(req)
+        # 读取response对象中的数据
+        res = response.read().decode("utf-8")
+        # json解析
+        res = json.loads(res)
+        data_list = res['data']['list']
+    except Exception as e:
+        data_list = []
+        print(e)
     for i in data_list:
         img_list = i['imgs']
         for j in img_list:
