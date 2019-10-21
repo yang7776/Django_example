@@ -54,8 +54,8 @@ body = {
     "properties": mapping
 }
 """
-注意setting设置（6.4.1版本，其他版本未知），直接在创建索引时，若设置分片数和副本，即：es.indices.create(index='test_index', body=settings, ignore=404)，
-因为分片数创建后无法动态设置，所以若在创建索引后使用“put_settings”设置，则报错，只能用put_settings设置其他配置。
+注意setting设置（6.4.1版本，其他版本未知），直接在创建索引时，若设置分片数，即：es.indices.create(index='test_index', body=settings, ignore=404)，
+因为分片数创建后无法动态设置，所以若在创建索引后使用“put_settings”设置，则报错，只能用put_settings设置其他配置（不能再设置“分片数”和“translog”）。
 """
 # 设置settings，可设置
 settings = {
@@ -74,7 +74,7 @@ settings = {
 
 # 注意7.x版本，需要include_type_name=True
 res_map = es.indices.put_mapping(include_type_name=True, index="t_index", doc_type='default', body=body)  # 设置指定type的mapping，默认index为_all
-res_set = es.indices.put_settings(include_type_name=True, index="t_index", body=settings)  # 设置setting，默认为_all，此时不能再设置分片数和副本数
+res_set = es.indices.put_settings(include_type_name=True, index="t_index", body=settings)  # 设置setting，默认为_all，此时不能再设置分片数和translog
 print(res_map)
 
 """
