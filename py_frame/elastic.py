@@ -42,6 +42,8 @@ type：（注意：版本不同，对应的类型也会有所改变）
 	 '“张三丰”',“'张'”,“'三'”,“'丰'”,“'张三'”,“'张丰'”,'三丰'”
 	ik_smart：粗粒度拆分
 """
+
+# 设置mapping
 mapping = {
     "id": {'type': 'long'},
     "name": {u'analyzer': u'ik_max_word', u'type': u'text', u"search_analyzer": u"ik_smart"},
@@ -51,8 +53,28 @@ mapping = {
 body = {
     "properties": mapping
 }
+"""
+注意setting设置（6.4.1版本，其他版本未知），直接在创建索引时，若设置分片数和副本，即：es.indices.create(index='test_index', body=settings, ignore=404)，
+因为分片数创建后无法动态设置，所以若在创建索引后使用“put_settings”设置，则报错，只能用put_settings设置其他配置。
+"""
+# 设置settings，可设置
+settings = {
+    "index": {
+        "number_of_shards": 2,     # 主分片数，默认为5.只能在创建索引时设置，不能修
+        "number_of_replicas": 1,    # 副本数
+        'max_result_window':500000,  # 设置最大数据量
+        # "refresh_interval" : "10s",       # 每10秒刷新"对应"索引
+        # "translog" : {
+        #           "flush_threshold_size" : "1gb",  # 内容容量到达1gb异步刷新
+        #           "sync_interval" : "30s",         # 间隔30s异步刷新（设置后无法更改）
+        #           "durability" : "async"           # 异步刷新
+        #         },
+    }
+}
+
 # 注意7.x版本，需要include_type_name=True
-res_map = es.indices.put_mapping(include_type_name=True, index="t_index", doc_type='default', body=body)
+res_map = es.indices.put_mapping(include_type_name=True, index="t_index", doc_type='default', body=body)  # 设置指定type的mapping，默认index为_all
+res_set = es.indices.put_settings(include_type_name=True, index="t_index", body=settings)  # 设置setting，默认为_all，此时不能再设置分片数和副本数
 print(res_map)
 
 """
