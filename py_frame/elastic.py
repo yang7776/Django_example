@@ -71,7 +71,10 @@ settings = {
         #         },
     }
 }
-
+"""
+注意：elasticsearch索引put_mapping()一旦确定，不能修改，但是可以在基础上添加字段。只需将新添加的字段和类型，写进mapping中，再执行一次put_mapping()就可以了，执行完
+后就可以直接插入数据了，若想确认，可以使用get_mapping()方法确认。
+"""
 # 注意7.x版本，需要include_type_name=True
 res_map = es.indices.put_mapping(include_type_name=True, index="t_index", doc_type='default', body=body)  # 设置指定type的mapping，默认index为_all
 res_set = es.indices.put_settings(include_type_name=True, index="t_index", body=settings)  # 设置setting，默认为_all，此时不能再设置分片数和translog
