@@ -49,6 +49,13 @@ class MongoData(object):
 		else:
 			return "数据格式为dict或者[{},{}]形式的列表但你传入的是：%s" % type(data)
 	
+	def field_update(self,action, org_data, new_data):
+		"""字段操作，注意action的操作仅针对于字段，且操作字段对应的数据类型必须是"array" !!!"""
+		if action not in ["push","pull","pop"]:
+			return "不支持的字段更新方式：%s"% action
+		res = self.col.update(org_data, {"${}".format(action):new_data})
+		return res
+		
 	def find(self, data, flag=True):
 		"""查找数据"""
 		try:
@@ -93,10 +100,11 @@ if __name__ == "__main__":
 	]
 	
 	data_find = {'age':{'$gte':5,"$lte":35}}    # {'age':{'$in':(5,25)}
+	data_update_or_delete = {"name":"jiesen1"}
 	
-	data_update_or_delete = {"age":35}
 	# res = mongo.insert(data_insert)
-	res = mongo.find(data_find)
-	# res = mongo.update(data_update_or_delete,{"name":"jiesen3"})
+	# res = mongo.find(data_find)
+	# res = mongo.update(data_update_or_delete,{"age":[1,2,3,4,5]})
 	# res = mongo.delete(data_update_or_delete,flag=False)
+	res = mongo.field_update("pull",data_update_or_delete,{"age":{"name":"asdsasd"}})
 	print(res)
