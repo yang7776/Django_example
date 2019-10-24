@@ -48,13 +48,6 @@ class MongoData(object):
 		
 		else:
 			return "数据格式为dict或者[{},{}]形式的列表但你传入的是：%s" % type(data)
-	
-	def field_update(self,action, org_data, new_data):
-		"""字段操作，注意action的操作仅针对于字段，且操作字段对应的数据类型必须是"array" !!!"""
-		if action not in ["push","pull","pop"]:
-			return "不支持的字段更新方式：%s"% action
-		res = self.col.update(org_data, {"${}".format(action):new_data})
-		return res
 		
 	def find(self, data, flag=True):
 		"""查找数据"""
@@ -72,7 +65,12 @@ class MongoData(object):
 			return "查询数据格式有误"
 	
 	def update(self, org_data, new_data, flag=True):  # flag = True  只更新一条
-		"""更新数据"""
+		"""
+		更新数据
+		update:返回的是一个字典，字典中包括了操作更新结果和操作数据的个数
+		update_one:只更新一条数据
+		update_many：更新所有数据
+		"""
 		if flag:
 			ret = self.col.update_one(org_data, {"$set": new_data})  # 只更新一条
 			return (ret,ret.modified_count)   # modified_count 返回更新的条数
@@ -80,6 +78,13 @@ class MongoData(object):
 		else:
 			ret = self.col.update_many(org_data, {"$set": new_data})  # 更新全部数据
 			return (ret,ret.modified_count)
+	
+	def field_update(self, action, org_data, new_data):
+		"""字段操作，注意action的操作仅针对于字段，且操作字段对应的数据类型必须是"array" !!!"""
+		if action not in ["push", "pull", "pop"]:
+			return "不支持的字段更新方式：%s" % action
+		res = self.col.update(org_data, {"${}".format(action): new_data})
+		return res
 	
 	def delete(self, data, flag=True):
 		"""删除数据"""
