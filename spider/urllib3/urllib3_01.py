@@ -26,10 +26,7 @@ urllib3是一个功能强大，条理清晰，用于HTTP请求的Python库，许
 
 header = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36', 'Content-type': 'text/json'}
 # 建立ip代理池
-proxy_list = [
-    'http://59.57.148.29:9999',
-    "http://27.128.187.22:3128",
-]
+proxy_list = ["HTTP://103.10.86.203:8080", "HTTP://110.16.80.106:8080", "HTTP://27.128.187.22:3128", "HTTP://183.185.1.47:9797", "HTTP://180.101.99.110:80", "HTTP://175.150.107.61:1133", "HTTP://120.77.206.107:3128", "HTTP://119.131.88.242:9797", "HTTP://125.88.190.1:3128", "HTTP://171.37.79.169:9797", "HTTP://59.57.148.165:9999", "HTTP://183.164.238.74:9999", "HTTP://117.69.200.167:9999", "HTTP://180.101.99.110:80", "HTTP://1.196.161.203:9999", "HTTP://103.10.86.203:8080", "HTTP://27.128.187.22:3128", "HTTP://117.57.90.81:9999", "HTTP://183.185.1.47:9797", "HTTP://117.28.96.18:9999"]
 # 选择随机IP
 ip = random.choice(proxy_list)
 
@@ -49,8 +46,8 @@ response = http.request(
     'http://www.baidu.com',
     timeout=urllib3.Timeout(connect=3, read=2),
     retries=urllib3.Retry(1, redirect=2))
-print(response.status)
-print(response.data.decode())
+if response.status == 200:
+    print(ip)
 
 # 模拟浏览器发送请求
 # 禁用urllib3警告（urllib3在进行https请求时，会抛出对应的警告，可以设置disable_warnings禁用对应的警告）

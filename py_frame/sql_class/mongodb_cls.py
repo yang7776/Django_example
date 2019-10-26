@@ -96,7 +96,7 @@ class MongoData(object):
             ret = self.col.delete_many(data)  # 删除全部
             return ret
 
-
+"""
 if __name__ == "__main__":
     mongo = MongoData("localhost", 27017, "test_mongo", "table_name")
     data_insert = [
@@ -106,11 +106,12 @@ if __name__ == "__main__":
     ]
 
     data_find = {'age': {'$gte': 5, "$lte": 35}}    # {'age':{'$in':(5,25)}
-    data_update_or_delete = {"name": "jiesen1"}
+    data_update_or_delete = {"name": "jiesen"}
 
     # res = mongo.insert(data_insert)
-    # res = mongo.find(data_find)
+    res = mongo.find(data_update_or_delete)
     # res = mongo.update(data_update_or_delete,{"age":[1,2,3,4,5]})
     # res = mongo.delete(data_update_or_delete,flag=False)
-    res = mongo.field_update("pull", data_update_or_delete, {"age": {"name": "asdsasd"}})
+    # res = mongo.field_update("pull", data_update_or_delete, {"age": {"name": "asdsasd"}})
     print(res)
+"""
