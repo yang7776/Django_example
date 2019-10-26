@@ -11,7 +11,8 @@ from gevent import monkey
 monkey.patch_all()
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)  # 消除https警告
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36'}
-proxy_ips = []
+proxy_lucency_ips = []
+proxy_anonymity_ips = []
 
 # ip清洗（过滤出可以使用的ip）
 
@@ -36,7 +37,7 @@ def checkip(targeturl, ip):
 # 爬取免费代理ip
 def get_ip(type, page, targeturl):  # ip类型,页码,目标url,存放ip的路径
     dict = {
-        # '1': 'http://www.xicidaili.com/nt/',  # xicidaili国内普通代理(透明)
+        '1': 'http://www.xicidaili.com/nt/',  # xicidaili国内普通代理(透明)
         '2': 'http://www.xicidaili.com/nn/',  # xicidaili国内高匿代理
         '3': 'http://www.xicidaili.com/wn/',  # xicidaili国内https代理
         '4': 'http://www.xicidaili.com/wt/'   # xicidaili国外http代理
@@ -52,7 +53,9 @@ def get_ip(type, page, targeturl):  # ip类型,页码,目标url,存放ip的路�
     # 获取返回html数据的指定节点并拼接
     ip_host = element.xpath("//table[@id='ip_list']//tr//td[2]/text()")
     ip_port = element.xpath("//table[@id='ip_list']//tr//td[3]/text()")
+    ip_anonymity = element.xpath("//table[@id='ip_list']//tr//td[5]/text()")
     ip_type = element.xpath("//table[@id='ip_list']//tr//td[6]/text()")
+    ip_live_time = element.xpath("//table[@id='ip_list']//tr//td[9]/text()")
     min_num = min(len(ip_host), len(ip_port), len(ip_type))
 
     # 检测ip可用性，并写入文档
@@ -63,17 +66,27 @@ def get_ip(type, page, targeturl):  # ip类型,页码,目标url,存放ip的路�
             print("此IP不可用:%s" % ip)
             continue
         else:
-            print("此IP可用:%s" % ip)
-            proxy_ips.append(ip)
+            if "天" in ip_live_time[i]:
+                print("此IP可用:%s" % ip)
+                if ip_anonymity == "透明":
+                    proxy_lucency_ips.append(ip)
+                else:
+                    proxy_anonymity_ips.append(ip)
+            else:
+                print("此IP存活时间过短:%s" % ip)
 
 
 if __name__ == '__main__':
     tasks = []
     targeturl = 'http://www.baidu.com'    # 验证ip有效性的指定url
     for type in range(4):
-        for page in range(10):
+        for page in range(50):
             # get_ip(type+1, page+1, targeturl)    # 同步
             tasks.append(gevent.spawn(get_ip, type + 1, page + 1, targeturl))  # 添加异步任务
     gevent.joinall(tasks)  # 执行协程异步任务
     with open("proxy_ip.json", "w+") as f:
-        f.write(json.dumps(proxy_ips))
+        ip_json = {
+            "lucency_ips":proxy_lucency_ips,
+            "anonymity_ips":proxy_anonymity_ips
+        }
+        f.write(json.dumps(ip_json))

@@ -32,7 +32,8 @@ class RandomProxyIpSpiderMiddleware(object):
 
     def choise_ip(self):
         with open(IP_PATH, "r") as f:
-            ips = json.loads(f.read())
+            ips_dic = json.loads(f.read())
+        ips = ips_dic["anonymity_ips"]
         now_ip = random.choice(ips)
         return now_ip
     
