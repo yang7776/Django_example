@@ -3,20 +3,23 @@
 # create_time   2019/10/17 15:17
 # file_name     ip_spider.py
 
-import urllib3
-from lxml import html
+
+import random
 import json
+import urllib3
+from spider.user_agent_util import PC_USER_AGENT
+from lxml import html
 import gevent
 from gevent import monkey
 monkey.patch_all()
+
+
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)  # 消除https警告
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36'}
 proxy_lucency_ips = []
 proxy_anonymity_ips = []
 
 # ip清洗（过滤出可以使用的ip）
-
-
 def checkip(targeturl, ip):
     http = urllib3.ProxyManager(ip, proxy_headers=headers)
     try:
@@ -43,6 +46,7 @@ def get_ip(type, page, targeturl):  # ip类型,页码,目标url,存放ip的路�
         '4': 'http://www.xicidaili.com/wt/'   # xicidaili国外http代理
     }
     url = dict[str(type)] + str(page)
+    headers["User-Agent"] = random.choice(PC_USER_AGENT)
 
     # 请求数据，并转化为HTML
     http = urllib3.PoolManager()
@@ -60,33 +64,35 @@ def get_ip(type, page, targeturl):  # ip类型,页码,目标url,存放ip的路�
 
     # 检测ip可用性，并写入文档
     for i in range(min_num):
-        ip = "{}://{}:{}".format(ip_type[i], ip_host[i], ip_port[i])
+        ip = "{}://{}:{}".format(ip_type[i].lower(), ip_host[i], ip_port[i])
         is_avail = checkip(targeturl, ip)
         if not is_avail:
             print("此IP不可用:%s" % ip)
             continue
         else:
-            if "天" in ip_live_time[i]:
-                print("此IP可用:%s" % ip)
-                if ip_anonymity == "透明":
-                    proxy_lucency_ips.append(ip)
-                else:
-                    proxy_anonymity_ips.append(ip)
+            ip_dic = {"ip": ip, "live_time": ip_live_time[i]}
+            if "天" not in ip_live_time[i]:
+                ip_dic["short_life"] = True
             else:
-                print("此IP存活时间过短:%s" % ip)
+                ip_dic["short_life"] = False
+            print("此IP可用:%s" % ip)
+            if ip_anonymity == "透明":
+                proxy_lucency_ips.append(ip_dic)
+            else:
+                proxy_anonymity_ips.append(ip_dic)
 
 
 if __name__ == '__main__':
     tasks = []
     targeturl = 'http://www.baidu.com'    # 验证ip有效性的指定url
     for type in range(4):
-        for page in range(50):
+        for page in range(10):
             # get_ip(type+1, page+1, targeturl)    # 同步
             tasks.append(gevent.spawn(get_ip, type + 1, page + 1, targeturl))  # 添加异步任务
     gevent.joinall(tasks)  # 执行协程异步任务
     with open("proxy_ip.json", "w+") as f:
         ip_json = {
-            "lucency_ips":proxy_lucency_ips,
-            "anonymity_ips":proxy_anonymity_ips
+            "lucency_ips": proxy_lucency_ips,
+            "anonymity_ips": proxy_anonymity_ips
         }
         f.write(json.dumps(ip_json))

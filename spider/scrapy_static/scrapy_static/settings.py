@@ -27,8 +27,8 @@ ROBOTSTXT_OBEY = True      # 限定爬虫程序可以爬取的内容范围
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-DOWNLOAD_DELAY = 3    # 限制request请求时间间隙
-DOWNLOAD_TIMEOUT = 60  # 60s内没有爬取下来网页，就放弃这个网页
+DOWNLOAD_DELAY = 5    # 限制request请求时间间隙
+DOWNLOAD_TIMEOUT = 30  # 60s内没有爬取下来网页，就放弃这个网页
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
@@ -57,6 +57,7 @@ COOKIES_ENABLED = False    # 如果爬取的网站无需登录，就禁止cookie
 DOWNLOADER_MIDDLEWARES = {
    'scrapy.contrib.downloadermiddleware.httpproxy.HttpProxyMiddleware': None,
    'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware':None,
+   "scrapy.downloadermiddlewares.retry.RetryMiddleware":500,
     # 'scrapy_static.middlewares.ScrapyStaticDownloaderMiddleware': 543,
     'scrapy_static.middlewares.RandomUserAgentMiddleware': 1,
     'scrapy_static.middlewares.RandomProxyIpSpiderMiddleware': 2,
@@ -104,6 +105,18 @@ LOG_LEVEL = "WARNING"
 # 配置log日志存储位置
 LOG_FILE = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'pipelines.log')
 
+# scrapy中默认的request并发数是32，可自己设置
+CONCURRENT_REQUESTS = 100
+
+# 是否开启重试：对失败的HTTP请求进行重试会减慢爬取的效率，尤其是当站点响应很慢(甚至失败)时， 访问这样的站点会造成超时并重试多次。这是不必要的，同时也占用了爬虫爬取其他站点的能力。
+RETRY_ENABLED = True
+# 重试次数
+RETRY_TIMES = 3
+# 遇到什么http code时需要重试，默认是500,502,503,504,408，其他的，网络连接超时等问题也会自动retry
+# RETRY_HTTP_CODECS = 500
+
+# 禁止重定向：当进行通用爬取时，一般的做法是保存重定向的地址，并在之后的爬取进行解析。 这保证了每批爬取的request数目在一定的数量， 否则重定向循环可能会导致爬虫在某个站点耗费过多资源。
+REDIRECT_ENABLED = False
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
 #AUTOTHROTTLE_ENABLED = True
