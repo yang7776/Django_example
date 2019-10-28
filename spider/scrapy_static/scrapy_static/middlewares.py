@@ -13,7 +13,6 @@ from spider.user_agent_util import PC_USER_AGENT
 # from spider.ip_spider import checkip
 IP_PATH = os.path.join(os.path.abspath("../.."), r"spider\proxy_ip.json")
 
-
 class RandomUserAgentMiddleware(object):
     def __init__(self, user_agent=''):
         self.user_agent = user_agent
@@ -21,7 +20,7 @@ class RandomUserAgentMiddleware(object):
     def process_request(self, request, spider):
         # 随机选择一个用户代理
         user_agent = random.choice(PC_USER_AGENT)
-        # print("当前用户代理为：%s" % user_agent)
+        print("正在配置用户代理为：%s" % user_agent)
         # request.headers["User-Agent"] = user_agent
         request.headers.setdefault('User-Agent', user_agent)
 
@@ -34,12 +33,12 @@ class RandomProxyIpSpiderMiddleware(object):
         with open(IP_PATH, "r") as f:
             ips_dic = json.loads(f.read())
         ips = ips_dic["anonymity_ips"]
-        now_ip = random.choice(ips)
+        now_ip = random.choice(ips)["ip"]
         return now_ip
     
     def process_request(self, request, spider):
         now_ip = self.choise_ip()
-        print("当前代理ip为：%s" % now_ip )
+        print("正在配置代理ip为：%s" % now_ip )
         request.meta["proxy"] = now_ip
 
 

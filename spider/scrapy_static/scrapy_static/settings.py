@@ -74,6 +74,20 @@ DOWNLOADER_MIDDLEWARES = {
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
+""" 将一个Scrapy项目改造成Scrapy-Redis增量式爬虫 """
+# 纯源生的它内部默认是用的以时间戳作为key（当然也可以自定义去重类），使用Redis的set集合来存储请求的指纹数据, 从而实现请求去重的持久化
+DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
+# 增加了调度的配置, 作用: 把请求对象存储到Redis数据, 从而实现请求的持久化.
+SCHEDULER = "scrapy_redis.scheduler.Scheduler"
+# 配置调度器是否要持久化, 也就是当爬虫结束了, 要不要清空Redis中请求队列和去重指纹的set。如果是True, 就表示要持久化存储, 就不清空数据, 否则清空数据
+SCHEDULER_PERSIST = True
+# 如果需要把数据存储到Redis数据库中, 可以配置RedisPipeline
+
+# redis配置(爬取数据时，自动连接存储key值)
+REDIS_HOST = "localhost"
+REDIS_PORT = 6379
+# REDIS_PARAMS = {'password': 'xxx'}
+
 
 # 注册指定的Item管道,注意该方式注册的管道是一个全局管道,所有爬虫都可以共享该管道
 # 后面的数字，是决定了管道的优先级，当spider返回item的时候，先执行哪个管道类，值越小越优先执行，
@@ -81,6 +95,8 @@ DOWNLOADER_MIDDLEWARES = {
 ITEM_PIPELINES = {
     'scrapy_static.pipelines.ScrapyStaticPipeline': 300,
     'scrapy_static.pipelines.DownloadImage': 277,
+    # 把爬虫爬取的数据存储到Redis数据库中
+    "scrapy_redis.pipelines.RedisPipeline": 400,
 }
 
 #  配置图片缩略图，配置后会自动生成对应尺寸的图片，存到以key值命名的文件夹
