@@ -15,11 +15,11 @@ selenium缺点：
 	没有内置的图像比较（Sikuli基于图像的识别工具），效率低，没有自带的报告功能，需要第三方插件完成
 """
 """   抓取英雄联盟壁纸   """
+
 from selenium import webdriver
 from urllib import request
 import time
 import os
-
 hero = []
 # 实例化一个浏览器驱动
 brower = webdriver.Chrome()
@@ -34,31 +34,31 @@ infor = brower.find_element_by_css_selector('#jSearchHeroDiv')
 links = infor.find_elements_by_css_selector('li>a')
 
 for link in links:
-	# get_attribute获取对应节点的属性值
-	urls = link.get_attribute('href')
-	hero.append(urls.split())
+    # get_attribute获取对应节点的属性值
+    urls = link.get_attribute('href')
+    hero.append(urls.split())
 # print(hero)
 for m in range(len(hero)):
-	# print(hero[m][0])
-	# 再打开单独英雄的壁纸链接
-	brower.get(hero[m][0])
-	# 数据缓冲
-	time.sleep(2)
-	# 执行js，左移100px，下移800px
-	brower.execute_script("window.scrollBy(100,800)")
-	# 找到对应的节点并点击
-	brower.find_element_by_css_selector('#skinNAV').find_elements_by_css_selector('li a')[1].click()
-	skins = brower.find_element_by_css_selector('#skinBG').find_elements_by_css_selector('li')
-	for skin in skins:
-		skin_name = skin.get_attribute('title')
-		img_url = skin.find_element_by_css_selector('img').get_attribute('src')
-		if '默认皮肤' in skin_name:
-			skin_name = '默认皮肤_' + hero[m][0].split('?')[1].split('=')[1]
-		else:
-			skin_name = skin_name.replace(" ","_")
-		if "/" in skin_name:
-			skin_name = skin_name.replace("/", "-")
-		print(skin_name)
-		if not os.path.exists("lol_wallpaper"):
-			os.mkdir("lol_wallpaper")
-		request.urlretrieve(img_url, "lol_wallpaper/%s" % (skin_name + ".jpg"))
+    # print(hero[m][0])
+    # 再打开单独英雄的壁纸链接
+    brower.get(hero[m][0])
+    # 数据缓冲
+    time.sleep(2)
+    # 执行js，左移100px，下移800px
+    brower.execute_script("window.scrollBy(100,800)")
+    # 找到对应的节点并点击
+    brower.find_element_by_css_selector('#skinNAV').find_elements_by_css_selector('li a')[1].click()
+    skins = brower.find_element_by_css_selector('#skinBG').find_elements_by_css_selector('li')
+    for skin in skins:
+        skin_name = skin.get_attribute('title')
+        img_url = skin.find_element_by_css_selector('img').get_attribute('src')
+        if '默认皮肤' in skin_name:
+            skin_name = '默认皮肤_' + hero[m][0].split('?')[1].split('=')[1]
+        else:
+            skin_name = skin_name.replace(" ", "_")
+        if "/" in skin_name:
+            skin_name = skin_name.replace("/", "-")
+        print(skin_name)
+        if not os.path.exists("lol_wallpaper"):
+            os.mkdir("lol_wallpaper")
+        request.urlretrieve(img_url, "lol_wallpaper/%s" % (skin_name + ".jpg"))
