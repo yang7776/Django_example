@@ -29,7 +29,7 @@ ROBOTSTXT_OBEY = True      # 限定爬虫程序可以爬取的内容范围
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-DOWNLOAD_DELAY = 5    # 限制request请求时间间隙
+DOWNLOAD_DELAY = 3    # 限制request请求时间间隙
 DOWNLOAD_TIMEOUT = 30  # 60s内没有爬取下来网页，就放弃这个网页
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16        # 现有的最大请求数，对于任何单域同时进行。
@@ -123,7 +123,7 @@ LOG_LEVEL = "WARNING"
 LOG_FILE = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'pipelines.log')
 
 # scrapy中默认的request并发数是32，设置前最好测试一下，一般占CPU的80-90%为好
-CONCURRENT_REQUESTS = 100
+CONCURRENT_REQUESTS = 32
 
 # 是否开启重试：对失败的HTTP请求进行重试会减慢爬取的效率，尤其是当站点响应很慢(甚至失败)时， 访问这样的站点会造成超时并重试多次。这是不必要的，同时也占用了爬虫爬取其他站点的能力。
 RETRY_ENABLED = True
