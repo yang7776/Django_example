@@ -27,9 +27,8 @@ class WallhavenSpider(scrapy.Spider):
         # 获取图片类别的名称和链接
         type_names = response.xpath("//div[@class='pop-tags']/span/a/text()").extract()[:-1]
         type_links = response.xpath("//div[@class='pop-tags']/span/a/@href").extract()[:-1]
-        # for i in range(len(type_links)):
-        for i in range(1):
-            for page in range(5): # 爬取五页图片
+        for i in range(len(type_links)):
+            for page in range(10): # 爬取十页图片
                 yield scrapy.Request(
                     url = "{}&page={}".format(type_links[i],page+1),
                     meta = {"type_name":type_names[i]},

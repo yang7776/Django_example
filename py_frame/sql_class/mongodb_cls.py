@@ -98,7 +98,7 @@ class MongoData(object):
 
 """
 if __name__ == "__main__":
-    mongo = MongoData("localhost", 27017, "test_mongo", "table_name")
+    mongo = MongoData("localhost", 27017, "wallhaven", "recommend_img")
     data_insert = [
         {'name': 'jiesen', 'age': 13, 'sex': '男'},
         {'name': 'jiesen', 'age': 35, 'sex': '男'},
@@ -109,7 +109,7 @@ if __name__ == "__main__":
     data_update_or_delete = {"name": "jiesen"}
 
     # res = mongo.insert(data_insert)
-    res = mongo.find(data_update_or_delete)
+    res = mongo.col.count()
     # res = mongo.update(data_update_or_delete,{"age":[1,2,3,4,5]})
     # res = mongo.delete(data_update_or_delete,flag=False)
     # res = mongo.field_update("pull", data_update_or_delete, {"age": {"name": "asdsasd"}})

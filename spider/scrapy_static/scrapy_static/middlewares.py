@@ -21,7 +21,7 @@ class RandomUserAgentMiddleware(object):
     def process_request(self, request, spider):
         # 随机选择一个用户代理
         user_agent = random.choice(PC_USER_AGENT)
-        print("当前用户代理为：%s" % user_agent)
+        # print("当前用户代理为：%s" % user_agent)
         # request.headers["User-Agent"] = user_agent
         request.headers.setdefault('User-Agent', user_agent)
 

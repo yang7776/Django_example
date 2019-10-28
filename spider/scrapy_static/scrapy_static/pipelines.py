@@ -32,7 +32,9 @@ class ScrapyStaticPipeline(Mongo, object):
 
     # 当爬虫关闭时执行
     def close_spider(self, spider):
-        print("执行完毕！！！")
+        if spider.name == "wallhaven":
+            spider_num = self.col.count()
+            print("执行完毕！成功爬取了%s条数据"%spider_num)
 
 
 # 定义一个管道类用来处理图片，注意：在settings中必须配置”下载路径“，和自定义的DownloadImage管道类
