@@ -38,6 +38,7 @@ class Spider6Pipeline(object):
 
 class DownloadImage(ImagesPipeline,DB):
     def get_media_requests(self, item, info):
+        img_url = ''
         if not hasattr(self,'col'):
             self.start_connect()
         dic = dict(item)
