@@ -58,9 +58,9 @@ COOKIES_ENABLED = False    # 如果爬取的网站无需登录，就禁止cookie
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 # 设置代理中间件
 DOWNLOADER_MIDDLEWARES = {
-   'scrapy.contrib.downloadermiddleware.httpproxy.HttpProxyMiddleware': None,
-   'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware':None,
-   "scrapy.downloadermiddlewares.retry.RetryMiddleware":550,
+    # 'scrapy.contrib.downloadermiddleware.httpproxy.HttpProxyMiddleware': None,
+    'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware': None,
+    "scrapy.downloadermiddlewares.retry.RetryMiddleware": 550,  # http重新连接的管道类
     # 'scrapy_static.middlewares.ScrapyStaticDownloaderMiddleware': 543,
     'scrapy_static.middlewares.RandomUserAgentMiddleware': 500,
     # 'scrapy_static.middlewares.RandomProxyIpSpiderMiddleware': 177,    # 自定义ip代理类
@@ -77,14 +77,14 @@ DOWNLOADER_MIDDLEWARES = {
 """ 将一个Scrapy项目改造成Scrapy-Redis增量式爬虫 """
 # 纯源生的它内部默认是用的以时间戳作为key（当然也可以自定义去重类），使用Redis的set集合来存储请求的指纹数据, 从而实现请求去重的持久化
 DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
-# 增加了调度的配置, 作用: 把请求对象存储到Redis数据, 从而实现请求的持久化.
+# 增加了调度的配置, 作用: 使用scrapy_redis的调度器 不使用scrapy默认的调度器，把请求对象存储到Redis队列, 从而实现请求的持久化.
 SCHEDULER = "scrapy_redis.scheduler.Scheduler"
 # 配置调度器是否要持久化, 也就是当爬虫结束了, 要不要清空Redis中请求队列和去重指纹的set。如果是True, 就表示要持久化存储, 就不清空数据, 否则清空数据
 SCHEDULER_PERSIST = True
 # 如果需要把数据存储到Redis数据库中, 可以配置RedisPipeline
 
 # redis配置(爬取数据时，自动连接存储key值)
-REDIS_HOST = "localhost"
+REDIS_HOST = "127.0.0.1"
 REDIS_PORT = 6379
 # REDIS_PARAMS = {'password': 'xxx'}
 
@@ -131,9 +131,12 @@ RETRY_ENABLED = True
 RETRY_TIMES = 3
 # 遇到什么http code时需要重试，默认是500,502,503,504,408，其他的，网络连接超时等问题也会自动retry
 # RETRY_HTTP_CODECS = 500
-
 # 禁止重定向：当进行通用爬取时，一般的做法是保存重定向的地址，并在之后的爬取进行解析。 这保证了每批爬取的request数目在一定的数量， 否则重定向循环可能会导致爬虫在某个站点耗费过多资源。
 REDIRECT_ENABLED = False
+# 设置爬虫从redis中提取任务方式(按优先级高低提取)，默认是按照队列方式提取
+SCHEDULER_QUEUE_CLASS = 'scrapy_redis.queue.SpiderPriorityQueue'
+# 设置爬虫在启动时自动清空缓存，这样每次重启爬虫都会清空指纹和请求队列,一般设置为False
+SCHEDULER_FLUSH_ON_START = False
 
 # 设置爬虫中断时，从中断的地方开始爬取，此目录不能被其他spider共享，如果不希望从中断的地方开始运行，只需要将这个文件夹删除即可
 # 当然，也可以执行命令：scrapy crawl somespider -s JOBDIR=crawls/somespider-1
