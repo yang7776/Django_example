@@ -2,7 +2,8 @@
 import scrapy
 import os
 from spider.scrapy_static.scrapy_static.items import WallhavenItem
-from scrapy_redis.spiders import RedisSpider   # 分布式导入
+from scrapy_redis.spiders import RedisSpider        # 分布式导入
+from scrapy_redis.spiders import RedisCrawlSpider   # 分布式导入，RedisCrawlSpider和正常类似，不用写make_requests_from_url
 
 
 """ 爬取最大壁纸网站主页 wallhaven 首页分类图片 """
