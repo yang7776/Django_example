@@ -10,7 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
-import os,sys
+import os
+import sys
 # 设置路径，使得“dj_study”这个路径可以被查询到
 APP_BASE_PATH = os.path.abspath('..')
 sys.path.append(APP_BASE_PATH)
@@ -44,7 +45,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+# 导入dwebsocket
+import dwebsocket
 # Application definition
 
 INSTALLED_APPS = [
@@ -56,10 +58,18 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app1',
     'app2',
+    'dwebsocket_',
     'dj_study.view_CBV',
     'rest_framework',
     'django_filters',
+    'dwebsocket',
 ]
+
+# 为所有的URL提供websocket，如果只是单独的视图需要可以不选
+MIDDLEWARE_CLASSES=['dwebsocket.middleware.WebSocketMiddleware']
+
+# 可以允许每一个单独的视图实用websockets
+WEBSOCKET_ACCEPT_ALL=True
 
 MIDDLEWARE = [
     # 'django.middleware.cache.UpdateCacheMiddleware',      # 全站缓存——顶部
