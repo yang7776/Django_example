@@ -38,9 +38,10 @@ def ws_chat(request, userid):
 		allconn[str(userid)] = request.websocket
 		# 遍历请求地址中的消息
 		for message in request.websocket:
-			# 将信息发至自己的聊天框
-			request.websocket.send(message)
-			# 将信息发至其他所有用户的聊天框
-			for i in allconn:
-				if i != str(userid):
-					allconn[i].send(message)
+			if message:
+				# 将信息发至自己的聊天框（即在聊天室看到自己发送的消息）
+				request.websocket.send(message)
+				# 将信息发至其他所有用户的聊天框（将自己的消息发送给其他所有用户，当然也可以在此指定用户）
+				for i in allconn:
+					if i != str(userid):  # 遍历userid，但不包括自己的userid
+						allconn[i].send(message)
