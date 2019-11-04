@@ -59,11 +59,26 @@ INSTALLED_APPS = [
     'app1',
     'app2',
     'dwebsocket_',
+    'channels_',
     'dj_study.view_CBV',
     'rest_framework',
     'django_filters',
     'dwebsocket',
+    'channels',
 ]
+
+# 指定ASGI的路由地址
+ASGI_APPLICATION = 'dj_study.channels_.routing.application'
+
+# 对Channel Layer进行支持，实现多人聊天
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('localhost', 6379)],
+        },
+    },
+}
 
 # 为所有的URL提供websocket，如果只是单独的视图需要可以不选
 MIDDLEWARE_CLASSES=['dwebsocket.middleware.WebSocketMiddleware']
