@@ -50,6 +50,9 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     # 会在收到消息后触发
     async def receive(self, text_data):
+        # 收到消息后触发
+        # 前端页面使用send()发送数据给websocket，由该函数处理
+        # 真个ChatConsumer类会将所有接收到的消息加上一个"聊天"的前缀发送给客户端
         text_data_json = json.loads(text_data)
         message = text_data_json['message']
 
