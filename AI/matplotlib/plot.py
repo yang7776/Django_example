@@ -41,7 +41,7 @@ def example_one():
     # 城市信息备注显示，即把上面线的label的信息展现出来，不设置则不展示。loc：显示的位置（网上有对应位置参数）
     plt.legend(loc="best")
 
-    # 存储图片到指定路径，如果不指定，默认存到“ C:\Users\admin ”中。
+    # 存储图片到指定路径。
     plt.savefig(os.path.join(os.getcwd(), "plot_01.png"))
 
     # 展示画布
