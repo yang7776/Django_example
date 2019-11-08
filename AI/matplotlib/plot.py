@@ -54,12 +54,12 @@ def example_one():
 # 当画布中需要多个坐标系时，用axes[num]设置各个坐标系的编号。之前使用的plt，都可用axes[num]代替，直接用对应的坐标系编号并设置各个方法
 """
 def example_two():
-        # 其中参数1和2分别代表子图的行数和列数，一共有 1x3 个子图像。函数返回一个figure图像和子图ax的array列表，一行里显示两列。
+    # 其中参数1和2分别代表子图的行数和列数，一共有 1x3 个子图像。函数返回一个figure图像和子图ax的array列表，一行里显示两列。
     fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(20, 8), dpi=100)
     x = range(60)
     y = range(40)
 
-    # 设置坐标拉到原点
+    # 设置x轴的数值显示范围。plt.xlim(xmin, xmax)
     plt.xlim(0, 60)
 
     y_shanghai = [random.uniform(15, 18) for i in x]

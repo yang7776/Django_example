@@ -22,7 +22,7 @@ matplotlib框架介绍：“栈”
 
 绘图的基本三步：
 	绘制画布，  plt.figure()
-	准备数据，  plt.plot/bar/hist/pie()    折线图/柱状图/直方图/饼形图
+	准备数据，  plt.plot/bar/hist/pie/scatter()    折线图/柱状图/直方图/饼形图/散点图
 	展示数据，  plt.show()
 	
 数据挖掘：去使用统计学，机器学习或深度学习的算法挖掘历史数据的价值
