@@ -76,7 +76,7 @@ def parse(url, headers, data):
         {"http": "27.128.187.22:3128"}
     ]
     # 随机选择ip
-    proxy = random.choice(proxy_list)
+    # proxy = random.choice(proxy_list)
     # 构建一个ProxyHandler处理器对象，支持IP代理处理
     proxy = request.ProxyHandler({'http': '59.57.148.29:9999'})
     # 创建支持代理池的opener对象（当使用复杂爬取方式时，如HTTPs，FTP, Proxy代理等，需要使用自定义opener）
