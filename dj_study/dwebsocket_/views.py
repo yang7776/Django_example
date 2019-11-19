@@ -16,32 +16,36 @@ WebSocket.count_messages（）返回消息的数量
 WebSocket.has_messages（）返回是否有新的消息过来
 WebSocket.send（message）像客户端发送消息，message为byte类型
 """
+"""
+注意：channels和dwebsocket不能同时在一个项目里，因为channels的一些全局配置，会影响到dwebsocket的socket连接。
+当使用dwebsocket的时候，需要将settings中的“INSTALLED_APPS”相关channels的注释。
+"""
 # 保存所有接入的用户地址(真正使用时，存入数据库，针对用户是否登录，判断临时存储还是持续性存储)
 allconn = defaultdict(list)
 @accept_websocket
 def ws_chat(request, userid):
-	# 获取用户信息
-	allresult = {
-		"user_id":userid,
-		"user_name":"杨先生"
-	}
-	# 声明全局变量
-	global allconn
-	if not request.is_websocket():  # 判断是不是websocket连接
-		try:  # 如果是普通的http方法
-			message = request.GET['message']
-			return HttpResponse(message)
-		except:
-			return render(request, 'chat.html', allresult)
-	else:
-		# 将链接(请求？)存入全局字典中
-		allconn[str(userid)] = request.websocket
-		# 遍历请求地址中的消息
-		for message in request.websocket:
-			if message:
-				# 将信息发至自己的聊天框（即在聊天室看到自己发送的消息）
-				request.websocket.send(message)
-				# 将信息发至其他所有用户的聊天框（将自己的消息发送给其他所有用户，当然也可以在此指定用户）
-				for i in allconn:
-					if i != str(userid):  # 遍历userid，但不包括自己的userid
-						allconn[i].send(message)
+    # 获取用户信息
+    allresult = {
+        "user_id": userid,
+        "user_name": "杨先生"
+    }
+    # 声明全局变量
+    global allconn
+    if not request.is_websocket():  # 判断是不是websocket连接
+        try:  # 如果是普通的http方法
+            message = request.GET['message']
+            return HttpResponse(message)
+        except:
+            return render(request, 'chat.html', allresult)
+    else:
+        # 将链接(请求？)存入全局字典中
+        allconn[str(userid)] = request.websocket
+        # 遍历请求地址中的消息
+        for message in request.websocket:
+            if message:
+                # 将信息发至自己的聊天框（即在聊天室看到自己发送的消息）
+                request.websocket.send(message)
+                # 将信息发至其他所有用户的聊天框（将自己的消息发送给其他所有用户，当然也可以在此指定用户）
+                for i in allconn:
+                    if i != str(userid):  # 遍历userid，但不包括自己的userid
+                        allconn[i].send(message)
