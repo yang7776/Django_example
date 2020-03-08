@@ -59,7 +59,7 @@ INSTALLED_APPS = [
     'app1',
     'app2',
     'dwebsocket_',
-    'channels_',
+    # 'channels_',
     'dj_study.view_CBV',
     'rest_framework',
     'django_filters',
@@ -68,17 +68,17 @@ INSTALLED_APPS = [
 ]
 
 # 指定ASGI的路由地址
-ASGI_APPLICATION = 'dj_study.channels_.routing.application'
+# ASGI_APPLICATION = 'dj_study.channels_.routing.application'
 
 # 对Channel Layer进行支持，实现多人聊天
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            "hosts": [('localhost', 6379)],
-        },
-    },
-}
+# CHANNEL_LAYERS = {
+#     'default': {
+#         'BACKEND': 'channels_redis.core.RedisChannelLayer',
+#         'CONFIG': {
+#             "hosts": [('localhost', 6379)],
+#         },
+#     },
+# }
 
 # 为所有的URL提供websocket，如果只是单独的视图需要可以不选
 MIDDLEWARE_CLASSES=['dwebsocket.middleware.WebSocketMiddleware']
@@ -123,28 +123,37 @@ WSGI_APPLICATION = 'utils.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'dg_test',
-        'USER': 'root',
-        'PASSWORD': 'ysh7776...',
-        'HOST':'localhost',
-        'PORT':'3306',
-    }
-}
+# mysql
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'dj_test',
+#         'USER': 'root',
+#         'PASSWORD': 'ysh7776...',
+#         'HOST':'localhost',
+#         'PORT':'3306',
+#     }
+# }
 
+# postgresql
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'test',
+#         'NAME': 'dj_test',
 #         'USER': 'postgres',
-#         'PASSWORD': 'shining321',   #123456
+#         'PASSWORD': 'ysh7776...',   #123456
 #         'HOST':'127.0.0.1',
 #         'PORT':'5432',
 #     }
 # }
 
+# sqlite
+DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'dj_test.db'),
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
