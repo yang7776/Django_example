@@ -3,6 +3,24 @@
 # create_time   2019/7/8 15:32
 # file_name     decorator.py
 
+import time
+def phoenix(fn):
+    """
+    装饰器
+    如果函数执行过程中出现异常，打印出错误信息并重新进入函数,
+    重新进入前休眠1秒，防止程序一直出现异常导致占用过多CPU。
+    """
+    # @wraps(fn)
+    def decorated(*args, **kwargs):
+        while True:
+            try:
+                ret = fn(*args, **kwargs)
+            except BaseException as e:
+                print(e)
+                time.sleep(1)
+                continue
+            return ret
+    return decorated
 # 不带参装饰器
 
 
