@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <h2>组件</h2>
+    <cpn1></cpn1>
+</div>
+
+<script src="vue.js"></script>
+<script type="text/x-template" id="cpn_script">
+    <div>
+        <h2>组件模板的分离写法</h2>
+        <p>script标签注意类型是text/x-template</p>
+      </div>
+</script>
+<script>
+    /*
+    // 普通写法
+    const cpn = Vue.extend({
+        template: `<p>这是全局组件</p>`
+    })
+    Vue.component('qjcpn',cpn)
+
+    const app = new Vue({
+        el: "#app",
+        components: {
+            jbcpn:cpn
+        }
+    })
+     */
+
+    /*
+    // 语法糖
+    Vue.component('qjcpn',{
+        template: `<p>这是全局组件</p>`
+    });
+    const app = new Vue({
+        el: '#app',
+        components:{
+            jbcpn: {
+                template: `<p>这是局部组件</p>`
+            }
+        }
+    })
+     */
+
+    /*
+
+    // template分离用法
+    const app = new Vue({
+      el: "#app",
+      components: {
+        cpn_script:{
+          template:'#cpn_script'
+        },
+        cpn_template: {
+          template: '#cpn_template'
+        }
+      }
+    })
+    */
+    const app = new Vue({
+      el: "#app",
+      components: { //局部组件创建
+        cpn1:{
+          template:'<div>{{msg}}</div>',
+          data(){
+            return {
+              msg:"组件的数据存放必须要是一个函数"
+            }
+          }
+        }
+      }
+    })
+
+</script>
+</body>
+</html>
