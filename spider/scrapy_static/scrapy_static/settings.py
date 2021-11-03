@@ -134,7 +134,7 @@ RETRY_TIMES = 3
 # 禁止重定向：当进行通用爬取时，一般的做法是保存重定向的地址，并在之后的爬取进行解析。 这保证了每批爬取的request数目在一定的数量， 否则重定向循环可能会导致爬虫在某个站点耗费过多资源。
 REDIRECT_ENABLED = False
 # 设置爬虫从redis中提取任务方式(按优先级高低提取)，默认是按照队列方式提取
-SCHEDULER_QUEUE_CLASS = 'scrapy_redis.queue.SpiderPriorityQueue'
+SCHEDULER_QUEUE_CLASS = 'scrapy_redis.queue111.SpiderPriorityQueue'
 # 设置爬虫在启动时自动清空缓存，这样每次重启爬虫都会清空指纹和请求队列,一般设置为False
 SCHEDULER_FLUSH_ON_START = False
 

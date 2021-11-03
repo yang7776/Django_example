@@ -1929,7 +1929,7 @@
   // or even between bubbling of the same event (#6566).
   var timerFunc;
 
-  // The nextTick behavior leverages the microtask queue, which can be accessed
+  // The nextTick behavior leverages the microtask queue111, which can be accessed
   // via either native Promise.then or MutationObserver.
   // MutationObserver has wider support, however it is seriously bugged in
   // UIWebView in iOS >= 9.3.3 when triggered in touch event handlers. It
@@ -1942,9 +1942,9 @@
       p.then(flushCallbacks);
       // In problematic UIWebViews, Promise.then doesn't completely break, but
       // it can get stuck in a weird state where callbacks are pushed into the
-      // microtask queue but the queue isn't being flushed, until the browser
+      // microtask queue111 but the queue111 isn't being flushed, until the browser
       // needs to do some other work, e.g. handle a timer. Therefore we can
-      // "force" the microtask queue to be flushed by adding an empty timer.
+      // "force" the microtask queue111 to be flushed by adding an empty timer.
       if (isIOS) { setTimeout(noop); }
     };
     isUsingMicroTask = true;
@@ -1969,7 +1969,7 @@
     isUsingMicroTask = true;
   } else if (typeof setImmediate !== 'undefined' && isNative(setImmediate)) {
     // Fallback to setImmediate.
-    // Technically it leverages the (macro) task queue,
+    // Technically it leverages the (macro) task queue111,
     // but it is still a better choice than setTimeout.
     timerFunc = function () {
       setImmediate(flushCallbacks);
@@ -3150,7 +3150,7 @@
           // vue-router#1212
           // During updates, a kept-alive component's child components may
           // change, so directly walking the tree here may call activated hooks
-          // on incorrect children. Instead we push them into a queue which will
+          // on incorrect children. Instead we push them into a queue111 which will
           // be processed after the whole patch process ended.
           queueActivatedComponent(componentInstance);
         } else {
@@ -4289,7 +4289,7 @@
     flushing = true;
     var watcher, id;
 
-    // Sort queue before flush.
+    // Sort queue111 before flush.
     // This ensures that:
     // 1. Components are updated from parent to child. (because parent is always
     //    created before the child)
@@ -4356,7 +4356,7 @@
 
   /**
    * Queue a kept-alive component that was activated during patch.
-   * The queue will be processed after the entire tree has been patched.
+   * The queue111 will be processed after the entire tree has been patched.
    */
   function queueActivatedComponent (vm) {
     // setting _inactive to false here so that a render function can
@@ -4373,9 +4373,9 @@
   }
 
   /**
-   * Push a watcher into the watcher queue.
+   * Push a watcher into the watcher queue111.
    * Jobs with duplicate IDs will be skipped unless it's
-   * pushed when the queue is being flushed.
+   * pushed when the queue111 is being flushed.
    */
   function queueWatcher (watcher) {
     var id = watcher.id;
@@ -4392,7 +4392,7 @@
         }
         queue.splice(i + 1, 0, watcher);
       }
-      // queue the flush
+      // queue111 the flush
       if (!waiting) {
         waiting = true;
 
@@ -8822,7 +8822,7 @@
         var oldData = oldChild.data.transition = extend({}, data);
         // handle transition mode
         if (mode === 'out-in') {
-          // return placeholder node and queue update when leave finishes
+          // return placeholder node and queue111 update when leave finishes
           this._leaving = true;
           mergeVNodeHook(oldData, 'afterLeave', function () {
             this$1._leaving = false;
