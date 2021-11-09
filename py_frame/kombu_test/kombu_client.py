@@ -5,6 +5,14 @@ from kombu.mixins import ConsumerProducerMixin
 
 
 class KombuClient(ConsumerProducerMixin):
+
+    __flag = None
+
+    def __new__(cls, *args, **kwargs):
+        if not cls.__flag:
+            cls.__flag = super().__new__(cls)
+        return cls.__flag
+
     def __init__(self, func, queue_name, url):
         self.url = url
         self.func = func

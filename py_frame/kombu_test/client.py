@@ -1,9 +1,10 @@
 
 from py_frame.kombu_test.kombu_client import KombuClient
-from py_frame.microservice.app import run
 import time
 import psutil
 from multiprocessing import Process
+
+client = None
 
 def a(msg):
     # with open(os.path.join(os.getcwd(),'stop.txt'), 'r') as f:
@@ -19,9 +20,10 @@ def run_k():
     client.start_consuming()
 
 if __name__ == '__main__':
-    f_list = [run, run_k]
-    for i in f_list:
-        p = Process(target=i)
-        p.start()
+    # f_list = [run_k]
+    # for i in f_list:
+    #     p = Process(target=i)
+    #     p.start()
+    run_k()
 
 
