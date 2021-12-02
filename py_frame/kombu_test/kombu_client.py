@@ -51,6 +51,7 @@ class KombuClient(ConsumerProducerMixin):
         except Exception as e:
             print(f'Error: {e}')
         finally:
+            print("啊啊啊啊啊啊啊啊啊啊")
             self.close()
 
     def clean(self):

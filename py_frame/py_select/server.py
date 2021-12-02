@@ -12,8 +12,6 @@ def socket_server():
     outputs = []
     try:
         while True:
-            print(inputs)
-            print(outputs)
             rlst, _, elst = select.select(inputs, outputs, inputs)
             print(f'========rlst==============={rlst}')
             print(f'========_==============={_}')
@@ -34,13 +32,13 @@ def socket_server():
                         outputs.remove(sk)
                         inputs.remove(sk)
                         sk.close()
-                    # raise Exception("error: socket %d select fail" % sk.fileno())
+                    raise Exception("error: socket %d select fail" % sk.fileno())
 
-            for sk in elst:
-                if sk == inputs[0]:
-                    raise Exception("error: listen socket fail")
-                else:
-                    raise Exception("error: socket %d select exp fail" % sk.fileno())
+            # for sk in elst:
+            #     if sk == inputs[0]:
+            #         raise Exception("error: listen socket fail")
+            #     else:
+            #         raise Exception("error: socket %d select exp fail" % sk.fileno())
 
     except Exception as e:
         print(f"错误！ {e}")

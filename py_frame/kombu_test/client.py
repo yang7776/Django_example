@@ -2,8 +2,9 @@
 from py_frame.kombu_test.kombu_client import KombuClient
 import time
 import psutil
+import _thread
 from multiprocessing import Process
-
+from py_frame.microservice.views import run
 client = None
 
 def a(msg):
@@ -16,7 +17,7 @@ def a(msg):
 
 def run_k():
     queue = 'video'
-    client = KombuClient(a, queue, "redis://localhost:6379/1")
+    client = KombuClient(a, queue, "redis://:seckerredis_868@10.33.70.242:6379/1")
     client.start_consuming()
 
 if __name__ == '__main__':
@@ -24,6 +25,7 @@ if __name__ == '__main__':
     # for i in f_list:
     #     p = Process(target=i)
     #     p.start()
+    _thread.start_new_thread(run, ("aaaa",))
     run_k()
 
 

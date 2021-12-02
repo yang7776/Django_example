@@ -41,4 +41,14 @@ def agent_files(action, scene_id):
         res = {""}
     return json.dumps(res)
 
-app.run()
+
+def run(msg):
+    try:
+        print(msg)
+        app.run()
+    except Exception as e:
+        print(f'==========={e}')
+
+
+# import _thread
+# _thread.start_new_thread(run, ("aaaa",))
